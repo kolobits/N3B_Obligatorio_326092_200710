@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Excepciones\Agencia\" />
     <Folder Include="Excepciones\Envio\" />
-    <Folder Include="Excepciones\Usuario\" />
     <Folder Include="InterfacesDominio\" />
     <Folder Include="InterfacesRepositorios\" />
   </ItemGroup>
