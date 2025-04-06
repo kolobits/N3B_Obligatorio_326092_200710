@@ -9,7 +9,11 @@
   <ItemGroup>
     <Folder Include="CasoUso\Agencias\" />
     <Folder Include="CasoUso\Envio\" />
-    <Folder Include="CasoUso\Usuarios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Obligatorio.CasoDeUsoCompartida\Obligatorio.CasoDeUsoCompartida.csproj" />
+    <ProjectReference Include="..\Obligatorio.LogicaNegocio\Obligatorio.LogicaNegocio.csproj" />
   </ItemGroup>
 
 </Project>

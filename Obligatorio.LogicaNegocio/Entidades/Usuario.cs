@@ -8,10 +8,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public int Id { get; set; }
         public Nombre Nombre { get; set; }
         public string Apellido { get;set; }
-        public string Email { get;set; }
-        public string Password { get; set; }
+        public Email Email { get;set; }
+        public Password Password { get; set; }
 
-        public Usuario (int id, Nombre nombre, string apellido, string email, string password)
+        public Usuario (int id, Nombre nombre, string apellido, Email email, Password password)
         {
             Id = id;
             Nombre = nombre;
@@ -19,17 +19,17 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Email = email;
             Password = password;
             Validar();
-		}
 
-        public void Validar()
-        {
-            if (Nombre == null)
-                throw new NombreException("Nombre obligatorio");
-			if (string.IsNullOrEmpty(Email))
-                throw new EmailException("Email inválido");
-            if (string.IsNullOrEmpty(Password))
-                throw new PasswordException("Password inválido");
         }
+
+        //Consulta : si se puede poner los metodos validar public en cada vo
+        public void Validar() 
+        {
+            Email.Validar();
+            Nombre.Validar();
+            Password.Validar();
+        }
+       
 
         public bool Equals(Usuario? other)
         {

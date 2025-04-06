@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Obligatorio.LogicaNegocio\Obligatorio.LogicaNegocio.csproj" />
+  </ItemGroup>
+
 </Project>

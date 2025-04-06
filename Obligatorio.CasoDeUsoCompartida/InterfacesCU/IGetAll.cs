@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.LogicaNegocio.Excepciones
+namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU
 {
-    class LatitudException
+    public interface IGetAll<T>
     {
+        IEnumerable<T> Execute();
     }
 }

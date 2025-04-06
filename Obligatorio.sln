@@ -4,16 +4,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.Test", "Obligatorio.Test\Obligatorio.Test.csproj", "{ECB1CC0F-6DAD-402D-8604-3232AB62F482}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.LogicaAccesoDatos", "Obligatorio.LogicaAccesoDatos\Obligatorio.LogicaAccesoDatos.csproj", "{104CDF05-F589-4B42-B919-7D7029E2E7C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.LogicaAplicacion", "Obligatorio.LogicaAplicacion\Obligatorio.LogicaAplicacion.csproj", "{783EAC2C-AF84-457C-B5B0-43B56EC10628}"
+	ProjectSection(ProjectDependencies) = postProject
+		{104CDF05-F589-4B42-B919-7D7029E2E7C4} = {104CDF05-F589-4B42-B919-7D7029E2E7C4}
+		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
+		{B06F8F1B-DD5B-4809-981D-62A3FA3F48BB} = {B06F8F1B-DD5B-4809-981D-62A3FA3F48BB}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.LogicaNegocio", "Obligatorio.LogicaNegocio\Obligatorio.LogicaNegocio.csproj", "{9625B34A-C3E6-416A-8CA0-45D6F34D2343}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.WebApp", "Obligatorio.WebApp\Obligatorio.WebApp.csproj", "{D524F3B3-7C12-4E8B-9554-6D2EA919F28C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{783EAC2C-AF84-457C-B5B0-43B56EC10628} = {783EAC2C-AF84-457C-B5B0-43B56EC10628}
+		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
+		{B06F8F1B-DD5B-4809-981D-62A3FA3F48BB} = {B06F8F1B-DD5B-4809-981D-62A3FA3F48BB}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obligatorio.CasoDeUsoCompartida", "Obligatorio.CasoDeUsoCompartida\Obligatorio.CasoDeUsoCompartida.csproj", "{B06F8F1B-DD5B-4809-981D-62A3FA3F48BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.CasoDeUsoCompartida", "Obligatorio.CasoDeUsoCompartida\Obligatorio.CasoDeUsoCompartida.csproj", "{B06F8F1B-DD5B-4809-981D-62A3FA3F48BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

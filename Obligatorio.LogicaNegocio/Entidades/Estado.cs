@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.LogicaNegocio.Excepciones
+namespace Obligatorio.LogicaNegocio.Entidades
 {
-    class LongitudException
+    public enum Estado
     {
+         En_Proceso,
+         Finalizado
     }
 }

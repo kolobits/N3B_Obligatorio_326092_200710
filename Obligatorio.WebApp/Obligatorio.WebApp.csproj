@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Usuario\" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Obligatorio.CasoDeUsoCompartida\Obligatorio.CasoDeUsoCompartida.csproj" />
+    <ProjectReference Include="..\Obligatorio.LogicaAccesoDatos\Obligatorio.LogicaAccesoDatos.csproj" />
+    <ProjectReference Include="..\Obligatorio.LogicaAplicacion\Obligatorio.LogicaAplicacion.csproj" />
   </ItemGroup>
 
 </Project>

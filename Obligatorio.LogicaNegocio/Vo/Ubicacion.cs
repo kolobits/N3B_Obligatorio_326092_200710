@@ -15,16 +15,9 @@ namespace Obligatorio.LogicaNegocio.Vo
         {
             Latitud = latitud;
             Longitud = longitud;
-            Validar();
         }
 
-        private void Validar()
-        {
-            if (string.IsNullOrEmpty(Latitud))
-                throw new LatitudException("Latitud inválida");
-            if (string.IsNullOrEmpty(Longitud))
-                throw new LongitudException("Longitud inválida");
-        }
+        
 
     }
 }

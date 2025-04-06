@@ -1,4 +1,4 @@
-﻿using Obligatorio.LogicaNegocio.Excepciones;
+﻿using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaNegocio.Vo
 {
-    public record Nombre
+    public class Email
     {
         public string Value { get; }
 
-        public Nombre(string value)
+        public Email(string value)
         {
             Value = value;
             Validar();
@@ -20,7 +20,7 @@ namespace Obligatorio.LogicaNegocio.Vo
         public void Validar()
         {
             if (string.IsNullOrEmpty(Value))
-                throw new NombreException("Nombre inválido");
+                throw new EmailException("Email inválido");
         }
     }
 }
