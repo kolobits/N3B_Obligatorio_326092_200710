@@ -13,6 +13,6 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
         IRepositorioRemove,
         IRepositorioGetById<Usuario>
     {
-        IEnumerable<Usuario> GetByName(string value);
+       
     }
 }
