@@ -54,10 +54,10 @@ namespace Obligatorio.WebApp.Controllers
             try
             {
                 _add.Execute(new UsuarioDto(usuario.Id,
-                                            usuario.Nombre.Value,
+                                            usuario.Nombre,
                                             usuario.Apellido,
-                                            usuario.Email.Value,
-                                            usuario.Password.Value
+                                            usuario.Email,
+                                            usuario.Password
                                                 ));
                 return RedirectToAction("index");
             }
@@ -71,7 +71,7 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (EmailRepetidoException)
             {
-                ViewBag.Message = $"El mail {usuario.Email.Value} esta repetido";
+                ViewBag.Message = $"El mail {usuario.Email} esta repetido";
             }
             catch (ArgumentNullException)
             {

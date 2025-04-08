@@ -6,28 +6,24 @@ namespace Obligatorio.LogicaNegocio.Entidades
     public class Usuario : IEntity, IEquatable<Usuario>
 	{
         public int Id { get; set; }
-        public Nombre Nombre { get; set; }
-        public string Apellido { get;set; }
+        public NombreCompleto NombreCompleto { get; set; }
         public Email Email { get;set; }
         public Password Password { get; set; }
 
-        public Usuario (int id, Nombre nombre, string apellido, Email email, Password password)
+        public Usuario (int id, NombreCompleto nombreCompleto, Email email, Password password)
         {
             Id = id;
-            Nombre = nombre;
-            Apellido = apellido;
+            NombreCompleto = nombreCompleto;
             Email = email;
             Password = password;
             Validar();
 
         }
 
-        //Consulta : si se puede poner los metodos validar public en cada vo
+ 
+
         public void Validar() 
         {
-            Email.Validar();
-            Nombre.Validar();
-            Password.Validar();
         }
        
 

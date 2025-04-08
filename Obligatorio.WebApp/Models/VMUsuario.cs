@@ -9,10 +9,12 @@ namespace Obligatorio.WebApp.Models
 
         [Required(ErrorMessage = "El nombre del usuario es requerido")]
         [StringLength(10, MinimumLength = 3, ErrorMessage = "Largo del nombre: entre 3 y 10 caracteres")]
-        public Nombre Nombre { get; set; }
+        
+        //corregir, no vo, solo string,int,etc
+        public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public Email Email { get; set; }
+        public string Email { get; set; }
         [RegularExpression(@"^[a-zA-Z''-.'\s]{6}$", ErrorMessage = "Solo letras .-")]
-        public Password Password { get; set; }
+        public string Password { get; set; }
     }
 }

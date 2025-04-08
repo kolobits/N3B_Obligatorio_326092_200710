@@ -1,0 +1,28 @@
+﻿
+using Obligatorio.LogicaNegocio.Excepciones.Usuario;
+
+namespace Obligatorio.LogicaNegocio.Vo
+{
+    public record NombreCompleto
+    {
+		public string Nombre { get; }
+		public string Apellido {  get; }
+
+		public NombreCompleto (string nombre, string apellido)
+		{
+			Nombre = nombre;
+			Apellido = apellido;
+			Validar();
+		}
+
+		public void Validar()
+		{
+			if (string.IsNullOrEmpty(Nombre))
+				throw new EmailException("Nombre inválido");
+
+			if (string.IsNullOrEmpty(Apellido)) 
+				throw new EmailException("Apellido inválido");
+		}
+
+	}
+}
