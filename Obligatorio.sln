@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.Test", "Obligatorio.Test\Obligatorio.Test.csproj", "{ECB1CC0F-6DAD-402D-8604-3232AB62F482}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.LogicaAccesoDatos", "Obligatorio.LogicaAccesoDatos\Obligatorio.LogicaAccesoDatos.csproj", "{104CDF05-F589-4B42-B919-7D7029E2E7C4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
@@ -40,10 +35,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ECB1CC0F-6DAD-402D-8604-3232AB62F482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECB1CC0F-6DAD-402D-8604-3232AB62F482}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECB1CC0F-6DAD-402D-8604-3232AB62F482}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECB1CC0F-6DAD-402D-8604-3232AB62F482}.Release|Any CPU.Build.0 = Release|Any CPU
 		{104CDF05-F589-4B42-B919-7D7029E2E7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{104CDF05-F589-4B42-B919-7D7029E2E7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104CDF05-F589-4B42-B919-7D7029E2E7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU

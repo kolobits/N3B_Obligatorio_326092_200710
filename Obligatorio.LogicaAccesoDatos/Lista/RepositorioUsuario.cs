@@ -2,10 +2,11 @@
 
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAccesoDatos.Lista
 {
-    public class RepositorioUsuario
+    public class RepositorioUsuario: IRepositorioUsuario 
     { 
 
         private static List<Usuario> _usuarios = new List<Usuario>();
