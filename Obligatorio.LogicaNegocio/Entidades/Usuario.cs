@@ -10,7 +10,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Email Email { get;set; }
         public Password Password { get; set; }
 
-        public Usuario (int id, NombreCompleto nombreCompleto, Email email, Password password)
+		protected Usuario() { } // Constructor protegido para EF Core
+
+		public Usuario (int id, NombreCompleto nombreCompleto, Email email, Password password)
         {
             Id = id;
             NombreCompleto = nombreCompleto;

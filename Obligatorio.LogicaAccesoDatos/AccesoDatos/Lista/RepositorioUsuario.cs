@@ -1,10 +1,8 @@
-﻿
-
-using Obligatorio.LogicaNegocio.Entidades;
+﻿using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
-namespace Obligatorio.LogicaAccesoDatos.Lista
+namespace Obligatorio.Infraestructura.AccesoDatos.Lista
 {
     public class RepositorioUsuario: IRepositorioUsuario 
     { 

@@ -1,9 +1,4 @@
 ﻿using Obligatorio.LogicaNegocio.Excepciones.Usuario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaNegocio.Vo
 {
@@ -11,7 +6,8 @@ namespace Obligatorio.LogicaNegocio.Vo
     {
         public string Value { get; }
 
-        public Password(string value)
+		protected Password() { } // Constructor protegido para EF Core
+		public Password(string value)
         {
             Value = value;
             Validar();
