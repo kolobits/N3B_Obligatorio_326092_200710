@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.LogicaAccesoDatos", "Obligatorio.LogicaAccesoDatos\Obligatorio.LogicaAccesoDatos.csproj", "{104CDF05-F589-4B42-B919-7D7029E2E7C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio.Infraestructura", "Obligatorio.LogicaAccesoDatos\Obligatorio.Infraestructura.csproj", "{104CDF05-F589-4B42-B919-7D7029E2E7C4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9625B34A-C3E6-416A-8CA0-45D6F34D2343} = {9625B34A-C3E6-416A-8CA0-45D6F34D2343}
 	EndProjectSection

@@ -1,5 +1,4 @@
 ﻿
-
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 
 namespace Obligatorio.LogicaNegocio.Vo
@@ -8,7 +7,8 @@ namespace Obligatorio.LogicaNegocio.Vo
     {
         public string Value { get; }
 
-        public Email(string value)
+		protected Email() { } // Constructor protegido para EF Core
+		public Email(string value)
         {
             Value = value;
             Validar();

@@ -1,0 +1,46 @@
+﻿
+using Obligatorio.LogicaNegocio.Entidades;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+
+namespace Obligatorio.Infraestructura.AccesoDatos.EF
+{
+	public class RepositorioUsuario : IRepositorioUsuario
+	{
+		private ObligatorioContext _context;
+
+		public RepositorioUsuario(ObligatorioContext context)
+		{
+			_context = context;
+		}
+		public void Add(Usuario obj)
+		{
+			_context.Usuarios.Add(obj);
+			_context.SaveChanges();
+		}
+
+		public IEnumerable<Usuario> GetAll()
+		{
+			return _context.Usuarios.ToList();
+		}
+
+		public Usuario GetById(int id)
+		{
+			Usuario usuarioEliminar = null;
+			foreach (Usuario usuario in _context.Usuarios)
+			{
+				if (usuario.Id == id)
+				{
+					usuarioEliminar = usuario;
+				}
+			}
+			return usuarioEliminar;
+		}
+
+		public void Remove(int id)
+		{
+			Usuario usuarioELiminar = GetById(id);
+			_context.Usuarios.Remove(usuarioELiminar);
+			_context.SaveChanges();
+		}
+	}
+}

@@ -1,7 +1,7 @@
 
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
-using Obligatorio.LogicaAccesoDatos.Lista;
+using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.LogicaAplicacion.CasoUso.Usuarios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
@@ -20,16 +20,17 @@ namespace Obligatorio.WebApp
 			builder.Services.AddControllersWithViews();
 
 
-			//            // Inyecciones para los Caso de Uso de Usuario
+			// Inyecciones para los Caso de Uso de Usuario
 			builder.Services.AddScoped<IAddUsuario<UsuarioDto>, AddUsuario>();
 			builder.Services.AddScoped<IGetAll<UsuarioListadoDto>, GetAllUsuario>();
 			builder.Services.AddScoped<IGetById<UsuarioListadoDto>, GetById>();
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
 
-			//            // Inyecciones para los repositorios ERROR:
+			// Inyecciones para los repositorios ERROR:
 			builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
-
+			// Inyecciones para el contexto de la base de datos
+			builder.Services.AddDbContext<ObligatorioContext>();
 
 			var app = builder.Build();
 

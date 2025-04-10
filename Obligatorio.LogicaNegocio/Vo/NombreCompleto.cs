@@ -8,6 +8,7 @@ namespace Obligatorio.LogicaNegocio.Vo
 		public string Nombre { get; }
 		public string Apellido {  get; }
 
+		protected NombreCompleto() { } // Constructor protegido para EF Core
 		public NombreCompleto (string nombre, string apellido)
 		{
 			Nombre = nombre;
