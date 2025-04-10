@@ -1,10 +1,4 @@
-﻿using Obligatorio.LogicaNegocio.Excepciones;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Obligatorio.LogicaNegocio.Vo
 {
     public record Nombre
@@ -14,13 +8,6 @@ namespace Obligatorio.LogicaNegocio.Vo
         public Nombre(string value)
         {
             Value = value;
-            Validar();
-        }
-
-        public void Validar()
-        {
-            if (string.IsNullOrEmpty(Value))
-                throw new NombreException("Nombre inválido");
         }
     }
 }

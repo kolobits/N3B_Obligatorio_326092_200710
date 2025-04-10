@@ -1,11 +1,6 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Vo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
 {
@@ -14,8 +9,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
         public static Usuario FromDto(UsuarioDto usuarioDto)
         {
             return new Usuario(usuarioDto.Id,
-                               new Nombre(usuarioDto.Nombre),
-                               usuarioDto.Apellido,
+                               new NombreCompleto(usuarioDto.Nombre,usuarioDto.Apellido),
                                new Email( usuarioDto.Email),
                                new Password(usuarioDto.Password)
                                       ); 
@@ -23,7 +17,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 
         public static UsuarioListadoDto ToDto(Usuario usuario)
         {
-            return new UsuarioListadoDto(usuario.Id, usuario.Nombre.Value, usuario.Email.Value);
+            return new UsuarioListadoDto(usuario.Id, usuario.NombreCompleto.Nombre, usuario.Email.Value);
         }
 
         public static IEnumerable<UsuarioListadoDto> ToListDto(IEnumerable<Usuario> usuarios)
@@ -32,7 +26,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 
             foreach (var item in usuarios)
             {
-                usuariosDto.Add(new UsuarioListadoDto(item.Id, item.Nombre.Value, item.Email.Value));
+                usuariosDto.Add(new UsuarioListadoDto(item.Id, item.NombreCompleto.Nombre, item.Email.Value));
             }
             return usuariosDto;
         }

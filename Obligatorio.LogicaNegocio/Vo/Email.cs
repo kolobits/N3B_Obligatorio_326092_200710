@@ -1,9 +1,6 @@
-﻿using Obligatorio.LogicaNegocio.Excepciones.Usuario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 
 namespace Obligatorio.LogicaNegocio.Vo
 {
