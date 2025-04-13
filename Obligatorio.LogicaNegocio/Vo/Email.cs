@@ -1,4 +1,5 @@
 ﻿
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 
 namespace Obligatorio.LogicaNegocio.Vo
@@ -18,6 +19,16 @@ namespace Obligatorio.LogicaNegocio.Vo
         {
             if (string.IsNullOrEmpty(Value))
                 throw new EmailException("Email inválido");
+        }
+
+      
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Email other)
+                return Value == other.Value;
+
+            return false;
         }
     }
 }

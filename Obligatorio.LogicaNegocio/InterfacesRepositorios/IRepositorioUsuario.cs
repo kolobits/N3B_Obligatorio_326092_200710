@@ -6,7 +6,10 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
         IRepositorioAdd<Usuario>,
         IRepositorioGetAll<Usuario>,
         IRepositorioRemove,
-        IRepositorioGetById<Usuario>
+        IRepositorioGetById<Usuario>,
+        IRepositorioUpdate<Usuario>,
+        IRepositorioGetByEmail<Usuario>
+        
     {
        
     }

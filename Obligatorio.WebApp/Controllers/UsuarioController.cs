@@ -13,16 +13,20 @@ namespace Obligatorio.WebApp.Controllers
         IAddUsuario<UsuarioDto> _add;
         IRemove _remove;
         IGetById<UsuarioListadoDto> _getById;
+        IUpdate<UsuarioDto> _update;
 
         public UsuarioController(IGetAll<UsuarioListadoDto> getAll,
                                  IAddUsuario<UsuarioDto> add,
                                  IRemove remove,
-                                 IGetById<UsuarioListadoDto> getById)
+                                 IGetById<UsuarioListadoDto> getById,
+                                 IUpdate<UsuarioDto> update)
         {
             _getAll = getAll;
             _add = add;
             _remove = remove;
             _getById = getById;
+            _update = update;
+
         }
 
 
@@ -53,7 +57,7 @@ namespace Obligatorio.WebApp.Controllers
         {
             try
             {
-                _add.Execute(new UsuarioDto(usuario.Id,
+                _add.Execute(new UsuarioDto(
                                             usuario.Nombre,
                                             usuario.Apellido,
                                             usuario.Email,
@@ -91,5 +95,33 @@ namespace Obligatorio.WebApp.Controllers
             return RedirectToAction("index");
         }
 
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                UsuarioListadoDto unU = _getById.Execute(id);
+                UsuarioDto usuario = new UsuarioDto(unU.Nombre,unU.Apellido,unU.Email,"passss12+.");
+                ViewBag.Id = id;
+                return View(usuario);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, UsuarioDto usuario)
+        {
+            try
+            {
+                _update.Execute(id, usuario);
+                return RedirectToAction("Index", new { message = "Modificacion exitosa" });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { message = e.Message });
+            }
+        }
     }
 }

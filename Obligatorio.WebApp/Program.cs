@@ -25,9 +25,12 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IGetAll<UsuarioListadoDto>, GetAllUsuario>();
 			builder.Services.AddScoped<IGetById<UsuarioListadoDto>, GetById>();
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
+            builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
+            builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
+            builder.Services.AddScoped(typeof(ILogin), typeof(Login));
 
-			// Inyecciones para los repositorios ERROR:
-			builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            // Inyecciones para los repositorios ERROR:
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 			// Inyecciones para el contexto de la base de datos
 			builder.Services.AddDbContext<ObligatorioContext>();

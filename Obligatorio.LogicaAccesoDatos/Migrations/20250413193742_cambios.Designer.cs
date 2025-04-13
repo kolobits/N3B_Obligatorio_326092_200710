@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
 
@@ -10,9 +11,11 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    partial class ObligatorioContextModelSnapshot : ModelSnapshot
+    [Migration("20250413193742_cambios")]
+    partial class cambios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,8 +34,8 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.HasKey("Id");
 
@@ -55,20 +58,6 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Usuario");
 
                     b.HasDiscriminator().HasValue("Empleado");
-                });
-
-            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Administrador", b =>
-                {
-                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Empleado");
-
-                    b.HasDiscriminator().HasValue("Administrador");
-                });
-
-            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Funcionario", b =>
-                {
-                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Empleado");
-
-                    b.HasDiscriminator().HasValue("Funcionario");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Usuario", b =>

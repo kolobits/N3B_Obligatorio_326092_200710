@@ -8,11 +8,13 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
     {
 
 		public DbSet<Usuario> Usuarios { get; set; }
-		public DbSet<Empleado> Empleados { get; set; }
-		public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+		public DbSet<Administrador> Administradores { get; set; }
+		public DbSet <Funcionario>Funcionarios { get; set; }
 
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			base.OnConfiguring(optionsBuilder);
 			optionsBuilder.UseSqlServer(@"
