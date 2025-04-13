@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.WebApp.Models;
 using System.Diagnostics;
 
@@ -36,6 +37,12 @@ namespace Obligatorio.WebApp.Controllers
             {
                var usuario = _login.Execute(model.Email, model.Password);
 
+
+                if (!(usuario is Empleado))
+                {
+                    ViewBag.Message = "No tiene permisos para iniciar sesión.";
+                    return View(model);
+                }
                 if (usuario != null)
                 {
                     
