@@ -1,76 +1,79 @@
 using Microsoft.AspNetCore.Mvc;
-using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.WebApp.Models;
-using System.Diagnostics;
 
 namespace Obligatorio.WebApp.Controllers
 {
-    public class HomeController : Controller
-    {
-        
-        private readonly ILogin _login;
+	public class HomeController : Controller
+	{
 
-        public HomeController(ILogin login)
-        {
-            _login = login;
-        }
+		private readonly ILogin _login;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+		public HomeController(ILogin login)
+		{
+			_login = login;
+		}
 
-        
+		public IActionResult Index()
+		{
+			return View();
+		}
 
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+		public IActionResult Login()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        public IActionResult Login(VMUsuario model)
-        {
-            try
-            {
-               var usuario = _login.Execute(model.Email, model.Password);
+		[HttpPost]
+		public IActionResult Login(VMUsuario model)
+		{
+			try
+			{
+				var usuario = _login.Execute(model.Email, model.Password);
 
+				if (usuario == null)
+				{
+					ViewBag.Message = "Las credenciales no son válidas.";
+					return View(model);
+				}
 
-                if (!(usuario is Empleado))
-                {
-                    ViewBag.Message = "No tiene permisos para iniciar sesión.";
-                    return View(model);
-                }
-                if (usuario != null)
-                {
-                    
-                    HttpContext.Session.SetString("TipoUsuario", usuario.GetType().Name);
-                    HttpContext.Session.SetString("EmailUsuario", usuario.Email.Value);
-                    HttpContext.Session.SetInt32("IdUsuario", usuario.Id);
+				if (!(usuario is Empleado))
+				{
+					ViewBag.Message = "No tiene permisos para ingresar.";
+					return View(model);
+				}
 
-                    return RedirectToAction("Index", "Home");
-                }
-            
-                else
-                {
-                    ViewBag.Message = "Las credenciales no son válidas";
-                }
+				HttpContext.Session.SetString("TipoUsuario", usuario.GetType().Name);
+				HttpContext.Session.SetString("EmailUsuario", usuario.Email.Value);
+				HttpContext.Session.SetInt32("IdUsuario", usuario.Id);
 
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message; 
-            }
+				if (usuario is Administrador)
+					return RedirectToAction("Index", "Usuario");
 
-            return View(model);
-        }
+				if (usuario is Funcionario)
+					return RedirectToAction("Index", "Envio");
 
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Login");
-        }
-    }
+				ViewBag.Message = "Rol no reconocido.";
+				return View(model);
+			}
+			catch (Exception ex)
+			{
+				ViewBag.Message = ex.Message;
+				return View(model);
+			}
+		}
+
+		public IActionResult Logout()
+		{
+			HttpContext.Session.Clear();
+			return RedirectToAction("Login");
+		}
+
+		public IActionResult Privacy()
+		{
+			return View();
+		}
+	}
 }

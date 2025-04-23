@@ -2,9 +2,9 @@
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public class Administrador:Empleado
-    {
-        public Administrador() { }
-       
-    }
+	public class Administrador : Empleado
+	{
+		public Administrador() { }
+
+	}
 }
