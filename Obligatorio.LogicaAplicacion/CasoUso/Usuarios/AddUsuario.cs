@@ -2,30 +2,37 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaAplicacion.Mapper;
-using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-    public class AddUsuario : IAddUsuario<UsuarioDto>
-    {
-        private IRepositorioUsuario _repo;
-        private IRepositorioAuditoria _repoAuditoria;
+	public class AddUsuario : IAddUsuario<UsuarioDto>
+	{
+		private IRepositorioUsuario _repo;
+		private IAddAuditoria<AuditoriaDto> _addAuditoria;
+		private ISesionUsuarioActual _sesionUsuarioActual;
 
-        public AddUsuario(IRepositorioUsuario repo)
-        {
-            _repo = repo;
-        }
+		public AddUsuario(
+						IRepositorioUsuario repo,
+						IAddAuditoria<AuditoriaDto> addAuditoria,
+						ISesionUsuarioActual sesionUsuarioActual)
+		{
+			_repo = repo;
+			_addAuditoria = addAuditoria;
+			_sesionUsuarioActual = sesionUsuarioActual;
+		}
 
-        public void Execute(UsuarioDto usuarioDto)
-        {
-            _repo.Add(UsuarioMapper.FromDto(usuarioDto));
-            //_repoAuditoria.Add(AuditoriaMapper.FromDto(auditoriaDto));
-        }
-    }
+
+		public void Execute(UsuarioDto usuarioDto)
+		{
+			_repo.Add(UsuarioMapper.FromDto(usuarioDto));
+
+			_addAuditoria.Execute(new AuditoriaDto(
+				_sesionUsuarioActual.ObtenerIdUsuario(),
+				DateTime.Now,
+				"Usuario agregado"
+			));
+		}
+
+	}
 }
