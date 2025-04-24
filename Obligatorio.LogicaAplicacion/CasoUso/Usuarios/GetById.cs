@@ -1,7 +1,7 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaAplicacion.Mapper;
-using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {

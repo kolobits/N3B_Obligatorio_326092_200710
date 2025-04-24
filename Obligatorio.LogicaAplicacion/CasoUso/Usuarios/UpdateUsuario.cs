@@ -1,7 +1,7 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 using Obligatorio.LogicaNegocio.Vo;
 using System;
 using System.Collections.Generic;
