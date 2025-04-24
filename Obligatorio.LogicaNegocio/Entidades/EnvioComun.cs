@@ -13,5 +13,5 @@ namespace Obligatorio.LogicaNegocio.Entidades
 		{
 		}
 	}
-    
+
 }

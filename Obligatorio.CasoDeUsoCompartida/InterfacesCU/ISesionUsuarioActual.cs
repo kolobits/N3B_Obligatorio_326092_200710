@@ -1,7 +1,7 @@
 ﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU
 {
-	public interface IAddAuditoria<T>
+	public interface ISesionUsuarioActual
 	{
-		void Execute(T obj);
+		int ObtenerIdUsuario();
 	}
 }

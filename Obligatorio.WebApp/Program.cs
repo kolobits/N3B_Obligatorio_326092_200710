@@ -1,9 +1,13 @@
 
+using Obligatorio.CasoDeUsoCompartida.DTOs;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
+using Obligatorio.LogicaAplicacion.CasoUso.Auditorias;
 using Obligatorio.LogicaAplicacion.CasoUso.Usuarios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
+using Obligatorio.WebApp.Servicios;
 
 namespace Obligatorio.WebApp
 {
@@ -25,12 +29,21 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IGetAll<UsuarioListadoDto>, GetAllUsuario>();
 			builder.Services.AddScoped<IGetById<UsuarioListadoDto>, GetById>();
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
-            builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
-            builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
-            builder.Services.AddScoped(typeof(ILogin), typeof(Login));
+			builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
+			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
+			builder.Services.AddScoped(typeof(ILogin), typeof(Login));
 
-            // Inyecciones para los repositorios ERROR:
-            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+			// Inyecciones para los Caso de Uso de Auditoria
+			builder.Services.AddScoped<IAddAuditoria<AuditoriaDto>, AddAuditoria>();
+
+
+			// Inyecciones para los repositorios ERROR:
+			builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+			builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
+
+			// Inyecciones para auditoría de sesión
+			builder.Services.AddHttpContextAccessor();
+			builder.Services.AddScoped<ISesionUsuarioActual, SesionUsuarioActual>();
 
 			// Inyecciones para el contexto de la base de datos
 			builder.Services.AddDbContext<ObligatorioContext>();
