@@ -18,5 +18,13 @@ namespace Obligatorio.LogicaNegocio.Vo
             if (string.IsNullOrEmpty(Value))
                 throw new PasswordException("Password inválido");
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Password other)
+                return Value == other.Value;
+
+            return false;
+        }
     }
 }

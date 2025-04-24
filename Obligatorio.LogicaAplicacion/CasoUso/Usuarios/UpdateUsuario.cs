@@ -1,7 +1,8 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
-using Obligatorio.LogicaAplicacion.Mapper;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
+using Obligatorio.LogicaNegocio.Vo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,20 @@ using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-    public class GetAllUsuario : IGetAll<UsuarioListadoDto>
+    public class UpdateUsuario : IUpdate<UsuarioDto>
     {
         private IRepositorioUsuario _repo;
 
-        public GetAllUsuario(IRepositorioUsuario repo)
+        public UpdateUsuario(IRepositorioUsuario repo)
         {
             _repo = repo;
         }
 
-        public IEnumerable<UsuarioListadoDto> Execute()
+        public void Execute(int id, UsuarioDto obj)
         {
-            return UsuarioMapper.ToListDto(_repo.GetAll());
+            _repo.Update(id, Mapper.UsuarioMapper.ForUpdate(_repo.GetById(id), obj));
         }
     }
+
+
 }

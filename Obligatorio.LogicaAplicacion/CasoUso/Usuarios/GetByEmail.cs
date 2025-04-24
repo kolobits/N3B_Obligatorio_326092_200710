@@ -1,23 +1,23 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
-using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaAplicacion.Mapper;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
+
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-    public class GetById : IGetById<UsuarioListadoDto>
+    public class GetByEmail : IGetByEmail<UsuarioListadoDto>
     {
         private IRepositorioUsuario _repo;
 
-        public GetById(IRepositorioUsuario repo)
+        public GetByEmail(IRepositorioUsuario repo)
         {
             _repo = repo;
         }
 
-
-        public UsuarioListadoDto Execute(int id)
+        public UsuarioListadoDto Execute(string valor)
         {
-            return UsuarioMapper.ToDto(_repo.GetById(id));
+            return UsuarioMapper.ToDto(_repo.GetByEmail(valor));
         }
     }
 }

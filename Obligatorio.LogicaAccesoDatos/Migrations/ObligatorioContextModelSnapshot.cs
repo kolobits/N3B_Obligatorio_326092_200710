@@ -29,9 +29,46 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+
+                    b.HasDiscriminator().HasValue("Usuario");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Cliente", b =>
+                {
+                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Usuario");
+
+                    b.HasDiscriminator().HasValue("Cliente");
+                });
+
+            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Empleado", b =>
+                {
+                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Usuario");
+
+                    b.HasDiscriminator().HasValue("Empleado");
+                });
+
+            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Administrador", b =>
+                {
+                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Empleado");
+
+                    b.HasDiscriminator().HasValue("Administrador");
+                });
+
+            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Funcionario", b =>
+                {
+                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Empleado");
+
+                    b.HasDiscriminator().HasValue("Funcionario");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Usuario", b =>

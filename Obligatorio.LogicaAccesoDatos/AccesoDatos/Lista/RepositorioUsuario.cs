@@ -1,11 +1,11 @@
 ﻿using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
-using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.Lista
 {
-    public class RepositorioUsuario: IRepositorioUsuario 
-    { 
+    public class RepositorioUsuario : IRepositorioUsuario
+    {
 
         private static List<Usuario> _usuarios = new List<Usuario>();
 
@@ -28,7 +28,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.Lista
             Usuario usuarioEliminar = GetById(id);
             _usuarios.Remove(usuarioEliminar);
         }
-        
+
         public IEnumerable<Usuario> GetAll()
         {
             return _usuarios;
@@ -45,7 +45,23 @@ namespace Obligatorio.Infraestructura.AccesoDatos.Lista
             return usuarioEliminar;
         }
 
-       
+
+        public void Update(int id, Usuario obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Usuario GetByEmail(string email)
+        {
+            Usuario usuarioAEncontrar = null;
+            foreach (var usuario in _usuarios)
+            {
+                if (usuario.Email.Value == email)
+                    usuarioAEncontrar = usuario;
+            }
+            return usuarioAEncontrar;
+        }
     }
+    
 }
 

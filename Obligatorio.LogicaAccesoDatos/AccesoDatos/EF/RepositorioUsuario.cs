@@ -1,6 +1,6 @@
 ﻿
 using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
 {
@@ -42,5 +42,34 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			_context.Usuarios.Remove(usuarioELiminar);
 			_context.SaveChanges();
 		}
+
+		public void Update(int id, Usuario obj)
+		{
+			Usuario unU = GetById(id);
+			unU.Update(obj);
+			_context.Usuarios.Update(unU);
+			_context.SaveChanges();
+		}
+
+		public IEnumerable<Usuario> GetByEmail(string value)
+		{
+			return _context.Usuarios
+				.Where(usuario => usuario.Email.Value.ToLower().Contains(value.ToLower()));
+		}
+
+		Usuario IRepositorioGetByEmail<Usuario>.GetByEmail(string email)
+		{
+			Usuario usuarioAEncontrar = null;
+			foreach (Usuario usuario in _context.Usuarios)
+			{
+				if (usuario.Email.Value == email)
+				{
+					usuarioAEncontrar = usuario;
+				}
+			}
+			return usuarioAEncontrar;
+		}
+
+
 	}
 }
