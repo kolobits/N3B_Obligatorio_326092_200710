@@ -10,22 +10,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
+namespace Obligatorio.LogicaAplicacion.CasoUso.Auditorias
 {
-    public class AddUsuario : IAddUsuario<UsuarioDto>
+    public class AddAuditoria : IAddAuditoria<AuditoriaDto>
     {
-        private IRepositorioUsuario _repo;
-        private IRepositorioAuditoria _repoAuditoria;
+        private IRepositorioAuditoria _repo;
 
-        public AddUsuario(IRepositorioUsuario repo)
+        public AddAuditoria (IRepositorioAuditoria repo)
         {
             _repo = repo;
         }
 
-        public void Execute(UsuarioDto usuarioDto)
+        public void Execute(AuditoriaDto auditoriaDto)
         {
-            _repo.Add(UsuarioMapper.FromDto(usuarioDto));
-            //_repoAuditoria.Add(AuditoriaMapper.FromDto(auditoriaDto));
+            _repo.Add(AuditoriaMapper.FromDto(auditoriaDto));
         }
     }
 }

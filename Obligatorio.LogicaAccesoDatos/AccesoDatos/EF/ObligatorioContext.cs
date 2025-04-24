@@ -14,9 +14,11 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 		public DbSet<Administrador> Administradores { get; set; }
 		public DbSet<Funcionario> Funcionarios { get; set; }
 		public DbSet<Envio> Envios { get; set; }
+        public DbSet<Auditoria> Auditorias { get; set; }
 
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			base.OnConfiguring(optionsBuilder);
 			optionsBuilder.UseSqlServer(@"
