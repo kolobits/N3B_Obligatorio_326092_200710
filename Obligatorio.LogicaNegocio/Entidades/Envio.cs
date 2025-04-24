@@ -23,5 +23,6 @@ namespace Obligatorio.LogicaNegocio.Entidades
 			Peso = peso;
 			Seguimientos = seguimientos;
 		}
-	}
+        protected Envio() { } // Constructor protegido para EF Core
+    }
 }

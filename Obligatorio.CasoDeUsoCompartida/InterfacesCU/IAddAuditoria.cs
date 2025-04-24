@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.CasoDeUsoCompartida.DTOs.Envios
+namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU
 {
-    public record EnvioDto
+    public interface IAddAuditoria<T>
     {
+        void Execute(T obj);
     }
 }
