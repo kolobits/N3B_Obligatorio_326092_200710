@@ -1,5 +1,5 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
-using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 

@@ -15,6 +15,8 @@ namespace Obligatorio.LogicaNegocio.Vo
             Value = value;
             Validar();
         }
+
+        protected Peso() { }
         private void Validar()
         {
 

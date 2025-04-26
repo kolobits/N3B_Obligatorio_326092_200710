@@ -1,8 +1,8 @@
-﻿using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+﻿using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 
 namespace Obligatorio.WebApp.Servicios
 {
-	public class SesionUsuarioActual : ISesionUsuarioActual
+    public class SesionUsuarioActual : ISesionUsuarioActual
 	{
 		private readonly IHttpContextAccessor _accessor;
 

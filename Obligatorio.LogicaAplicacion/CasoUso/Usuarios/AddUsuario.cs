@@ -1,12 +1,13 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-	public class AddUsuario : IAddUsuario<UsuarioDto>
+    public class AddUsuario : IAddUsuario<UsuarioDto>
 	{
 		private IRepositorioUsuario _repo;
 		private IAddAuditoria<AuditoriaDto> _addAuditoria;

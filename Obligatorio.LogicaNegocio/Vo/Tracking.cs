@@ -16,6 +16,8 @@ namespace Obligatorio.LogicaNegocio.Vo
             Validar();
         }
 
+        protected Tracking() { }
+
         private void Validar()
         {
             

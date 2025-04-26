@@ -20,5 +20,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Fecha = fecha;
             Empleado = empleado;
         }
+
+        protected Seguimiento() { }
     }
 }

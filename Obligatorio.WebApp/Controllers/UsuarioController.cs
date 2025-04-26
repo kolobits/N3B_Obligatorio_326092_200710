@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
-using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.WebApp.Filtros;
 using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
 {
-	[AuthorizeSesion]
+    [AuthorizeSesion]
 	public class UsuarioController : Controller
 	{
 

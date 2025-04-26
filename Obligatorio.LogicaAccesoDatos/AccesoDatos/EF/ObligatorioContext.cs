@@ -31,6 +31,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
-		}
-	}
+            modelBuilder.ApplyConfiguration(new EnvioConfiguration());
+        }
+
+    }
 }

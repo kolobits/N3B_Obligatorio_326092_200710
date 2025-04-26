@@ -2,16 +2,18 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.LogicaAplicacion.CasoUso.Auditorias;
 using Obligatorio.LogicaAplicacion.CasoUso.Usuarios;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 using Obligatorio.WebApp.Servicios;
 
 namespace Obligatorio.WebApp
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{
@@ -31,7 +33,7 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
 			builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
 			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
-			builder.Services.AddScoped(typeof(ILogin), typeof(Login));
+			builder.Services.AddScoped(typeof(ILogin<Usuario>), typeof(Login));
 
 			// Inyecciones para los Caso de Uso de Auditoria
 			builder.Services.AddScoped<IAddAuditoria<AuditoriaDto>, AddAuditoria>();

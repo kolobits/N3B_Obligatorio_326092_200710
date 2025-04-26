@@ -1,4 +1,4 @@
-﻿using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
+﻿using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
