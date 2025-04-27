@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Obligatorio.CasoDeUsoCompartida.DTOs.Envios
+﻿namespace Obligatorio.CasoDeUsoCompartida.DTOs.Envios
 {
-    class EnvioListadoDto
-    {
-    }
+	public record EnvioListadoDto(
+		int Id,
+		int Tracking,
+		string Empleado,
+		string Cliente,
+		string Estado,
+		double Peso,
+		string Tipo
+		)
+	{
+	}
 }
