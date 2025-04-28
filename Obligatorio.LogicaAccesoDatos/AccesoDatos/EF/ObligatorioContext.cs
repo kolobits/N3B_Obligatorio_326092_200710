@@ -33,6 +33,11 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
 			modelBuilder.ApplyConfiguration(new EnvioConfiguration());
+			modelBuilder.ApplyConfiguration(new AgenciaConfiguration());
+			modelBuilder.ApplyConfiguration(new EnvioUrgenteConfiguration());
+			modelBuilder.ApplyConfiguration(new EnvioComunConfiguration());
+
+
 		}
 
 	}

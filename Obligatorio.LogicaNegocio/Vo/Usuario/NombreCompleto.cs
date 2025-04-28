@@ -1,7 +1,6 @@
-﻿
-using Obligatorio.LogicaNegocio.Excepciones.Usuario;
+﻿using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 
-namespace Obligatorio.LogicaNegocio.Vo
+namespace Obligatorio.LogicaNegocio.Vo.Usuario
 {
     public record NombreCompleto
     {

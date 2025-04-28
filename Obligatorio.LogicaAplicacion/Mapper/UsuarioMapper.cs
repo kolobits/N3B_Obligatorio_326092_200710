@@ -1,6 +1,6 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.Vo;
+using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
 {

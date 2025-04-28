@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.LogicaNegocio.Vo
+﻿namespace Obligatorio.LogicaNegocio.Vo.Envio
 {
 	public class Tracking
 	{

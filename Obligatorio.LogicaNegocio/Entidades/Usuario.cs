@@ -1,5 +1,5 @@
 ﻿using Obligatorio.LogicaNegocio.InterfacesDominio;
-using Obligatorio.LogicaNegocio.Vo;
+using Obligatorio.LogicaNegocio.Vo.Usuario;
 namespace Obligatorio.LogicaNegocio.Entidades
 {
 	public class Usuario : IEntity, IEquatable<Usuario>
