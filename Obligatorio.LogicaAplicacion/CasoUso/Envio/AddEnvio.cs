@@ -6,7 +6,7 @@ using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Agencias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
-using Obligatorio.LogicaNegocio.Vo;
+using Obligatorio.LogicaNegocio.Vo.Agencia;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 {

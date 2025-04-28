@@ -1,22 +1,24 @@
 ﻿using Obligatorio.LogicaNegocio.InterfacesDominio;
-using Obligatorio.LogicaNegocio.Vo;
+using Obligatorio.LogicaNegocio.Vo.Agencia;
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public class Agencia : IEntity
+	public class Agencia : IEntity
 	{
-        public int Id { get; set; }
-        public Nombre Nombre { get; set; }
-        public DireccionPostal DireccionPostal { get; set; }
-        public Ubicacion Ubicacion { get; set; }
+		public int Id { get; set; }
+		public Nombre Nombre { get; set; }
+		public DireccionPostal DireccionPostal { get; set; }
+		public Ubicacion Ubicacion { get; set; }
 
-        public Agencia(int id, Nombre nombre, DireccionPostal direccionPostal,Ubicacion ubicacion)
-        {
-            Id = id;
-            Nombre = nombre;
-            DireccionPostal = direccionPostal;
-            Ubicacion = ubicacion;
-        }
+		protected Agencia() { } // Constructor protegido para EF Core
+
+		public Agencia(int id, Nombre nombre, DireccionPostal direccionPostal, Ubicacion ubicacion)
+		{
+			Id = id;
+			Nombre = nombre;
+			DireccionPostal = direccionPostal;
+			Ubicacion = ubicacion;
+		}
 
 
-    }
+	}
 }

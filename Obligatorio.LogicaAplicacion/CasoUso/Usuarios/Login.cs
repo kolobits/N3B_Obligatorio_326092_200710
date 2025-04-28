@@ -1,12 +1,12 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
-using Obligatorio.LogicaNegocio.Vo;
+using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-    public class Login : ILogin<Usuario>
+	public class Login : ILogin<Usuario>
 	{
 		private readonly IRepositorioUsuario _repo;
 
@@ -25,6 +25,6 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 			return usuario;
 		}
 
-    }
+	}
 }
 
