@@ -2,7 +2,7 @@
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-	public class Envio
+	public abstract class Envio
 	{
 		public int Id { get; set; }
 		public Tracking Tracking { get; set; }
@@ -23,6 +23,6 @@ namespace Obligatorio.LogicaNegocio.Entidades
 			Peso = peso;
 			Seguimientos = seguimientos;
 		}
-        protected Envio() { } // Constructor protegido para EF Core
-    }
+		protected Envio() { } // Constructor protegido para EF Core
+	}
 }
