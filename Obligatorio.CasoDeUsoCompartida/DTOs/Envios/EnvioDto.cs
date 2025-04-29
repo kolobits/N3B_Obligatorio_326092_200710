@@ -4,12 +4,11 @@
 						   string Tipo,
 						   string Email,
 						   double Peso,
-						   string Agencia,
-						   string Calle,
-						   int Numero,
-						   int CodigoPostal
+						   string? Agencia,
+						   string? Calle,
+						   int? Numero,
+						   int? CodigoPostal
 						   )
 	{
 	}
 }
-

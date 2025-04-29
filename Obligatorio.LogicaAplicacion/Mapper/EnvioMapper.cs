@@ -14,7 +14,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			Agencia? agencia = null,
 			DireccionPostal? direccionPostal = null)
 		{
-			Tracking tracking = new Tracking(2);
+			Tracking tracking = new Tracking(new Random().Next(100000, 999999));
 			Peso peso = new Peso(dto.Peso);
 			Estado estado = Estado.En_Proceso;
 			List<Seguimiento> seguimientos = new();

@@ -8,7 +8,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 	{
 		public static Usuario FromDto(UsuarioDto usuarioDto)
 		{
-			return new Usuario(0,
+			return new Empleado(0,
 							   new NombreCompleto(usuarioDto.Nombre, usuarioDto.Apellido),
 							   new Email(usuarioDto.Email),
 							   new Password(usuarioDto.Password)
