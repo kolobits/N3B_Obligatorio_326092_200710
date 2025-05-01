@@ -3,6 +3,8 @@ using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.LogicaAplicacion.CasoUso.Envio;
 using Obligatorio.WebApp.Filtros;
 using Obligatorio.WebApp.Models;
 
@@ -13,20 +15,38 @@ namespace Obligatorio.WebApp.Controllers
 	{
 		IAddEnvio<EnvioDto> _add;
 		IGetByName<AgenciaListadoDto> _getByNombre;
+		IGetAll<EnvioListadoDto> _getAll;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre)
+		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre,IGetAll<EnvioListadoDto> getAll)
 
 		{
 			_add = add;
 			_getByNombre = getByNombre;
-		}
+			_getAll = getAll;
+        }
 		public IActionResult Index()
 		{
-			return View();
-		}
+            return View(_getAll.Execute());
+        }
 
-		[AuthorizeSesion]
+        public IActionResult Filtrar(string tipoBuscado, string estadoBuscado)
+        {
+            var envios = _getAll.Execute();
+
+            if (!string.IsNullOrEmpty(tipoBuscado))
+                envios = envios.Where(e => e.Tipo == tipoBuscado);
+
+            if (!string.IsNullOrEmpty(estadoBuscado))
+                envios = envios.Where(e => e.Estado == estadoBuscado);
+
+            return View("Index", envios);
+        }
+
+
+
+
+        [AuthorizeSesion]
 		public IActionResult Create()
 		{
 			return View();

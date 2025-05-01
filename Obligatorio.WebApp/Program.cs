@@ -48,13 +48,15 @@ namespace Obligatorio.WebApp
 
 			// Inyecciones para los Caso de Uso de Envio
 			builder.Services.AddScoped<IAddEnvio<EnvioDto>, AddEnvio>();
+            builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
 
-			// Inyecciones para los Caso de Uso de Agencia
-			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
+            // Inyecciones para los Caso de Uso de Agencia
+            builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
+            builder.Services.AddScoped<IGetById<AgenciaListadoDto>, LogicaAplicacion.CasoUso.Agencias.GetById>();
 
 
-			// Inyecciones para los repositorios ERROR:
-			builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            // Inyecciones para los repositorios ERROR:
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 			builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 			builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
 			builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();

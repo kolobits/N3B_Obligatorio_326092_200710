@@ -1,4 +1,5 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Vo.Agencia;
 using Obligatorio.LogicaNegocio.Vo.Envio;
@@ -47,41 +48,35 @@ namespace Obligatorio.LogicaAplicacion.Mapper
         }
 
 
-
-
-
-
-
-
-
-
-
-
         public static EnvioListadoDto ToDto(Envio envio)
 		{
-			string tipo = envio is EnvioComun ? "Común" : "Urgente";
-
 			return new EnvioListadoDto(
 				envio.Id,
 				envio.Tracking.Value,
-				envio.Cliente.Email.Value,
+				envio.Cliente.NombreCompleto.Nombre,
 				envio.Empleado.NombreCompleto.Nombre,
 				envio.Estado.ToString(),
 				envio.Peso.Value,
-				tipo
+				envio.Discriminator
 			);
 		}
 
 		public static IEnumerable<EnvioListadoDto> ToListDto(IEnumerable<Envio> envios)
 		{
-			List<EnvioListadoDto> lista = new();
+			List<EnvioListadoDto> enviosDto = new List<EnvioListadoDto>();
 
-			foreach (var envio in envios)
-			{
-				lista.Add(ToDto(envio));
-			}
-			return lista;
-		}
+            foreach (var item in envios)
+            {
+                enviosDto.Add(new EnvioListadoDto(item.Id, 
+                                                  item.Tracking.Value, 
+                                                  item.Cliente.NombreCompleto.Nombre,
+                                                  item.Empleado.NombreCompleto.Nombre,
+                                                  item.Estado.ToString(),
+                                                  item.Peso.Value,
+                                                  item.Discriminator));
+            }
+            return enviosDto;
+        }
 	}
 }
 
