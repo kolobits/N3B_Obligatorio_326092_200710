@@ -38,17 +38,32 @@ namespace Obligatorio.WebApp.Controllers
 
 			try
 			{
-				AgenciaListadoDto agencia = _getByNombre.Execute(envio.Agencia);
-				_add.Execute(new EnvioDto(
-											envio.Tipo,
-											envio.Email,
-											envio.Peso,
-											agencia.Id,
-											envio.Calle,
-											envio.Numero,
-											envio.CodigoPostal
+				if(envio.Tipo=="Comun")
+				{
+                    AgenciaListadoDto agencia = _getByNombre.Execute(envio.Agencia);
+                    _add.Execute(new EnvioDto(
+                                                envio.Tipo,
+                                                envio.Email,
+                                                envio.Peso,
+                                                agencia.Id,
+                                                envio.Calle,
+                                                envio.Numero,
+                                                envio.CodigoPostal
 
+                                                    ));
+                }else if (envio.Tipo == "Urgente")
+				{
+					_add.Execute(new EnvioDto(
+											   envio.Tipo,
+											   envio.Email,
+											   envio.Peso,
+											   null, // No necesita agenciaId, por ejemplo, se pone null o 0
+											   envio.Calle,
+											   envio.Numero,
+											   envio.CodigoPostal
 												));
+                }
+			
 				return RedirectToAction("index");
 			}
 

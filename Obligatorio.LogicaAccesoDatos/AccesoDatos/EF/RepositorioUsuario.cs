@@ -25,15 +25,15 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
 		public Usuario GetById(int id)
 		{
-			Usuario usuarioEliminar = null;
+			Usuario usuarioAEncontrar = null;
 			foreach (Usuario usuario in _context.Usuarios)
 			{
 				if (usuario.Id == id)
 				{
-					usuarioEliminar = usuario;
+                    usuarioAEncontrar = usuario;
 				}
 			}
-			return usuarioEliminar;
+			return usuarioAEncontrar;
 		}
 
 		public void Remove(int id)

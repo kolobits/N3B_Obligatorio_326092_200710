@@ -49,7 +49,8 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 			}
 			else if (dto.Tipo.ToLower() == "urgente")
 			{
-			}
+                _repoEnvio.Add(EnvioMapper.FromDtoEnvioUrgente(dto, empleado.Id, cliente.Id));
+            }
 
 		}
 	}
