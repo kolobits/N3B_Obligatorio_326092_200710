@@ -1,5 +1,6 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.LogicaNegocio.Entidades;
+using Obligatorio.LogicaNegocio.Vo.Agencia;
 using Obligatorio.LogicaNegocio.Vo.Envio;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
@@ -24,7 +25,39 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			);
 		}
 
-		public static EnvioListadoDto ToDto(Envio envio)
+        public static EnvioUrgente FromDtoEnvioUrgente(
+        EnvioDto dto,
+        int empleadoId,
+        int clienteId
+        )
+        {
+            return new EnvioUrgente(
+                0,
+                new Tracking(new Random().Next(100000, 999999)),
+                empleadoId,
+                clienteId,
+                new Peso(dto.Peso),
+                Estado.En_Proceso,
+                new List<Seguimiento>(),
+                new DireccionPostal(dto.Calle,
+									dto.Numero,
+									dto.CodigoPostal),
+				false
+            );
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public static EnvioListadoDto ToDto(Envio envio)
 		{
 			string tipo = envio is EnvioComun ? "Común" : "Urgente";
 

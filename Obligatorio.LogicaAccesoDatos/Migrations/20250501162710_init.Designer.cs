@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250501011206_init")]
+    [Migration("20250501162710_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -152,7 +152,7 @@ namespace Obligatorio.Infraestructura.Migrations
                 {
                     b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Envio");
 
-                    b.Property<int>("AgenciaRetiroId")
+                    b.Property<int?>("AgenciaRetiroId")
                         .HasColumnType("int");
 
                     b.HasIndex("AgenciaRetiroId");
@@ -211,11 +211,13 @@ namespace Obligatorio.Infraestructura.Migrations
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("Calle");
 
-                            b1.Property<int>("CodigoPostal")
+                            b1.Property<int?>("CodigoPostal")
+                                .IsRequired()
                                 .HasColumnType("int")
                                 .HasColumnName("Codigo Postal");
 
-                            b1.Property<int>("Numero")
+                            b1.Property<int?>("Numero")
+                                .IsRequired()
                                 .HasColumnType("int")
                                 .HasColumnName("Numero");
 
@@ -426,8 +428,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.HasOne("Obligatorio.LogicaNegocio.Entidades.Agencia", "AgenciaRetiro")
                         .WithMany()
                         .HasForeignKey("AgenciaRetiroId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("AgenciaRetiro");
                 });
@@ -444,11 +445,13 @@ namespace Obligatorio.Infraestructura.Migrations
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("Calle");
 
-                            b1.Property<int>("CodigoPostal")
+                            b1.Property<int?>("CodigoPostal")
+                                .IsRequired()
                                 .HasColumnType("int")
                                 .HasColumnName("Codigo Postal");
 
-                            b1.Property<int>("Numero")
+                            b1.Property<int?>("Numero")
+                                .IsRequired()
                                 .HasColumnType("int")
                                 .HasColumnName("Numero");
 

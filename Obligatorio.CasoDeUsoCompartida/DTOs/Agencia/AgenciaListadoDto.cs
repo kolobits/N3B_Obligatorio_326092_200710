@@ -4,8 +4,8 @@
 						int Id,
 						string Nombre,
 						string Calle,
-						int Numero,
-						int CodigoPostal,
+						int? Numero,
+						int? CodigoPostal,
 						double Latitud,
 						double Longitud
 					   )
