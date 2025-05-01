@@ -1,4 +1,5 @@
-﻿using Obligatorio.LogicaNegocio.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
@@ -18,9 +19,16 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			_context.SaveChanges();
 		}
 
-		public IEnumerable<Envio> GetAll()
-		{
-			return _context.Envios.ToList();
-		}
-	}
+        public IEnumerable<Envio> GetAll()
+        {
+            return _context.Envios
+                .Include(e => e.Cliente)
+                    .ThenInclude(c => c.NombreCompleto)
+                .Include(e => e.Empleado)
+                    .ThenInclude(emp => emp.NombreCompleto)
+                .Include(e => e.Tracking)
+                .ToList();
+        }
+
+    }
 }
