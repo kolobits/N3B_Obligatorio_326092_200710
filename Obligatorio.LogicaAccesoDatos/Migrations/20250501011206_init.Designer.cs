@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250427213811_init")]
+    [Migration("20250501011206_init")]
     partial class init
     {
         /// <inheritdoc />

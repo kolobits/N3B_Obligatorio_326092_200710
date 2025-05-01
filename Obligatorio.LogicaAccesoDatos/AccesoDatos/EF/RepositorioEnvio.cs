@@ -13,13 +13,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 		}
 		public void Add(Envio obj)
 		{
-			//_context.Attach(obj.Empleado);
-			//_context.Attach(obj.Cliente);
 
-			//if (obj is EnvioComun envioComun && envioComun.AgenciaRetiro != null)
-			//{
-			//	_context.Attach(envioComun.AgenciaRetiro);
-			//}
 			_context.Envios.Add(obj);
 			_context.SaveChanges();
 		}

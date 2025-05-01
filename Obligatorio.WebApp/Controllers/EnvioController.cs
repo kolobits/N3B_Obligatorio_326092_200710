@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.WebApp.Filtros;
 using Obligatorio.WebApp.Models;
@@ -10,12 +12,14 @@ namespace Obligatorio.WebApp.Controllers
 	public class EnvioController : Controller
 	{
 		IAddEnvio<EnvioDto> _add;
+		IGetByName<AgenciaListadoDto> _getByNombre;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add)
+		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre)
 
 		{
 			_add = add;
+			_getByNombre = getByNombre;
 		}
 		public IActionResult Index()
 		{
@@ -31,13 +35,15 @@ namespace Obligatorio.WebApp.Controllers
 		[HttpPost]
 		public IActionResult Create(VMEnvio envio)
 		{
+
 			try
 			{
+				AgenciaListadoDto agencia = _getByNombre.Execute(envio.Agencia);
 				_add.Execute(new EnvioDto(
 											envio.Tipo,
 											envio.Email,
 											envio.Peso,
-											envio.Agencia,
+											agencia.Id,
 											envio.Calle,
 											envio.Numero,
 											envio.CodigoPostal
@@ -46,7 +52,7 @@ namespace Obligatorio.WebApp.Controllers
 				return RedirectToAction("index");
 			}
 
-			catch (Exception)
+			catch (Exception e)
 			{
 				ViewBag.Message = "Hubo un error";
 			}
