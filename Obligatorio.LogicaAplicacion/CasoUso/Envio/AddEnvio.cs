@@ -43,27 +43,14 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 
 			if (dto.Tipo.ToLower() == "comun")
 			{
-				if (string.IsNullOrWhiteSpace(dto.Agencia))
-					throw new Exception("Debe ingresar la agencia para el envío común.");
+				EnvioComun e = EnvioMapper.FromDtoEnvioComun(dto, empleado.Id, cliente.Id);
+				_repoEnvio.Add(e);
 
-				agencia = _repoAgencia.GetByName(dto.Agencia);
-
-				if (agencia == null)
-					throw new Exception("Agencia no encontrada.");
 			}
 			else if (dto.Tipo.ToLower() == "urgente")
 			{
-				if (string.IsNullOrEmpty(dto.Calle))
-					throw new Exception("Debe ingresar la dirección postal para el envío urgente.");
-
-				direccionPostal = new DireccionPostal(dto.Calle, dto.Numero, dto.CodigoPostal);
-			}
-			else
-			{
-				throw new Exception("Tipo de envío inválido.");
 			}
 
-			_repoEnvio.Add(EnvioMapper.FromDto(dto, empleado, cliente, agencia, direccionPostal));
 		}
 	}
 }

@@ -4,7 +4,7 @@
 						   string Tipo,
 						   string Email,
 						   double Peso,
-						   string? Agencia,
+						   int AgenciaId,
 						   string? Calle,
 						   int? Numero,
 						   int? CodigoPostal

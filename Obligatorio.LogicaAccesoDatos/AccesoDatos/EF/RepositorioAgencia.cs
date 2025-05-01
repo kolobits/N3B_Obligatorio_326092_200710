@@ -23,6 +23,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.Where(agencia => agencia.Nombre.Value.ToLower().Contains(value.ToLower()));
 		}
 
+		//hacer sentencia en linq igual a la de arriba
 		Agencia IRepositorioGetByName<Agencia>.GetByName(string nombre)
 		{
 			Agencia agenciaAEncontrar = null;
@@ -34,6 +35,19 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				}
 			}
 			return agenciaAEncontrar;
+		}
+
+		public Agencia GetById(int id)
+		{
+			Agencia agenciaBuscada = null;
+			foreach (Agencia agencia in _context.Agencias)
+			{
+				if (agencia.Id == id)
+				{
+					agenciaBuscada = agencia;
+				}
+			}
+			return agenciaBuscada;
 		}
 	}
 }

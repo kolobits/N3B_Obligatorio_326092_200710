@@ -37,7 +37,7 @@ namespace Obligatorio.WebApp
 			// Inyecciones para los Caso de Uso de Usuario
 			builder.Services.AddScoped<IAddUsuario<UsuarioDto>, AddUsuario>();
 			builder.Services.AddScoped<IGetAll<UsuarioListadoDto>, GetAllUsuario>();
-			builder.Services.AddScoped<IGetById<UsuarioListadoDto>, GetById>();
+			builder.Services.AddScoped<IGetById<UsuarioListadoDto>, LogicaAplicacion.CasoUso.Usuarios.GetById>();
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
 			builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
 			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();

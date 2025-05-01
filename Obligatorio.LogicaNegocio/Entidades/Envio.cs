@@ -7,18 +7,20 @@ namespace Obligatorio.LogicaNegocio.Entidades
 		public int Id { get; set; }
 		public Tracking Tracking { get; set; }
 		public Empleado Empleado { get; set; }
+		public int EmpleadoId { get; set; }
 		public Cliente Cliente { get; set; }
+		public int ClienteId { get; set; }
 		public Peso Peso { get; set; }
 		public Estado Estado { get; set; }
 		public string? Discriminator { get; set; }
 		public List<Seguimiento> Seguimientos { get; set; }
 
-		public Envio(int id, Tracking tracking, Empleado empleado, Cliente cliente, Peso peso, Estado estado, List<Seguimiento> seguimientos)
+		public Envio(int id, Tracking tracking, int empleadoId, int clienteId, Peso peso, Estado estado, List<Seguimiento> seguimientos)
 		{
 			Id = id;
 			Tracking = tracking;
-			Empleado = empleado;
-			Cliente = cliente;
+			EmpleadoId = empleadoId;
+			ClienteId = clienteId;
 			Estado = estado;
 			Peso = peso;
 			Seguimientos = seguimientos;
