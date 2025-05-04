@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario
+﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario
 {
-    public interface IUpdate<T>
-    {
-        void Execute(int id, T obj);
-    }
+	public interface IUpdate<T>
+	{
+		void Execute(int id, T obj);
+	}
 }

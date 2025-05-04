@@ -5,24 +5,35 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
 {
 	public class SeedData
 	{
-		ObligatorioContext _context;
+		private readonly ObligatorioContext _context;
 
 		public SeedData(ObligatorioContext context)
 		{
 			_context = context;
 		}
 
-		public void run()
+		public void Run()
 		{
-			if (!_context.Agencias.Any()) Agencia();
+			if (!_context.Agencias.Any()) CargarAgencias();
 		}
 
-		private void Agencia()
+		private void CargarAgencias()
 		{
-			Agencia unA = null;
-			unA = new Agencia(0, new Nombre("Rivera"), new DireccionPostal("Falsa", 123, 54300), new Ubicacion(230000, 450000));
-			_context.Agencias.Add(unA);
+			var agencia1 = new Agencia(
+				0,
+				new Nombre("Centro"),
+				new DireccionPostal("18 de Julio", 1234, 11100),
+				new Ubicacion(-34.9011, -56.1645)
+			);
 
+			var agencia2 = new Agencia(
+				0,
+				new Nombre("Pocitos"),
+				new DireccionPostal("Ellauri", 456, 11300),
+				new Ubicacion(-34.9075, -56.1486)
+			);
+
+			_context.Agencias.AddRange(agencia1, agencia2);
 			_context.SaveChanges();
 		}
 	}

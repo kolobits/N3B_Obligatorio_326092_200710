@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Excepciones\Agencia\" />
-    <Folder Include="Excepciones\Envio\" />
+    <Compile Remove="Excepciones\Agencia\**" />
+    <Compile Remove="Excepciones\Envio\**" />
+    <EmbeddedResource Remove="Excepciones\Agencia\**" />
+    <EmbeddedResource Remove="Excepciones\Envio\**" />
+    <None Remove="Excepciones\Agencia\**" />
+    <None Remove="Excepciones\Envio\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="InterfacesDominio\" />
   </ItemGroup>
 
