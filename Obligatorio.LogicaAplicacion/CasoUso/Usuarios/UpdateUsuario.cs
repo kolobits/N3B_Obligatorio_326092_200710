@@ -2,6 +2,7 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
@@ -23,7 +24,7 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 
 		public void Execute(int id, UsuarioDto obj)
 		{
-			_repo.Update(id, Mapper.UsuarioMapper.ForUpdate(_repo.GetById(id), obj));
+			_repo.Update(id, UsuarioMapper.ForUpdate(_repo.GetById(id), obj));
 			_addAuditoria.Execute(new AuditoriaDto(
 				_sesionUsuarioActual.ObtenerIdUsuario(),
 				DateTime.Now,

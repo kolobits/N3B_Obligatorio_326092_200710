@@ -15,10 +15,10 @@ namespace Obligatorio.WebApp.Controllers
 		IAddEnvio<EnvioDto> _add;
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
-		IUpdateEnvio<EnvioUpdateDto> _update;
+		IUpdate<EnvioDto> _update;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdateEnvio<EnvioUpdateDto> update)
+		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update)
 
 		{
 			_add = add;
@@ -97,12 +97,11 @@ namespace Obligatorio.WebApp.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Finalizar(int id)
+		public IActionResult Finalizar(int id, EnvioDto dto)
 		{
 			try
 			{
-				var dto = new EnvioUpdateDto(id);
-				_update.Execute(dto);
+				_update.Execute(id,dto);
 				return RedirectToAction("Index");
 			}
 			catch (Exception e)

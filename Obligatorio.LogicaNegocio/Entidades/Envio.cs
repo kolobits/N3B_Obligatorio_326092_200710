@@ -1,4 +1,5 @@
 ﻿using Obligatorio.LogicaNegocio.Vo.Envio;
+using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
@@ -26,5 +27,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
 			Seguimientos = seguimientos;
 		}
 		protected Envio() { } // Constructor protegido para EF Core
-	}
+
+        public void Update(Envio obj)
+        {
+            Estado = obj.Estado;
+        }
+    }
 }

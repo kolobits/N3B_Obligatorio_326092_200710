@@ -1,11 +1,15 @@
-﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
+﻿using Obligatorio.CasoDeUsoCompartida.DTOs;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 {
-	public class UpdateEnvio : IUpdateEnvio<EnvioUpdateDto>
+	public class UpdateEnvio : IUpdate<EnvioDto>
 	{
 		private IRepositorioEnvio _repo;
 		public UpdateEnvio(IRepositorioEnvio repo)
@@ -13,13 +17,11 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 			_repo = repo;
 		}
 
-		public void Execute(EnvioUpdateDto dto)
-		{
-			var envio = _repo.GetById(dto.Id);
 
-			envio.Estado = Estado.Finalizado;
+		public void Execute(int id,EnvioDto dto)
+        {
+			  _repo.Update(id,EnvioMapper.ForUpdate(_repo.GetById(id)));
+        }
 
-			_repo.Update(envio);
-		}
-	}
+    }
 }

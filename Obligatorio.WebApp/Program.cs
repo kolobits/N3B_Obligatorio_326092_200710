@@ -49,7 +49,7 @@ namespace Obligatorio.WebApp
 			// Inyecciones para los Caso de Uso de Envio
 			builder.Services.AddScoped<IAddEnvio<EnvioDto>, AddEnvio>();
 			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
-			builder.Services.AddScoped<IUpdateEnvio<EnvioUpdateDto>, UpdateEnvio>();
+			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
 
 
 			// Inyecciones para los Caso de Uso de Agencia

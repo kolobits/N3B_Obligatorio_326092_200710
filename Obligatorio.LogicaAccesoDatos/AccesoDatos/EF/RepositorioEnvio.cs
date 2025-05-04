@@ -30,12 +30,13 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.ToList();
 		}
 
-		public void Update(Envio envio)
+        public void Update(int id,Envio obj)
 		{
-			var envioExistente = _context.Envios.Find(envio.Id);
-			if (envioExistente != null)
+			Envio unE = GetById(id);
+			if (unE != null)
 			{
-				envioExistente.Estado = envio.Estado;
+				unE.Update(obj);
+                _context.Envios.Update(unE);
 				_context.SaveChanges();
 			}
 		}
