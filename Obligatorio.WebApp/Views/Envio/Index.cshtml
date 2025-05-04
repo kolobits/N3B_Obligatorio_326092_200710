@@ -57,14 +57,23 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Tracking)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Empleado)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Cliente)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Peso)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
-                            <td> @(item.Estado == "En_Proceso" ? "En proceso" : item.Estado)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Tracking)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Empleado)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cliente)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Peso)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                        <td>@(item.Estado == "En_Proceso" ? "En proceso" : item.Estado)</td>
                         <td class="text-center">
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning me-1">Cambiar Estado</a>
+                            @if (item.Estado == "En_Proceso")
+                            {
+                                <form asp-action="Finalizar" asp-controller="Envio" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-outline-success">Finalizar</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Ya finalizado</span>
+                            }
                         </td>
                     </tr>
                 }

@@ -48,15 +48,17 @@ namespace Obligatorio.WebApp
 
 			// Inyecciones para los Caso de Uso de Envio
 			builder.Services.AddScoped<IAddEnvio<EnvioDto>, AddEnvio>();
-            builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
-
-            // Inyecciones para los Caso de Uso de Agencia
-            builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
-            builder.Services.AddScoped<IGetById<AgenciaListadoDto>, LogicaAplicacion.CasoUso.Agencias.GetById>();
+			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
+			builder.Services.AddScoped<IUpdateEnvio<EnvioUpdateDto>, UpdateEnvio>();
 
 
-            // Inyecciones para los repositorios ERROR:
-            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+			// Inyecciones para los Caso de Uso de Agencia
+			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
+			builder.Services.AddScoped<IGetById<AgenciaListadoDto>, LogicaAplicacion.CasoUso.Agencias.GetById>();
+
+
+			// Inyecciones para los repositorios ERROR:
+			builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 			builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 			builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
 			builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
@@ -77,6 +79,16 @@ namespace Obligatorio.WebApp
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
+			//if (app.Environment.IsDevelopment())
+
+			//	using (var scope = app.Services.CreateScope())
+			//	{
+			//		var services = scope.ServiceProvider;
+			//		var context = services.GetRequiredService<ObligatorioContext>();
+
+			//		var seeder = services.GetRequiredService<SeedData>();
+			//		seeder.Run();
+			//	}
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();

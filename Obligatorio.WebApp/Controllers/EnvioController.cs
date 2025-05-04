@@ -4,7 +4,6 @@ using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
-using Obligatorio.LogicaAplicacion.CasoUso.Envio;
 using Obligatorio.WebApp.Filtros;
 using Obligatorio.WebApp.Models;
 
@@ -16,37 +15,38 @@ namespace Obligatorio.WebApp.Controllers
 		IAddEnvio<EnvioDto> _add;
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
+		IUpdateEnvio<EnvioUpdateDto> _update;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre,IGetAll<EnvioListadoDto> getAll)
+		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdateEnvio<EnvioUpdateDto> update)
 
 		{
 			_add = add;
 			_getByNombre = getByNombre;
 			_getAll = getAll;
-        }
+			_update = update;
+
+		}
 		public IActionResult Index()
 		{
-            return View(_getAll.Execute());
-        }
+			return View(_getAll.Execute());
+		}
 
-        public IActionResult Filtrar(string tipoBuscado, string estadoBuscado)
-        {
-            var envios = _getAll.Execute();
+		public IActionResult Filtrar(string tipoBuscado, string estadoBuscado)
+		{
+			var envios = _getAll.Execute();
 
-            if (!string.IsNullOrEmpty(tipoBuscado))
-                envios = envios.Where(e => e.Tipo == tipoBuscado);
+			if (!string.IsNullOrEmpty(tipoBuscado))
+				envios = envios.Where(e => e.Tipo == tipoBuscado);
 
-            if (!string.IsNullOrEmpty(estadoBuscado))
-                envios = envios.Where(e => e.Estado == estadoBuscado);
+			if (!string.IsNullOrEmpty(estadoBuscado))
+				envios = envios.Where(e => e.Estado == estadoBuscado);
 
-            return View("Index", envios);
-        }
-
-
+			return View("Index", envios);
+		}
 
 
-        [AuthorizeSesion]
+		[AuthorizeSesion]
 		public IActionResult Create()
 		{
 			return View();
@@ -58,32 +58,33 @@ namespace Obligatorio.WebApp.Controllers
 
 			try
 			{
-				if(envio.Tipo=="Comun")
+				if (envio.Tipo == "Comun")
 				{
-                    AgenciaListadoDto agencia = _getByNombre.Execute(envio.Agencia);
-                    _add.Execute(new EnvioDto(
-                                                envio.Tipo,
-                                                envio.Email,
-                                                envio.Peso,
-                                                agencia.Id,
-                                                envio.Calle,
-                                                envio.Numero,
-                                                envio.CodigoPostal
+					AgenciaListadoDto agencia = _getByNombre.Execute(envio.Agencia);
+					_add.Execute(new EnvioDto(
+												envio.Tipo,
+												envio.Email,
+												envio.Peso,
+												agencia.Id,
+												envio.Calle,
+												envio.Numero,
+												envio.CodigoPostal
 
-                                                    ));
-                }else if (envio.Tipo == "Urgente")
+													));
+				}
+				else if (envio.Tipo == "Urgente")
 				{
 					_add.Execute(new EnvioDto(
 											   envio.Tipo,
 											   envio.Email,
 											   envio.Peso,
-											   null, // No necesita agenciaId, por ejemplo, se pone null o 0
+											   null,
 											   envio.Calle,
 											   envio.Numero,
 											   envio.CodigoPostal
 												));
-                }
-			
+				}
+
 				return RedirectToAction("index");
 			}
 
@@ -93,6 +94,22 @@ namespace Obligatorio.WebApp.Controllers
 			}
 			return View();
 
+		}
+
+		[HttpPost]
+		public IActionResult Finalizar(int id)
+		{
+			try
+			{
+				var dto = new EnvioUpdateDto(id);
+				_update.Execute(dto);
+				return RedirectToAction("Index");
+			}
+			catch (Exception e)
+			{
+				ViewBag.Message = $"Error al finalizar el envío: {e.Message}";
+				return RedirectToAction("Index");
+			}
 		}
 	}
 }
