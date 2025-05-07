@@ -12,8 +12,8 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250504192637_init")]
-    partial class init
+    [Migration("20250506235315_int")]
+    partial class @int
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -52,8 +52,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			return new EnvioListadoDto(
 				envio.Id,
 				envio.Tracking.Value,
-				envio.Cliente.NombreCompleto.Nombre,
 				envio.Empleado.NombreCompleto.Nombre,
+				envio.Cliente.NombreCompleto.Nombre,
 				envio.Estado.ToString(),
 				envio.Peso.Value,
 				envio.Discriminator
@@ -68,8 +68,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			{
 				enviosDto.Add(new EnvioListadoDto(item.Id,
 												  item.Tracking.Value,
-												  item.Cliente.NombreCompleto.Nombre,
 												  item.Empleado.NombreCompleto.Nombre,
+												  item.Cliente.NombreCompleto.Nombre,
 												  item.Estado.ToString(),
 												  item.Peso.Value,
 												  item.Discriminator));
@@ -82,8 +82,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			envio.Estado = Estado.Finalizado;
 			return envio;
 		}
-		
 
-    }
+
+	}
 }
 
