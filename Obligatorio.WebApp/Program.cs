@@ -2,20 +2,24 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Seguimientos;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
+using Obligatorio.Infraestructura.AccesoDatos.EF.Config;
 using Obligatorio.LogicaAplicacion.CasoUso.Agencias;
 using Obligatorio.LogicaAplicacion.CasoUso.Auditorias;
 using Obligatorio.LogicaAplicacion.CasoUso.Envio;
+using Obligatorio.LogicaAplicacion.CasoUso.Seguimiento;
 using Obligatorio.LogicaAplicacion.CasoUso.Usuarios;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Agencias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Seguimientos;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 using Obligatorio.WebApp.Servicios;
 
@@ -51,6 +55,8 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
 			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
 
+			// Inyecciones para los Caso de Uso de Seguimiento
+			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
 
 			// Inyecciones para los Caso de Uso de Agencia
 			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
@@ -62,6 +68,8 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 			builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
 			builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
+			builder.Services.AddScoped<IRepositorioSeguimiento, RepositorioSeguimiento>();
+			builder.Services.AddScoped<SeedData>();
 
 			// Inyecciones para auditoría de sesión
 			builder.Services.AddHttpContextAccessor();
@@ -79,16 +87,16 @@ namespace Obligatorio.WebApp
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
-			//if (app.Environment.IsDevelopment())
+			if (app.Environment.IsDevelopment())
 
-			//	using (var scope = app.Services.CreateScope())
-			//	{
-			//		var services = scope.ServiceProvider;
-			//		var context = services.GetRequiredService<ObligatorioContext>();
+				using (var scope = app.Services.CreateScope())
+				{
+					var services = scope.ServiceProvider;
+					//var context = services.GetRequiredService<ObligatorioContext>();
 
-			//		var seeder = services.GetRequiredService<SeedData>();
-			//		seeder.Run();
-			//	}
+					var seeder = services.GetRequiredService<SeedData>();
+					seeder.Run();
+				}
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();

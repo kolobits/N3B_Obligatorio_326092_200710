@@ -103,7 +103,7 @@ namespace Obligatorio.Infraestructura.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Seguimiento",
+                name: "Seguimientos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -115,14 +115,14 @@ namespace Obligatorio.Infraestructura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seguimiento", x => x.Id);
+                    table.PrimaryKey("PK_Seguimientos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Seguimiento_Envios_EnvioId",
+                        name: "FK_Seguimientos_Envios_EnvioId",
                         column: x => x.EnvioId,
                         principalTable: "Envios",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Seguimiento_Usuarios_EmpleadoId",
+                        name: "FK_Seguimientos_Usuarios_EmpleadoId",
                         column: x => x.EmpleadoId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
@@ -145,13 +145,13 @@ namespace Obligatorio.Infraestructura.Migrations
                 column: "EmpleadoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seguimiento_EmpleadoId",
-                table: "Seguimiento",
+                name: "IX_Seguimientos_EmpleadoId",
+                table: "Seguimientos",
                 column: "EmpleadoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seguimiento_EnvioId",
-                table: "Seguimiento",
+                name: "IX_Seguimientos_EnvioId",
+                table: "Seguimientos",
                 column: "EnvioId");
         }
 
@@ -162,7 +162,7 @@ namespace Obligatorio.Infraestructura.Migrations
                 name: "Auditorias");
 
             migrationBuilder.DropTable(
-                name: "Seguimiento");
+                name: "Seguimientos");
 
             migrationBuilder.DropTable(
                 name: "Envios");
