@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Seguimientos;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
@@ -16,15 +18,17 @@ namespace Obligatorio.WebApp.Controllers
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
 		IUpdate<EnvioDto> _update;
+		IAdd<SeguimientoDto> _addSeguimiento;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update)
+		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update, IAdd<SeguimientoDto> addSeguimiento)
 
 		{
 			_add = add;
 			_getByNombre = getByNombre;
 			_getAll = getAll;
 			_update = update;
+			_addSeguimiento = addSeguimiento;
 
 		}
 		public IActionResult Index()
@@ -109,6 +113,26 @@ namespace Obligatorio.WebApp.Controllers
 				ViewBag.Message = $"Error al finalizar el envío: {e.Message}";
 				return RedirectToAction("Index");
 			}
+		}
+
+		[HttpPost]
+		public IActionResult AgregarSeguimiento(VMSeguimiento seguimiento)
+		{
+			try
+			{
+				_addSeguimiento.Execute(new SeguimientoDto(
+												seguimiento.Comentario,
+												seguimiento.Fecha
+													));
+				return RedirectToAction("AgregarSeguimiento");
+			}
+			catch (Exception e)
+			{
+				ViewBag.Message = $"Error al agregar el comentario: {e.Message}";
+
+			}
+			return View(seguimiento);
+
 		}
 	}
 }

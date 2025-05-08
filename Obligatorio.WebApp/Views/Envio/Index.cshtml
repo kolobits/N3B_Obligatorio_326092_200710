@@ -49,6 +49,9 @@
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
                     <th>@Html.DisplayNameFor(model => model.Tipo)</th>
                     <th>@Html.DisplayNameFor(model => model.Estado)</th>
+
+                    
+
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -68,6 +71,10 @@
                             {
                                 <form asp-action="Finalizar" asp-controller="Envio" asp-route-id="@item.Id" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-sm btn-outline-success">Finalizar</button>
+                                </form>
+
+                                <form asp-action="AgregarSeguimiento" asp-controller="Envio" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-outline-success">Agregar Seguimiento</button>
                                 </form>
                             }
                             else

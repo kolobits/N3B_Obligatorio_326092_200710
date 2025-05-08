@@ -12,8 +12,8 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250506235315_int")]
-    partial class @int
+    [Migration("20250508010315_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,7 +123,7 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.HasIndex("EnvioId");
 
-                    b.ToTable("Seguimiento");
+                    b.ToTable("Seguimientos");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Usuario", b =>

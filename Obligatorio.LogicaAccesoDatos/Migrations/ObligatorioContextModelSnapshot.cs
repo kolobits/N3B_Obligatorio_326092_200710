@@ -120,7 +120,7 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.HasIndex("EnvioId");
 
-                    b.ToTable("Seguimiento");
+                    b.ToTable("Seguimientos");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Usuario", b =>

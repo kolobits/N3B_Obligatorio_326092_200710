@@ -16,6 +16,9 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 		public DbSet<Funcionario> Funcionarios { get; set; }
 		public DbSet<Envio> Envios { get; set; }
 		public DbSet<Auditoria> Auditorias { get; set; }
+		public DbSet<EnvioUrgente> EnviosUrgentes { get; set; }
+		public DbSet<EnvioComun> EnviosComunes { get; set; }
+		public DbSet<Seguimiento> Seguimientos { get; set; }
 
 
 
