@@ -2,6 +2,7 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Seguimientos;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
@@ -18,15 +19,21 @@ namespace Obligatorio.WebApp.Controllers
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
 		IUpdate<EnvioDto> _update;
+		IGetByTracking<EnvioListadoDto> _getByTracking;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update)
+		public EnvioController(IAddEnvio<EnvioDto> add, 
+							   IGetByName<AgenciaListadoDto> getByNombre,
+							   IGetAll<EnvioListadoDto> getAll, 
+							   IUpdate<EnvioDto> update, 
+							   IGetByTracking<EnvioListadoDto> getByTracking)
 
 		{
 			_add = add;
 			_getByNombre = getByNombre;
 			_getAll = getAll;
 			_update = update;
+			_getByTracking = getByTracking;
 		}
 		public IActionResult Index()
 		{
@@ -111,5 +118,17 @@ namespace Obligatorio.WebApp.Controllers
 				return RedirectToAction("Index");
 			}
 		}
+
+		public IActionResult Details(int tracking)
+		{
+			EnvioListadoDto unE = _getByTracking.Execute(tracking);
+			if (unE == null)
+			{
+				return RedirectToAction("index");
+			}
+			return View(unE);
+		}
+
+
 	}
 }

@@ -54,9 +54,10 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IAddEnvio<EnvioDto>, AddEnvio>();
 			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
 			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
+            builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
 
-			// Inyecciones para los Caso de Uso de Seguimiento
-			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
+            // Inyecciones para los Caso de Uso de Seguimiento
+            builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
 
 			// Inyecciones para los Caso de Uso de Agencia
 			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
