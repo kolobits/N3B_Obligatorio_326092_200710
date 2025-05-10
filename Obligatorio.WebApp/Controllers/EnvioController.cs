@@ -18,18 +18,15 @@ namespace Obligatorio.WebApp.Controllers
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
 		IUpdate<EnvioDto> _update;
-		IAdd<SeguimientoDto> _addSeguimiento;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update, IAdd<SeguimientoDto> addSeguimiento)
+		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update)
 
 		{
 			_add = add;
 			_getByNombre = getByNombre;
 			_getAll = getAll;
 			_update = update;
-			_addSeguimiento = addSeguimiento;
-
 		}
 		public IActionResult Index()
 		{
@@ -113,26 +110,6 @@ namespace Obligatorio.WebApp.Controllers
 				ViewBag.Message = $"Error al finalizar el envío: {e.Message}";
 				return RedirectToAction("Index");
 			}
-		}
-
-		[HttpPost]
-		public IActionResult AgregarSeguimiento(VMSeguimiento seguimiento)
-		{
-			try
-			{
-				_addSeguimiento.Execute(new SeguimientoDto(
-												seguimiento.Comentario,
-												seguimiento.Fecha
-													));
-				return RedirectToAction("AgregarSeguimiento");
-			}
-			catch (Exception e)
-			{
-				ViewBag.Message = $"Error al agregar el comentario: {e.Message}";
-
-			}
-			return View(seguimiento);
-
 		}
 	}
 }

@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250508010315_init")]
+    [Migration("20250510152214_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -111,7 +111,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EnvioId")
+                    b.Property<int>("EnvioId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
@@ -347,7 +347,9 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.HasOne("Obligatorio.LogicaNegocio.Entidades.Envio", null)
                         .WithMany("Seguimientos")
-                        .HasForeignKey("EnvioId");
+                        .HasForeignKey("EnvioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Empleado");
                 });

@@ -7,7 +7,8 @@
 		string Cliente,
 		string Estado,
 		double Peso,
-		string Tipo
+		string Tipo,
+		string UltimoComentario
 		)
 	{
 	}

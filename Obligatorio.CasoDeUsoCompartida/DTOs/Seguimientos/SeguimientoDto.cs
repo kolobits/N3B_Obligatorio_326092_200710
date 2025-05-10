@@ -2,8 +2,9 @@
 {
 	public record SeguimientoDto(
 								string Comentario,
-								DateTime Fecha
-								)
+								DateTime Fecha,
+                                int EnvioId
+                                )
 	{
 	}
 }
