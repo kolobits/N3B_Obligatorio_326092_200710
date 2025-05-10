@@ -46,7 +46,20 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 		{
 			return _context.Envios.FirstOrDefault(e => e.Id == id);
 		}
-	}
+
+        public Envio GetByTracking(int tracking)
+        {
+            return _context.Envios
+                .Include(e => e.Cliente)
+                    .ThenInclude(c => c.NombreCompleto)
+                .Include(e => e.Empleado)
+                    .ThenInclude(emp => emp.NombreCompleto)
+                .Include(e => e.Seguimientos) 
+                .Include(e => e.Tracking) 
+                .FirstOrDefault(e => e.Tracking.Value == tracking);
+        }
+
+    }
 
 
 }

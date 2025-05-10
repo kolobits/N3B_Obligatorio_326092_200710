@@ -73,8 +73,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
             foreach (var item in envios)
             {
                 var ultimoComentario = item.Seguimientos?
-            .OrderByDescending(s => s.Fecha)
-            .FirstOrDefault()?.Comentario ?? "Sin comentarios";
+                    .OrderByDescending(s => s.Fecha)
+                    .FirstOrDefault()?.Comentario ?? "Sin comentarios";
 
                 enviosDto.Add(new EnvioListadoDto(item.Id,
                                                   item.Tracking.Value,
