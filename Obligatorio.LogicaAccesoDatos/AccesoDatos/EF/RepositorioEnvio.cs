@@ -27,7 +27,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.Include(e => e.Empleado)
 					.ThenInclude(emp => emp.NombreCompleto)
 				.Include(e => e.Tracking)
-				.ToList();
+                .Include(e => e.Seguimientos)
+                .ToList();
 		}
 
         public void Update(int id,Envio obj)

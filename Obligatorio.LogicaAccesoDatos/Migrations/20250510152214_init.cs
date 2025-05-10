@@ -111,7 +111,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     Comentario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EmpleadoId = table.Column<int>(type: "int", nullable: false),
-                    EnvioId = table.Column<int>(type: "int", nullable: true)
+                    EnvioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,7 +120,8 @@ namespace Obligatorio.Infraestructura.Migrations
                         name: "FK_Seguimientos_Envios_EnvioId",
                         column: x => x.EnvioId,
                         principalTable: "Envios",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Seguimientos_Usuarios_EmpleadoId",
                         column: x => x.EmpleadoId,
