@@ -7,7 +7,7 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-    public class AddUsuario : IAddUsuario<UsuarioDto>
+	public class AddUsuario : IAdd<UsuarioDto>
 	{
 		private IRepositorioUsuario _repo;
 		private IAddAuditoria<AuditoriaDto> _addAuditoria;

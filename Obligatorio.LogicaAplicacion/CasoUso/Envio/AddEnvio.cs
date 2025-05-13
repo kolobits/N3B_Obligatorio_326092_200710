@@ -1,5 +1,5 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
-using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.Entidades;
@@ -10,7 +10,7 @@ using Obligatorio.LogicaNegocio.Vo.Agencia;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 {
-	public class AddEnvio : IAddEnvio<EnvioDto>
+	public class AddEnvio : IAdd<EnvioDto>
 	{
 		private IRepositorioEnvio _repoEnvio;
 		private IRepositorioUsuario _repoUsuario;
@@ -49,8 +49,8 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 			}
 			else if (dto.Tipo.ToLower() == "urgente")
 			{
-                _repoEnvio.Add(EnvioMapper.FromDtoEnvioUrgente(dto, empleado.Id, cliente.Id));
-            }
+				_repoEnvio.Add(EnvioMapper.FromDtoEnvioUrgente(dto, empleado.Id, cliente.Id));
+			}
 
 		}
 	}

@@ -1,37 +1,34 @@
-﻿
-using System.Runtime.Serialization;
-
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Runtime.Serialization;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.Excepciones
 {
-    public abstract class InfraestructuraException : Exception
-    {
-        string _message;
-        public InfraestructuraException()
-        {
-        }
+	public abstract class InfraestructuraException : Exception
+	{
+		string _message;
+		public InfraestructuraException()
+		{
+		}
 
-        public InfraestructuraException(string? message) : base(message)
-        {
-            _message = message;
-        }
+		public InfraestructuraException(string? message) : base(message)
+		{
+			_message = message;
+		}
 
-        protected InfraestructuraException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+		protected InfraestructuraException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+		}
 
-        public abstract int statusCode();
+		public abstract int statusCode();
 
-        public Error Error()
-        {
-            return new Error(
-                statusCode(),
-                _message
-                );
+		public Error Error()
+		{
+			return new Error(
+				statusCode(),
+				_message
+				);
 
-        }
+		}
 
-    }
+	}
 }
 
