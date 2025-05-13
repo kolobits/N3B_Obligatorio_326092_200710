@@ -24,15 +24,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
 		public Usuario GetById(int id)
 		{
-			Usuario usuarioAEncontrar = null;
-			foreach (Usuario usuario in _context.Usuarios)
-			{
-				if (usuario.Id == id)
-				{
-					usuarioAEncontrar = usuario;
-				}
-			}
-			return usuarioAEncontrar;
+			return _context.Usuarios
+				.FirstOrDefault(usuario => usuario.Id == id);
 		}
 
 		public void Remove(int id)
@@ -58,15 +51,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
 		Usuario IRepositorioGetByEmail<Usuario>.GetByEmail(string email)
 		{
-			Usuario usuarioAEncontrar = null;
-			foreach (Usuario usuario in _context.Usuarios)
-			{
-				if (usuario.Email.Value == email)
-				{
-					usuarioAEncontrar = usuario;
-				}
-			}
-			return usuarioAEncontrar;
+			return _context.Usuarios
+				.FirstOrDefault(usuario => usuario.Email.Value.ToLower() == email.ToLower());
 		}
 
 

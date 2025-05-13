@@ -1,6 +1,6 @@
-﻿namespace Obligatorio.LogicaNegocio.Excepciones.Usuario
+﻿namespace Obligatorio.LogicaNegocio.Excepciones.Agencia
 {
-	public class NombreException : UsuarioException
+	public class NombreException : AgenciaException
 	{
 		public NombreException()
 		{

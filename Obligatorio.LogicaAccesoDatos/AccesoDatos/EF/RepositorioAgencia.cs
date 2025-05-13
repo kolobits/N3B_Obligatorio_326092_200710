@@ -23,31 +23,16 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.Where(agencia => agencia.Nombre.Value.ToLower().Contains(value.ToLower()));
 		}
 
-		//hacer sentencia en linq igual a la de arriba
 		Agencia IRepositorioGetByName<Agencia>.GetByName(string nombre)
 		{
-			Agencia agenciaAEncontrar = null;
-			foreach (Agencia agencia in _context.Agencias)
-			{
-				if (agencia.Nombre.Value == nombre)
-				{
-					agenciaAEncontrar = agencia;
-				}
-			}
-			return agenciaAEncontrar;
+			return _context.Agencias
+				.FirstOrDefault(agencia => agencia.Nombre.Value.ToLower().Contains(nombre.ToLower()));
 		}
 
 		public Agencia GetById(int id)
 		{
-			Agencia agenciaBuscada = null;
-			foreach (Agencia agencia in _context.Agencias)
-			{
-				if (agencia.Id == id)
-				{
-					agenciaBuscada = agencia;
-				}
-			}
-			return agenciaBuscada;
+			return _context.Agencias
+					.FirstOrDefault(agencia => agencia.Id == id);
 		}
 	}
 }
