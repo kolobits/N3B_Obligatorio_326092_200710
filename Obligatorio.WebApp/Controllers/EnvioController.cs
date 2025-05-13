@@ -2,6 +2,7 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Seguimientos;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
@@ -18,18 +19,21 @@ namespace Obligatorio.WebApp.Controllers
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
 		IUpdate<EnvioDto> _update;
-		IAdd<SeguimientoDto> _addSeguimiento;
+		IGetByTracking<EnvioListadoDto> _getByTracking;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, IGetByName<AgenciaListadoDto> getByNombre, IGetAll<EnvioListadoDto> getAll, IUpdate<EnvioDto> update, IAdd<SeguimientoDto> addSeguimiento)
+		public EnvioController(IAddEnvio<EnvioDto> add, 
+							   IGetByName<AgenciaListadoDto> getByNombre,
+							   IGetAll<EnvioListadoDto> getAll, 
+							   IUpdate<EnvioDto> update, 
+							   IGetByTracking<EnvioListadoDto> getByTracking)
 
 		{
 			_add = add;
 			_getByNombre = getByNombre;
 			_getAll = getAll;
 			_update = update;
-			_addSeguimiento = addSeguimiento;
-
+			_getByTracking = getByTracking;
 		}
 		public IActionResult Index()
 		{
@@ -115,24 +119,16 @@ namespace Obligatorio.WebApp.Controllers
 			}
 		}
 
-		[HttpPost]
-		public IActionResult AgregarSeguimiento(VMSeguimiento seguimiento)
+		public IActionResult Details(int tracking)
 		{
-			try
+			EnvioListadoDto unE = _getByTracking.Execute(tracking);
+			if (unE == null)
 			{
-				_addSeguimiento.Execute(new SeguimientoDto(
-												seguimiento.Comentario,
-												seguimiento.Fecha
-													));
-				return RedirectToAction("AgregarSeguimiento");
+				return RedirectToAction("index");
 			}
-			catch (Exception e)
-			{
-				ViewBag.Message = $"Error al agregar el comentario: {e.Message}";
-
-			}
-			return View(seguimiento);
-
+			return View(unE);
 		}
+
+
 	}
 }

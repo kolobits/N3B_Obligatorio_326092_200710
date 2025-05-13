@@ -108,7 +108,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EnvioId")
+                    b.Property<int>("EnvioId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
@@ -344,7 +344,9 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.HasOne("Obligatorio.LogicaNegocio.Entidades.Envio", null)
                         .WithMany("Seguimientos")
-                        .HasForeignKey("EnvioId");
+                        .HasForeignKey("EnvioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Empleado");
                 });
