@@ -1,5 +1,4 @@
 ﻿using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 
 
 namespace Obligatorio.LogicaNegocio.InterfacesRepositorios.Agencias

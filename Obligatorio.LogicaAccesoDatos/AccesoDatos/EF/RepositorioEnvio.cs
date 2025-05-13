@@ -27,17 +27,17 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.Include(e => e.Empleado)
 					.ThenInclude(emp => emp.NombreCompleto)
 				.Include(e => e.Tracking)
-                .Include(e => e.Seguimientos)
-                .ToList();
+				.Include(e => e.Seguimientos)
+				.ToList();
 		}
 
-        public void Update(int id,Envio obj)
+		public void Update(int id, Envio obj)
 		{
 			Envio unE = GetById(id);
 			if (unE != null)
 			{
 				unE.Update(obj);
-                _context.Envios.Update(unE);
+				_context.Envios.Update(unE);
 				_context.SaveChanges();
 			}
 		}
@@ -47,19 +47,19 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			return _context.Envios.FirstOrDefault(e => e.Id == id);
 		}
 
-        public Envio GetByTracking(int tracking)
-        {
-            return _context.Envios
-                .Include(e => e.Cliente)
-                    .ThenInclude(c => c.NombreCompleto)
-                .Include(e => e.Empleado)
-                    .ThenInclude(emp => emp.NombreCompleto)
-                .Include(e => e.Seguimientos) 
-                .Include(e => e.Tracking) 
-                .FirstOrDefault(e => e.Tracking.Value == tracking);
-        }
+		public Envio GetByTracking(int tracking)
+		{
+			return _context.Envios
+				.Include(e => e.Cliente)
+					.ThenInclude(c => c.NombreCompleto)
+				.Include(e => e.Empleado)
+					.ThenInclude(emp => emp.NombreCompleto)
+				.Include(e => e.Seguimientos)
+				.Include(e => e.Tracking)
+				.FirstOrDefault(e => e.Tracking.Value == tracking);
+		}
 
-    }
+	}
 
 
 }
