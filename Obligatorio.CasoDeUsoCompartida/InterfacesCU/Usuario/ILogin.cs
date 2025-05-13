@@ -1,10 +1,9 @@
-﻿
-namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario
+﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario
 {
-    public interface ILogin<T>
-    {
-        T Execute(string email, string password);
-    }
+	public interface ILogin<T>
+	{
+		T Execute(string email, string password);
+	}
 
 
 }

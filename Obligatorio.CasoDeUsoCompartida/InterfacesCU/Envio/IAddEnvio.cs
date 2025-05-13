@@ -1,7 +1,0 @@
-﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio
-{
-	public interface IAddEnvio<T>
-	{
-		void Execute(T obj);
-	}
-}

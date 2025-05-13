@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
+using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.WebApp.Filtros;
@@ -7,18 +8,18 @@ using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
 {
-    [AuthorizeSesion]
+	[AuthorizeSesion]
 	public class UsuarioController : Controller
 	{
 
 		IGetAll<UsuarioListadoDto> _getAll;
-		IAddUsuario<UsuarioDto> _add;
+		IAdd<UsuarioDto> _add;
 		IRemove _remove;
 		IGetById<UsuarioListadoDto> _getById;
 		IUpdate<UsuarioDto> _update;
 
 		public UsuarioController(IGetAll<UsuarioListadoDto> getAll,
-								 IAddUsuario<UsuarioDto> add,
+								 IAdd<UsuarioDto> add,
 								 IRemove remove,
 								 IGetById<UsuarioListadoDto> getById,
 								 IUpdate<UsuarioDto> update)

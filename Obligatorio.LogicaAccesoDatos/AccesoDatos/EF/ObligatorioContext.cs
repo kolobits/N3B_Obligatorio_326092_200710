@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Obligatorio.Infraestructura.AccesoDatos.EF.Config;
 using Obligatorio.LogicaNegocio.Entidades;
 

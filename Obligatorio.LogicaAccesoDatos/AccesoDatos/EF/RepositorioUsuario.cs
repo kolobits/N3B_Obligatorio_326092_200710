@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.LogicaNegocio.Entidades;
+﻿using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
@@ -30,7 +29,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			{
 				if (usuario.Id == id)
 				{
-                    usuarioAEncontrar = usuario;
+					usuarioAEncontrar = usuario;
 				}
 			}
 			return usuarioAEncontrar;

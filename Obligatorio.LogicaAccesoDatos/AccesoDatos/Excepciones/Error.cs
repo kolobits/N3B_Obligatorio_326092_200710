@@ -1,9 +1,7 @@
-﻿
-
-namespace Obligatorio.Infraestructura.AccesoDatos.Excepciones
+﻿namespace Obligatorio.Infraestructura.AccesoDatos.Excepciones
 {
-    public record Error(int Code, string Message)
-    {
+	public record Error(int Code, string Message)
+	{
 
-    }
+	}
 }

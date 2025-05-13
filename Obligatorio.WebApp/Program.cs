@@ -39,7 +39,7 @@ namespace Obligatorio.WebApp
 
 
 			// Inyecciones para los Caso de Uso de Usuario
-			builder.Services.AddScoped<IAddUsuario<UsuarioDto>, AddUsuario>();
+			builder.Services.AddScoped<IAdd<UsuarioDto>, AddUsuario>();
 			builder.Services.AddScoped<IGetAll<UsuarioListadoDto>, GetAllUsuario>();
 			builder.Services.AddScoped<IGetById<UsuarioListadoDto>, LogicaAplicacion.CasoUso.Usuarios.GetById>();
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
@@ -51,13 +51,13 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IAddAuditoria<AuditoriaDto>, AddAuditoria>();
 
 			// Inyecciones para los Caso de Uso de Envio
-			builder.Services.AddScoped<IAddEnvio<EnvioDto>, AddEnvio>();
+			builder.Services.AddScoped<IAdd<EnvioDto>, AddEnvio>();
 			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
 			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
-            builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
+			builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
 
-            // Inyecciones para los Caso de Uso de Seguimiento
-            builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
+			// Inyecciones para los Caso de Uso de Seguimiento
+			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
 
 			// Inyecciones para los Caso de Uso de Agencia
 			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();

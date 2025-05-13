@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
-using Obligatorio.CasoDeUsoCompartida.DTOs.Seguimientos;
-using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
@@ -15,17 +13,17 @@ namespace Obligatorio.WebApp.Controllers
 	[AuthorizeSesion]
 	public class EnvioController : Controller
 	{
-		IAddEnvio<EnvioDto> _add;
+		IAdd<EnvioDto> _add;
 		IGetByName<AgenciaListadoDto> _getByNombre;
 		IGetAll<EnvioListadoDto> _getAll;
 		IUpdate<EnvioDto> _update;
 		IGetByTracking<EnvioListadoDto> _getByTracking;
 
 
-		public EnvioController(IAddEnvio<EnvioDto> add, 
+		public EnvioController(IAdd<EnvioDto> add,
 							   IGetByName<AgenciaListadoDto> getByNombre,
-							   IGetAll<EnvioListadoDto> getAll, 
-							   IUpdate<EnvioDto> update, 
+							   IGetAll<EnvioListadoDto> getAll,
+							   IUpdate<EnvioDto> update,
 							   IGetByTracking<EnvioListadoDto> getByTracking)
 
 		{
