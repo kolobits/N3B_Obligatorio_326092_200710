@@ -56,6 +56,7 @@
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
                     <th>@Html.DisplayNameFor(model => model.Tipo)</th>
                     <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                    <th>@("Fecha finalización")</th>
                     <th>@("Último Comentario")</th>
                     <th class="text-center">Acciones</th>
                 </tr>
@@ -71,6 +72,7 @@
                         <td>@Html.DisplayFor(modelItem => item.Peso)</td>
                         <td>@Html.DisplayFor(modelItem => item.Tipo)</td>      
                         <td>@(item.Estado == "En_Proceso" ? "En proceso" : item.Estado)</td>
+						<td>@Html.DisplayFor(modelItem => item.FechaFinalizacion)</td>
                         <td>@Html.DisplayFor(modelItem => item.UltimoComentario)</td>
                         <td class="text-center">
                             @if (item.Estado == "En_Proceso")

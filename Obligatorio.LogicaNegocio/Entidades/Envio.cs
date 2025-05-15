@@ -1,5 +1,4 @@
 ﻿using Obligatorio.LogicaNegocio.Vo.Envio;
-using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
@@ -15,8 +14,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
 		public Estado Estado { get; set; }
 		public string? Discriminator { get; set; }
 		public List<Seguimiento> Seguimientos { get; set; }
+		public DateTime? FechaFinalizacion { get; set; }
 
-		public Envio(int id, Tracking tracking, int empleadoId, int clienteId, Peso peso, Estado estado, List<Seguimiento> seguimientos)
+		public Envio(int id, Tracking tracking, int empleadoId, int clienteId, Peso peso, Estado estado, List<Seguimiento> seguimientos, DateTime? fechaFinalizacion)
 		{
 			Id = id;
 			Tracking = tracking;
@@ -25,12 +25,13 @@ namespace Obligatorio.LogicaNegocio.Entidades
 			Estado = estado;
 			Peso = peso;
 			Seguimientos = seguimientos;
+			FechaFinalizacion = fechaFinalizacion;
 		}
 		protected Envio() { } // Constructor protegido para EF Core
 
-        public void Update(Envio obj)
-        {
-            Estado = obj.Estado;
-        }
-    }
+		public void Update(Envio obj)
+		{
+			Estado = obj.Estado;
+		}
+	}
 }

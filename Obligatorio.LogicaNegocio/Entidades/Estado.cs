@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Obligatorio.LogicaNegocio.Entidades
+﻿namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public enum Estado
-    {
-         En_Proceso,
-         Finalizado
-    }
+	public enum Estado
+	{
+		En_Proceso,
+		Finalizado
+	}
 }

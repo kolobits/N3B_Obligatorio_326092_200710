@@ -37,13 +37,9 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 
 		public static IEnumerable<UsuarioListadoDto> ToListDto(IEnumerable<Usuario> usuarios)
 		{
-			List<UsuarioListadoDto> usuariosDto = new List<UsuarioListadoDto>();
-
-			foreach (var item in usuarios)
-			{
-				usuariosDto.Add(new UsuarioListadoDto(item.Id, item.NombreCompleto.Nombre, item.NombreCompleto.Apellido, item.Email.Value));
-			}
-			return usuariosDto;
+			return usuarios.Select(item =>
+				new UsuarioListadoDto(item.Id, item.NombreCompleto.Nombre, item.NombreCompleto.Apellido, item.Email.Value)
+			);
 		}
 
 

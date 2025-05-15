@@ -3,6 +3,7 @@ using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaAplicacion.Mapper;
+using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
@@ -26,6 +27,12 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 
 		public void Execute(UsuarioDto usuarioDto)
 		{
+			var existente = _repo.GetByEmail(usuarioDto.Email);
+			if (existente != null)
+			{
+				throw new EmailRepetidoException(usuarioDto.Email);
+			}
+
 			_repo.Add(UsuarioMapper.FromDto(usuarioDto));
 
 			_addAuditoria.Execute(new AuditoriaDto(

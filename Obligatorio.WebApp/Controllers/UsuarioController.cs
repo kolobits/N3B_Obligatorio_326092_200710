@@ -79,7 +79,7 @@ namespace Obligatorio.WebApp.Controllers
 			}
 			catch (EmailRepetidoException)
 			{
-				ViewBag.Message = $"El mail {usuario.Email} esta repetido";
+				ViewBag.Message = $"El mail {usuario.Email} ya está registrado";
 			}
 			catch (ArgumentNullException)
 			{

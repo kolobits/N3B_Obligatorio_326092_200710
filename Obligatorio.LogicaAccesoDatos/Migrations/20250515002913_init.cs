@@ -73,6 +73,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     Peso = table.Column<double>(type: "float", nullable: false),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    FechaFinalizacion = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AgenciaRetiroId = table.Column<int>(type: "int", nullable: true),
                     Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Numero = table.Column<int>(type: "int", nullable: true),

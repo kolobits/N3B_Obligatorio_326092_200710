@@ -5,7 +5,7 @@ using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
 {
-    public class HomeController : Controller
+	public class HomeController : Controller
 	{
 
 		private readonly ILogin<Usuario> _login;
@@ -33,11 +33,7 @@ namespace Obligatorio.WebApp.Controllers
 			{
 				var usuario = _login.Execute(model.Email, model.Password);
 
-				if (usuario == null)
-				{
-					ViewBag.Message = "Las credenciales no son válidas.";
-					return View(model);
-				}
+
 
 				if (!(usuario is Empleado))
 				{
