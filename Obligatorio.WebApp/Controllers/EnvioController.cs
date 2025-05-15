@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
@@ -18,13 +19,15 @@ namespace Obligatorio.WebApp.Controllers
 		IGetAll<EnvioListadoDto> _getAll;
 		IUpdate<EnvioDto> _update;
 		IGetByTracking<EnvioListadoDto> _getByTracking;
+		IGetAll<AgenciaListadoDto> _getAllAgencias;
 
 
 		public EnvioController(IAdd<EnvioDto> add,
 							   IGetByName<AgenciaListadoDto> getByNombre,
 							   IGetAll<EnvioListadoDto> getAll,
 							   IUpdate<EnvioDto> update,
-							   IGetByTracking<EnvioListadoDto> getByTracking)
+							   IGetByTracking<EnvioListadoDto> getByTracking,
+							   IGetAll<AgenciaListadoDto> getAllAgencias)
 
 		{
 			_add = add;
@@ -32,6 +35,7 @@ namespace Obligatorio.WebApp.Controllers
 			_getAll = getAll;
 			_update = update;
 			_getByTracking = getByTracking;
+			_getAllAgencias = getAllAgencias;
 		}
 		public IActionResult Index()
 		{
@@ -55,6 +59,8 @@ namespace Obligatorio.WebApp.Controllers
 		[AuthorizeSesion]
 		public IActionResult Create()
 		{
+			ViewBag.Agencias = _getAllAgencias.Execute()
+			.Select(a => new SelectListItem { Value = a.Nombre, Text = a.Nombre });
 			return View();
 		}
 

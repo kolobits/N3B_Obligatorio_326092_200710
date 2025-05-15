@@ -5,96 +5,106 @@ using Obligatorio.LogicaNegocio.Vo.Envio;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
 {
-    public static class EnvioMapper
-    {
-        public static EnvioComun FromDtoEnvioComun(
-            EnvioDto dto,
-            int empleadoId,
-            int clienteId
-            )
-        {
-            return new EnvioComun(
-                0,
-                new Tracking(new Random().Next(100000, 999999)),
-                empleadoId,
-                clienteId,
-                new Peso(dto.Peso),
-                Estado.En_Proceso,
-                new List<Seguimiento>(),
-                dto.AgenciaId
-            );
-        }
+	public static class EnvioMapper
+	{
+		public static EnvioComun FromDtoEnvioComun(
+			EnvioDto dto,
+			int empleadoId,
+			int clienteId
+			)
+		{
+			return new EnvioComun(
+				0,
+				new Tracking(new Random().Next(100000, 999999)),
+				empleadoId,
+				clienteId,
+				new Peso(dto.Peso),
+				Estado.En_Proceso,
+				new List<Seguimiento>(),
+				fechaFinalizacion: null,
+				dto.AgenciaId
+			);
+		}
 
-        public static EnvioUrgente FromDtoEnvioUrgente(
-        EnvioDto dto,
-        int empleadoId,
-        int clienteId
-        )
-        {
-            return new EnvioUrgente(
-                0,
-                new Tracking(new Random().Next(100000, 999999)),
-                empleadoId,
-                clienteId,
-                new Peso(dto.Peso),
-                Estado.En_Proceso,
-                new List<Seguimiento>(),
-                new DireccionPostal(dto.Calle,
-                                    dto.Numero,
-                                    dto.CodigoPostal),
-                false
-            );
-        }
-
-
-        public static EnvioListadoDto ToDto(Envio envio)
-        {
-            var ultimoComentario = envio.Seguimientos?
-                .OrderByDescending(s => s.Fecha)
-                .FirstOrDefault()?.Comentario ?? "Sin comentarios";
-
-            return new EnvioListadoDto(
-                envio.Id,
-                envio.Tracking.Value,
-                envio.Empleado.NombreCompleto.Nombre,
-                envio.Cliente.NombreCompleto.Nombre,
-                envio.Estado.ToString(),
-                envio.Peso.Value,
-                envio.Discriminator,
-                ultimoComentario
-            );
-        }
-
-        public static IEnumerable<EnvioListadoDto> ToListDto(IEnumerable<Envio> envios)
-        {
-            List<EnvioListadoDto> enviosDto = new List<EnvioListadoDto>();
+		public static EnvioUrgente FromDtoEnvioUrgente(
+		EnvioDto dto,
+		int empleadoId,
+		int clienteId
+		)
+		{
+			return new EnvioUrgente(
+				0,
+				new Tracking(new Random().Next(100000, 999999)),
+				empleadoId,
+				clienteId,
+				new Peso(dto.Peso),
+				Estado.En_Proceso,
+				new List<Seguimiento>(),
+				fechaFinalizacion: null,
+				new DireccionPostal(dto.Calle,
+									dto.Numero,
+									dto.CodigoPostal),
+				false
+			);
+		}
 
 
-            foreach (var item in envios)
-            {
-                var ultimoComentario = item.Seguimientos?
-                    .OrderByDescending(s => s.Fecha)
-                    .FirstOrDefault()?.Comentario ?? "Sin comentarios";
+		public static EnvioListadoDto ToDto(Envio envio)
+		{
+			var ultimoComentario = envio.Seguimientos?
+				.OrderByDescending(s => s.Fecha)
+				.FirstOrDefault()?.Comentario ?? "Sin comentarios";
 
-                enviosDto.Add(new EnvioListadoDto(item.Id,
-                                                  item.Tracking.Value,
-                                                  item.Empleado.NombreCompleto.Nombre,
-                                                  item.Cliente.NombreCompleto.Nombre,
-                                                  item.Estado.ToString(),
-                                                  item.Peso.Value,
-                                                  item.Discriminator,
-                                                  ultimoComentario));
-            }
-            return enviosDto;
-        }
+			return new EnvioListadoDto(
+				envio.Id,
+				envio.Tracking.Value,
+				envio.Empleado.NombreCompleto.Nombre,
+				envio.Cliente.NombreCompleto.Nombre,
+				envio.Estado.ToString(),
+				envio.Peso.Value,
+				envio.Discriminator,
+				ultimoComentario,
+				envio.FechaFinalizacion
+			);
+		}
 
-        public static Envio ForUpdate(Envio envio)
-        {
-            envio.Estado = Estado.Finalizado;
-            return envio;
-        }
+		public static IEnumerable<EnvioListadoDto> ToListDto(IEnumerable<Envio> envios)
+		{
+			List<EnvioListadoDto> enviosDto = new List<EnvioListadoDto>();
 
 
-    }
+			foreach (var item in envios)
+			{
+				var ultimoComentario = item.Seguimientos?
+					.OrderByDescending(s => s.Fecha)
+					.FirstOrDefault()?.Comentario ?? "Sin comentarios";
+
+				enviosDto.Add(new EnvioListadoDto(item.Id,
+												  item.Tracking.Value,
+												  item.Empleado.NombreCompleto.Nombre,
+												  item.Cliente.NombreCompleto.Nombre,
+												  item.Estado.ToString(),
+												  item.Peso.Value,
+												  item.Discriminator,
+												  ultimoComentario,
+												  item.FechaFinalizacion
+												  ));
+			}
+			return enviosDto;
+		}
+
+
+		public static Envio ForUpdate(Envio envio)
+		{
+			if (envio.Estado == Estado.En_Proceso)
+			{
+				envio.Estado = Estado.Finalizado;
+				envio.FechaFinalizacion = DateTime.Now;
+			}
+			return envio;
+		}
+
+
+	}
 }
 

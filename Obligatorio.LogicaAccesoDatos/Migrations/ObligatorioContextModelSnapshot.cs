@@ -80,6 +80,9 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaFinalizacion")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");

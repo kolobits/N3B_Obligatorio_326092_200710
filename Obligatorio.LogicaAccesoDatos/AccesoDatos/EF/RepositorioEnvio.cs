@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Obligatorio.Infraestructura.AccesoDatos.Excepciones;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
 
@@ -49,7 +50,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
 		public Envio GetByTracking(int tracking)
 		{
-			return _context.Envios
+			var envioExitoso = _context.Envios
 				.Include(e => e.Cliente)
 					.ThenInclude(c => c.NombreCompleto)
 				.Include(e => e.Empleado)
@@ -57,6 +58,12 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.Include(e => e.Seguimientos)
 				.Include(e => e.Tracking)
 				.FirstOrDefault(e => e.Tracking.Value == tracking);
+
+			if (envioExitoso == null)
+			{
+				throw new NotFoundException("404");
+			}
+			return envioExitoso;
 		}
 
 	}

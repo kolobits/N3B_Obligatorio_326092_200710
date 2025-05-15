@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Excepciones\Agencia\**" />
-    <EmbeddedResource Remove="Excepciones\Agencia\**" />
-    <None Remove="Excepciones\Agencia\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="InterfacesDominio\" />
   </ItemGroup>
 

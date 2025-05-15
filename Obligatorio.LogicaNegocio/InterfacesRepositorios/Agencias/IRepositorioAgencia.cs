@@ -6,7 +6,8 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios.Agencias
 	public interface IRepositorioAgencia :
 	IRepositorioAdd<Agencia>,
 	IRepositorioGetByName<Agencia>,
-	IRepositorioGetById<Agencia>
+	IRepositorioGetById<Agencia>,
+	IRepositorioGetAll<Agencia>
 	{
 
 	}

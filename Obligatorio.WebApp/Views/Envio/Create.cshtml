@@ -37,9 +37,16 @@
 
                     <div id="agenciaSection" class="mb-3" style="display:none;">
                         <label asp-for="Agencia" class="form-label fw-bold">Agencia</label>
-                        <input asp-for="Agencia" class="form-control" />
+                        <select asp-for="Agencia" class="form-select">
+                            <option value="">-- Seleccionar Agencia --</option>
+                            @foreach (var item in ViewBag.Agencias)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
                         <span asp-validation-for="Agencia" class="text-danger small"></span>
                     </div>
+
 
                     <div id="direccionSection" style="display:none;">
                         <div class="mb-3">

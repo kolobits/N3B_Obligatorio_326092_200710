@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios
+﻿namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
 {
 	public interface IRepositorioGetAll<T>
 	{

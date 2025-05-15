@@ -8,7 +8,8 @@
 		string Estado,
 		double Peso,
 		string Tipo,
-		string UltimoComentario
+		string UltimoComentario,
+		DateTime? FechaFinalizacion
 		)
 	{
 	}

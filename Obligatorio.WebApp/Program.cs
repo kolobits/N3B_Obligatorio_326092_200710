@@ -62,6 +62,7 @@ namespace Obligatorio.WebApp
 			// Inyecciones para los Caso de Uso de Agencia
 			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
 			builder.Services.AddScoped<IGetById<AgenciaListadoDto>, LogicaAplicacion.CasoUso.Agencias.GetById>();
+			builder.Services.AddScoped<IGetAll<AgenciaListadoDto>, GetAllAgencia>();
 
 
 			// Inyecciones para los repositorios ERROR:

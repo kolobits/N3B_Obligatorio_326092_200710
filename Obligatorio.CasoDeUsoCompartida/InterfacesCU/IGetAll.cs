@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario
+﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU
 {
 	public interface IGetAll<T>
 	{

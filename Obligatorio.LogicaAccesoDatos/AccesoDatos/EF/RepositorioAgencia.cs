@@ -34,5 +34,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			return _context.Agencias
 					.FirstOrDefault(agencia => agencia.Id == id);
 		}
+
+		public IEnumerable<Agencia> GetAll()
+		{
+			return _context.Agencias.ToList();
+		}
 	}
 }
