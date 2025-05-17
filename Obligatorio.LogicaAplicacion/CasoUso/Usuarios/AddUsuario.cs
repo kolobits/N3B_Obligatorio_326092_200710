@@ -3,6 +3,7 @@ using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaAplicacion.Mapper;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
@@ -11,12 +12,12 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 	public class AddUsuario : IAdd<UsuarioDto>
 	{
 		private IRepositorioUsuario _repo;
-		private IAddAuditoria<AuditoriaDto> _addAuditoria;
+		private IAdd<AuditoriaDto> _addAuditoria;
 		private ISesionUsuarioActual _sesionUsuarioActual;
 
 		public AddUsuario(
 						IRepositorioUsuario repo,
-						IAddAuditoria<AuditoriaDto> addAuditoria,
+						IAdd<AuditoriaDto> addAuditoria,
 						ISesionUsuarioActual sesionUsuarioActual)
 		{
 			_repo = repo;
@@ -28,10 +29,10 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 		public void Execute(UsuarioDto usuarioDto)
 		{
 			var existente = _repo.GetByEmail(usuarioDto.Email);
-			if (existente != null)
-			{
-				throw new EmailRepetidoException(usuarioDto.Email);
-			}
+            if (existente != null)
+            {
+                throw new EmailRepetidoException($"El email {usuarioDto.Email} ya está registrado");
+            }
 
 			_repo.Add(UsuarioMapper.FromDto(usuarioDto));
 

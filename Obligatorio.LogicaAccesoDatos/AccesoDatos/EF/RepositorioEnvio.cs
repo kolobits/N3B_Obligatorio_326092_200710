@@ -15,7 +15,6 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 		}
 		public void Add(Envio obj)
 		{
-
 			_context.Envios.Add(obj);
 			_context.SaveChanges();
 		}
@@ -29,7 +28,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 					.ThenInclude(emp => emp.NombreCompleto)
 				.Include(e => e.Tracking)
 				.Include(e => e.Seguimientos)
-				.ToList();
+                .ToList();
 		}
 
 		public void Update(int id, Envio obj)

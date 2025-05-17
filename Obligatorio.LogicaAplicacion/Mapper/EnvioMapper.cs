@@ -54,12 +54,14 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			var ultimoComentario = envio.Seguimientos?
 				.OrderByDescending(s => s.Fecha)
 				.FirstOrDefault()?.Comentario ?? "Sin comentarios";
+			var nombreEmpleado = $"{envio.Empleado?.NombreCompleto?.Nombre} {envio.Empleado?.NombreCompleto?.Apellido}";
+			var nombreCliente = $"{envio.Cliente?.NombreCompleto?.Nombre} {envio.Cliente?.NombreCompleto?.Apellido}";
 
 			return new EnvioListadoDto(
 				envio.Id,
 				envio.Tracking.Value,
-				envio.Empleado.NombreCompleto.Nombre,
-				envio.Cliente.NombreCompleto.Nombre,
+				nombreEmpleado,
+				nombreCliente,
 				envio.Estado.ToString(),
 				envio.Peso.Value,
 				envio.Discriminator,

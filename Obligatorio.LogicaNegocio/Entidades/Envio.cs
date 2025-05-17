@@ -26,10 +26,16 @@ namespace Obligatorio.LogicaNegocio.Entidades
 			Peso = peso;
 			Seguimientos = seguimientos;
 			FechaFinalizacion = fechaFinalizacion;
-		}
+			Validar();
+
+        }
 		protected Envio() { } // Constructor protegido para EF Core
 
-		public void Update(Envio obj)
+        public void Validar()
+        {
+        }
+
+        public void Update(Envio obj)
 		{
 			Estado = obj.Estado;
 		}

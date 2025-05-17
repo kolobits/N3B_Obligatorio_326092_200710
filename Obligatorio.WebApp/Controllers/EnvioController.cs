@@ -6,12 +6,15 @@ using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.LogicaNegocio.Excepciones;
+using Obligatorio.LogicaNegocio.Excepciones.Envio;
+using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.WebApp.Filtros;
 using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
 {
-	[AuthorizeSesion]
+    [AuthorizeSesion]
 	public class EnvioController : Controller
 	{
 		IAdd<EnvioDto> _add;
@@ -42,7 +45,7 @@ namespace Obligatorio.WebApp.Controllers
 			return View(_getAll.Execute());
 		}
 
-		public IActionResult Filtrar(string tipoBuscado, string estadoBuscado)
+		public IActionResult Filtrar(string tipoBuscado, string estadoBuscado, DateTime? fechaInicio, DateTime? fechaFin)
 		{
 			var envios = _getAll.Execute();
 
@@ -52,11 +55,19 @@ namespace Obligatorio.WebApp.Controllers
 			if (!string.IsNullOrEmpty(estadoBuscado))
 				envios = envios.Where(e => e.Estado == estadoBuscado);
 
-			return View("Index", envios);
+            if (fechaInicio != null && fechaFin != null)
+            {
+                envios = envios
+                    .Where(e => e.FechaFinalizacion >= fechaInicio && e.FechaFinalizacion <= fechaFin)
+                    .ToList();
+            }
+
+
+            return View("Index", envios);
 		}
 
 
-		[AuthorizeSesion]
+        [AuthorizeSesion]
 		public IActionResult Create()
 		{
 			ViewBag.Agencias = _getAllAgencias.Execute()
@@ -99,12 +110,25 @@ namespace Obligatorio.WebApp.Controllers
 
 				return RedirectToAction("index");
 			}
-
-			catch (Exception e)
+            catch (EmailException e)
+            {
+                ViewBag.Message = e.Message;
+            }
+            catch (PesoException e)
+            {
+                ViewBag.Message = e.Message;
+            }
+            catch (DireccionPostalException e)
+            {
+                ViewBag.Message = e.Message;
+            }
+            catch (Exception)
 			{
 				ViewBag.Message = "Hubo un error";
-			}
-			return View();
+            }
+            ViewBag.Agencias = _getAllAgencias.Execute()
+                   .Select(a => new SelectListItem { Value = a.Nombre, Text = a.Nombre });
+              return View();
 
 		}
 

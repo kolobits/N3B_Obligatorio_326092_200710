@@ -5,7 +5,7 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Auditorias
 {
-	public class AddAuditoria : IAddAuditoria<AuditoriaDto>
+	public class AddAuditoria : IAdd<AuditoriaDto>
 	{
 		private IRepositorioAuditoria _repo;
 
