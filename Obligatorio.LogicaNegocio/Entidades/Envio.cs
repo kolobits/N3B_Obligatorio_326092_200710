@@ -1,8 +1,9 @@
-﻿using Obligatorio.LogicaNegocio.Vo.Envio;
+﻿using Obligatorio.LogicaNegocio.InterfacesDominio;
+using Obligatorio.LogicaNegocio.Vo.Envio;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-	public abstract class Envio
+	public abstract class Envio : IEntity
 	{
 		public int Id { get; set; }
 		public Tracking Tracking { get; set; }
@@ -28,14 +29,14 @@ namespace Obligatorio.LogicaNegocio.Entidades
 			FechaFinalizacion = fechaFinalizacion;
 			Validar();
 
-        }
+		}
 		protected Envio() { } // Constructor protegido para EF Core
 
-        public void Validar()
-        {
-        }
+		public void Validar()
+		{
+		}
 
-        public void Update(Envio obj)
+		public void Update(Envio obj)
 		{
 			Estado = obj.Estado;
 		}

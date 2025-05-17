@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250517120212_init")]
+    [Migration("20250517211417_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -204,7 +204,7 @@ namespace Obligatorio.Infraestructura.Migrations
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Agencia", b =>
                 {
-                    b.OwnsOne("Obligatorio.LogicaNegocio.Vo.Agencia.DireccionPostal", "DireccionPostal", b1 =>
+                    b.OwnsOne("Obligatorio.LogicaNegocio.Vo.Envio.DireccionPostal", "DireccionPostal", b1 =>
                         {
                             b1.Property<int>("AgenciaId")
                                 .HasColumnType("int");
@@ -440,7 +440,7 @@ namespace Obligatorio.Infraestructura.Migrations
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.EnvioUrgente", b =>
                 {
-                    b.OwnsOne("Obligatorio.LogicaNegocio.Vo.Agencia.DireccionPostal", "DireccionPostal", b1 =>
+                    b.OwnsOne("Obligatorio.LogicaNegocio.Vo.Envio.DireccionPostal", "DireccionPostal", b1 =>
                         {
                             b1.Property<int>("EnvioUrgenteId")
                                 .HasColumnType("int");
