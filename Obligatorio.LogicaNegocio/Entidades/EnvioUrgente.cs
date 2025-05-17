@@ -1,9 +1,8 @@
-﻿using Obligatorio.LogicaNegocio.Vo.Agencia;
-using Obligatorio.LogicaNegocio.Vo.Envio;
+﻿using Obligatorio.LogicaNegocio.Vo.Envio;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-	public class EnvioUrgente : Envio
+    public class EnvioUrgente : Envio
 	{
 		public DireccionPostal DireccionPostal { get; set; }
 		public bool EsEficiente { get; set; }

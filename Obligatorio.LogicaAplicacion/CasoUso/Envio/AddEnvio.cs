@@ -3,14 +3,15 @@ using Obligatorio.CasoDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.Entidades;
+using Obligatorio.LogicaNegocio.Excepciones.Usuario;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Agencias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
-using Obligatorio.LogicaNegocio.Vo.Agencia;
+using Obligatorio.LogicaNegocio.Vo.Envio;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 {
-	public class AddEnvio : IAdd<EnvioDto>
+    public class AddEnvio : IAdd<EnvioDto>
 	{
 		private IRepositorioEnvio _repoEnvio;
 		private IRepositorioUsuario _repoUsuario;
@@ -35,7 +36,10 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 			Cliente cliente = (Cliente)_repoUsuario.GetByEmail(dto.Email);
 
 			if (cliente == null)
-				throw new Exception("Cliente no encontrado.");
+			{
+
+                throw new EmailException("No existe un cliente con el email proporcionado");
+            }
 
 			Agencia? agencia = null;
 			DireccionPostal? direccionPostal = null;

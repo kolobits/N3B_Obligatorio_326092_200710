@@ -1,7 +1,0 @@
-﻿namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU
-{
-	public interface IAddAuditoria<T>
-	{
-		void Execute(T obj);
-	}
-}

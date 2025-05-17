@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.WebApp.Models;
@@ -27,37 +28,35 @@ namespace Obligatorio.WebApp.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Login(VMUsuario model)
+		public IActionResult Login(UsuarioDto usuario)
 		{
 			try
 			{
-				var usuario = _login.Execute(model.Email, model.Password);
+				var usuarioLogueado = _login.Execute(usuario.Email, usuario.Password);
 
-
-
-				if (!(usuario is Empleado))
+				if (!(usuarioLogueado is Empleado))
 				{
 					ViewBag.Message = "No tiene permisos para ingresar.";
-					return View(model);
+					return View();
 				}
 
-				HttpContext.Session.SetString("TipoUsuario", usuario.GetType().Name);
-				HttpContext.Session.SetString("EmailUsuario", usuario.Email.Value);
-				HttpContext.Session.SetInt32("IdUsuario", usuario.Id);
+				HttpContext.Session.SetString("TipoUsuario", usuarioLogueado.GetType().Name);
+				HttpContext.Session.SetString("EmailUsuario", usuarioLogueado.Email.Value);
+				HttpContext.Session.SetInt32("IdUsuario", usuarioLogueado.Id);
 
-				if (usuario is Administrador)
+				if (usuarioLogueado is Administrador)
 					return RedirectToAction("Index", "Usuario");
 
-				if (usuario is Funcionario)
+				if (usuarioLogueado is Funcionario)
 					return RedirectToAction("Index", "Envio");
 
-				ViewBag.Message = "Rol no reconocido.";
-				return View(model);
+				ViewBag.Message = "Error";
+				return View();
 			}
 			catch (Exception ex)
 			{
 				ViewBag.Message = ex.Message;
-				return View(model);
+				return View();
 			}
 		}
 
@@ -65,11 +64,6 @@ namespace Obligatorio.WebApp.Controllers
 		{
 			HttpContext.Session.Clear();
 			return RedirectToAction("Login");
-		}
-
-		public IActionResult Privacy()
-		{
-			return View();
 		}
 	}
 }

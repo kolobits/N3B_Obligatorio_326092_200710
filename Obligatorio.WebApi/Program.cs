@@ -48,7 +48,7 @@ namespace Obligatorio.WebApi
 			builder.Services.AddScoped(typeof(ILogin<Usuario>), typeof(Login));
 
 			// Inyecciones para los Caso de Uso de Auditoria
-			builder.Services.AddScoped<IAddAuditoria<AuditoriaDto>, AddAuditoria>();
+			builder.Services.AddScoped<IAdd<AuditoriaDto>, AddAuditoria>();
 
 			// Inyecciones para los Caso de Uso de Envio
 			builder.Services.AddScoped<IAdd<EnvioDto>, AddEnvio>();

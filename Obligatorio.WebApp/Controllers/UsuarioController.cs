@@ -45,15 +45,6 @@ namespace Obligatorio.WebApp.Controllers
 			return View();
 		}
 
-		public IActionResult Details(int id)
-		{
-			UsuarioListadoDto unU = _getById.Execute(id);
-			if (unU == null)
-			{
-				return RedirectToAction("index");
-			}
-			return View(unU);
-		}
 
 		[HttpPost]
 		[AuthorizeAdministrador]
@@ -77,9 +68,9 @@ namespace Obligatorio.WebApp.Controllers
 			{
 				ViewBag.Message = "El email ingresado no es correcto";
 			}
-			catch (EmailRepetidoException)
+			catch (EmailRepetidoException e)
 			{
-				ViewBag.Message = $"El mail {usuario.Email} ya está registrado";
+				ViewBag.Message = e.Message;
 			}
 			catch (ArgumentNullException)
 			{
@@ -93,20 +84,31 @@ namespace Obligatorio.WebApp.Controllers
 
 		}
 
-		[AuthorizeAdministrador]
+        public IActionResult Details(int id)
+        {
+            UsuarioListadoDto unU = _getById.Execute(id);
+            if (unU == null)
+            {
+                return RedirectToAction("index");
+            }
+            return View(unU);
+        }
+
+        [AuthorizeAdministrador]
 		public IActionResult Delete(int id)
 		{
 			_remove.Execute(id);
 			return RedirectToAction("index");
 		}
 
-		[AuthorizeAdministrador]
-		public IActionResult Edit(int id)
+    
+        [AuthorizeAdministrador]
+		public IActionResult Update(int id)
 		{
 			try
 			{
 				UsuarioListadoDto unU = _getById.Execute(id);
-				UsuarioDto usuario = new UsuarioDto(unU.Nombre, unU.Apellido, unU.Email, "passss12+.");
+				var usuario = new VMUsuario { Nombre = unU.Nombre, Apellido = unU.Apellido, Email = unU.Email, Password = "" };
 				ViewBag.Id = id;
 				return View(usuario);
 			}
@@ -118,17 +120,23 @@ namespace Obligatorio.WebApp.Controllers
 
 		[HttpPost]
 		[AuthorizeAdministrador]
-		public IActionResult Edit(int id, UsuarioDto usuario)
+		public IActionResult Update(int id, VMUsuario usuario)
 		{
 			try
 			{
-				_update.Execute(id, usuario);
+                var Usuariodto = new UsuarioDto(usuario.Nombre, usuario.Apellido, usuario.Email, usuario.Password);
+                _update.Execute(id, Usuariodto);
 				return RedirectToAction("Index", new { message = "Modificacion exitosa" });
 			}
-			catch (Exception e)
+            catch (EmailRepetidoException e)
+            {
+                ViewBag.Message = e.Message;
+            }
+            catch (Exception e)
 			{
 				return RedirectToAction("Index", new { message = e.Message });
 			}
-		}
+            return View();
+        }
 	}
 }

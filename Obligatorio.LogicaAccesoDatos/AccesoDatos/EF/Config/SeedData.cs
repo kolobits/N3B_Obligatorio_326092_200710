@@ -1,5 +1,6 @@
 ﻿using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.Vo.Agencia;
+using Obligatorio.LogicaNegocio.Vo.Envio;
 using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config

@@ -11,6 +11,13 @@
             <div class="card shadow-sm p-4">
                 <h2 class="text-center text-primary mb-4">@ViewData["Title"]</h2>
 
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-danger text-center" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
@@ -28,13 +35,13 @@
 
                     <div class="mb-3">
                         <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control" />
+                        <input asp-for="Email" class="form-control" autocomplete="new-email" />
                         <span asp-validation-for="Email" class="text-danger small"></span>
                     </div>
 
                     <div class="mb-4">
-                        <label asp-for="Password" class="form-label"></label>
-                        <input asp-for="Password" class="form-control" type="password" />
+                        <label asp-for="Password" class="form-label" ></label>
+                        <input asp-for="Password" class="form-control" type="password" autocomplete="new-password" />
                         <span asp-validation-for="Password" class="text-danger small"></span>
                     </div>
 
@@ -42,8 +49,6 @@
                         <a asp-action="Index" class="btn btn-outline-danger">Volver</a>
                         <button type="submit" class="btn btn-success">Crear</button>
                     </div>
-
-                    @ViewBag.message
                 </form>
             </div>
         </div>

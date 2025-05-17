@@ -8,11 +8,11 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 	public class RemoveUsuario : IRemove
 	{
 		private IRepositorioUsuario _repo;
-		private IAddAuditoria<AuditoriaDto> _addAuditoria;
+		private IAdd<AuditoriaDto> _addAuditoria;
 		private ISesionUsuarioActual _sesionUsuarioActual;
 
 		public RemoveUsuario(IRepositorioUsuario repo,
-							IAddAuditoria<AuditoriaDto> addAuditoria,
+							IAdd<AuditoriaDto> addAuditoria,
 							ISesionUsuarioActual sesionUsuarioActual)
 		{
 			_repo = repo;
