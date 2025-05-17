@@ -9,7 +9,6 @@ using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
-using Obligatorio.Infraestructura.AccesoDatos.EF.Config;
 using Obligatorio.LogicaAplicacion.CasoUso.Agencias;
 using Obligatorio.LogicaAplicacion.CasoUso.Auditorias;
 using Obligatorio.LogicaAplicacion.CasoUso.Envio;
