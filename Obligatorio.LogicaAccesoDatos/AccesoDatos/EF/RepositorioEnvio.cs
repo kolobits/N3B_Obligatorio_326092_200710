@@ -42,12 +42,15 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			}
 		}
 
-		public Envio GetById(int id)
-		{
-			return _context.Envios.FirstOrDefault(e => e.Id == id);
-		}
+        public Envio GetById(int id)
+        {
+            return _context.Envios
+                .Include(e => e.Seguimientos)
+                .FirstOrDefault(e => e.Id == id);
+        }
 
-		public Envio GetByTracking(int tracking)
+
+        public Envio GetByTracking(int tracking)
 		{
 			var envioExitoso = _context.Envios
 				.Include(e => e.Cliente)

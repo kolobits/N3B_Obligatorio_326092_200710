@@ -11,8 +11,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
 		{
 
 			builder.HasDiscriminator<string>("Discriminator")
-				   .HasValue<EnvioComun>("Envio Comun")
-				   .HasValue<EnvioUrgente>("Envio Urgente");
+				   .HasValue<EnvioComun>("EnvioComun")
+				   .HasValue<EnvioUrgente>("EnvioUrgente");
 
 
 			// VO: Tracking
