@@ -26,7 +26,7 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 		public void Execute(int id, UsuarioDto usuarioDto)
 		{
             var existente = _repo.GetByEmail(usuarioDto.Email);
-            if (existente != null)
+            if (existente != null && existente.Id != id)
             {
                 throw new EmailRepetidoException($"El email {usuarioDto.Email} ya está registrado");
             }
