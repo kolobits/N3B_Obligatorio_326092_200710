@@ -96,17 +96,43 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 		}
 
 
-		public static Envio ForUpdate(Envio envio)
-		{
-			if (envio.Estado == Estado.En_Proceso)
-			{
-				envio.Estado = Estado.Finalizado;
-				envio.FechaFinalizacion = DateTime.Now;
-			}
-			return envio;
-		}
+        public static Envio ForUpdate(Envio envio)
+        {
+            if (envio.Estado == Estado.En_Proceso)
+            {
+                envio.Estado = Estado.Finalizado;
+                envio.FechaFinalizacion = DateTime.Now;
+
+                if (envio is EnvioUrgente envioUrgente)
+                {
+                    
+                    if (envio.Seguimientos != null && envio.Seguimientos.Any())
+                    {
+                        var seguimientoEnvio = envio.Seguimientos
+                            .FirstOrDefault(s => s.Comentario == "El envío fue enviado");
+
+                        if (seguimientoEnvio != null && envio.FechaFinalizacion.HasValue)
+                        {
+                            TimeSpan tiempoTranscurrido = envio.FechaFinalizacion.Value - seguimientoEnvio.Fecha;
+
+                            envioUrgente.EsEficiente = tiempoTranscurrido.TotalHours < 24;
+                        }
+                        else
+                        {
+                            envioUrgente.EsEficiente = false;
+                        }
+                    }
+                    else
+                    {
+                        envioUrgente.EsEficiente = false;
+                    }
+                }
+            }
+
+            return envio;
+        }
 
 
-	}
+    }
 }
 

@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250517211417_init")]
+    [Migration("20250519004401_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -160,7 +160,7 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.HasIndex("AgenciaRetiroId");
 
-                    b.HasDiscriminator().HasValue("Envio Comun");
+                    b.HasDiscriminator().HasValue("EnvioComun");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.EnvioUrgente", b =>
@@ -171,7 +171,7 @@ namespace Obligatorio.Infraestructura.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("EsEficiente");
 
-                    b.HasDiscriminator().HasValue("Envio Urgente");
+                    b.HasDiscriminator().HasValue("EnvioUrgente");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Cliente", b =>

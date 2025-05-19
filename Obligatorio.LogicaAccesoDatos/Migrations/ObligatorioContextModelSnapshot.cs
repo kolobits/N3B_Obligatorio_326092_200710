@@ -157,7 +157,7 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.HasIndex("AgenciaRetiroId");
 
-                    b.HasDiscriminator().HasValue("Envio Comun");
+                    b.HasDiscriminator().HasValue("EnvioComun");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.EnvioUrgente", b =>
@@ -168,7 +168,7 @@ namespace Obligatorio.Infraestructura.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("EsEficiente");
 
-                    b.HasDiscriminator().HasValue("Envio Urgente");
+                    b.HasDiscriminator().HasValue("EnvioUrgente");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Cliente", b =>
