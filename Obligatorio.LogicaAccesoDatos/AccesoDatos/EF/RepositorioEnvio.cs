@@ -28,7 +28,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 					.ThenInclude(emp => emp.NombreCompleto)
 				.Include(e => e.Tracking)
 				.Include(e => e.Seguimientos)
-                .ToList();
+				.ToList();
 		}
 
 		public void Update(int id, Envio obj)
@@ -42,15 +42,15 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			}
 		}
 
-        public Envio GetById(int id)
-        {
-            return _context.Envios
-                .Include(e => e.Seguimientos)
-                .FirstOrDefault(e => e.Id == id);
-        }
+		public Envio GetById(int id)
+		{
+			return _context.Envios
+				.Include(e => e.Seguimientos)
+				.FirstOrDefault(e => e.Id == id);
+		}
 
 
-        public Envio GetByTracking(int tracking)
+		public Envio GetByTracking(int tracking)
 		{
 			var envioExitoso = _context.Envios
 				.Include(e => e.Cliente)
@@ -63,7 +63,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
 			if (envioExitoso == null)
 			{
-				throw new NotFoundException("404");
+				throw new NotFoundException("No se encontró un envío con ese número de tracking");
 			}
 			return envioExitoso;
 		}
