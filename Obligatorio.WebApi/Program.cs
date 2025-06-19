@@ -1,4 +1,7 @@
 
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Obligatorio.CasoDeUsoCompartida.DTOs;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
@@ -14,12 +17,12 @@ using Obligatorio.LogicaAplicacion.CasoUso.Auditorias;
 using Obligatorio.LogicaAplicacion.CasoUso.Envio;
 using Obligatorio.LogicaAplicacion.CasoUso.Seguimiento;
 using Obligatorio.LogicaAplicacion.CasoUso.Usuarios;
-using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Agencias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Auditorias;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Seguimientos;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
+using Obligatorio.WebApi.Services;
 using Obligatorio.WebApp.Servicios;
 
 namespace Obligatorio.WebApi
@@ -44,7 +47,9 @@ namespace Obligatorio.WebApi
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
 			builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
 			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
-			builder.Services.AddScoped(typeof(ILogin<Usuario>), typeof(Login));
+			//builder.Services.AddScoped(typeof(ILogin<UsuarioDto>), typeof(LoginWebApi));
+			builder.Services.AddScoped<ILogin<UsuarioListadoDto>, LoginWebApi>();
+			builder.Services.AddScoped<IUpdate<UsuarioDtoUpdate>, UpdatePassword>();
 
 			// Inyecciones para los Caso de Uso de Auditoria
 			builder.Services.AddScoped<IAdd<AuditoriaDto>, AddAuditoria>();
@@ -54,6 +59,7 @@ namespace Obligatorio.WebApi
 			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
 			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
 			builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
+			builder.Services.AddScoped<IGetAllEnviosCliente<EnvioListadoDto>, GetAllEnviosCliente>();
 
 			// Inyecciones para los Caso de Uso de Seguimiento
 			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
@@ -79,14 +85,47 @@ namespace Obligatorio.WebApi
 			builder.Services.AddDbContext<ObligatorioContext>();
 
 
-			// Add services to the container.
+			// Agrega generador de token JWT
+			builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 
+			// Obtener configuración JWT desde appsettings
+			var jwtConfig = builder.Configuration.GetSection("Jwt");
+			var key = Encoding.ASCII.GetBytes(jwtConfig["Key"]);
+
+			builder.Services.AddAuthentication(options =>
+			{
+				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			})
+		   .AddJwtBearer(options =>
+		   {
+			   options.RequireHttpsMetadata = false; // En producción: true
+			   options.SaveToken = true;
+			   options.TokenValidationParameters = new TokenValidationParameters
+			   {
+				   ValidateIssuerSigningKey = true,
+				   IssuerSigningKey = new SymmetricSecurityKey(key),
+				   // ValidateIssuer = true,
+				   // ValidIssuer = jwtConfig["Issuer"],
+				   // ValidateAudience = true,
+				   // ValidAudience = jwtConfig["Audience"],
+				   ValidateIssuer = false,
+				   ValidateAudience = false,
+			   };
+		   });
+
+			builder.Services.AddAuthorization();
+
+
+
+			// Add services to the container.
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
 			var app = builder.Build();
+
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())

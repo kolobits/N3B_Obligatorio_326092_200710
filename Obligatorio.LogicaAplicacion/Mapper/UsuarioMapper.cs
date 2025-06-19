@@ -28,8 +28,6 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 		}
 
 
-
-
 		public static UsuarioListadoDto ToDto(Usuario usuario)
 		{
 			return new UsuarioListadoDto(usuario.Id, usuario.NombreCompleto.Nombre, usuario.NombreCompleto.Apellido, usuario.Email.Value);
@@ -42,7 +40,21 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			);
 		}
 
+		public static UsuarioDto ToLoginDto(Usuario usuario)
+		{
+			return new UsuarioDto(
+				usuario.Email.Value,
+				usuario.Password.Value,
+				usuario.NombreCompleto.Nombre,
+				usuario.NombreCompleto.Apellido
+			);
+		}
 
+		public static Usuario ForUpdatePassword(Usuario usuario, UsuarioDtoUpdate usuarioDtoUpdate)
+		{
+			usuario.Password = new Password(usuarioDtoUpdate.PasswordNueva);
+			return usuario;
+		}
 
 	}
 

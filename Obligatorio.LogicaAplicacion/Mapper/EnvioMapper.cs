@@ -1,6 +1,5 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.Vo.Agencia;
 using Obligatorio.LogicaNegocio.Vo.Envio;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
@@ -96,43 +95,42 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 		}
 
 
-        public static Envio ForUpdate(Envio envio)
-        {
-            if (envio.Estado == Estado.En_Proceso)
-            {
-                envio.Estado = Estado.Finalizado;
-                envio.FechaFinalizacion = DateTime.Now;
+		public static Envio ForUpdate(Envio envio)
+		{
+			if (envio.Estado == Estado.En_Proceso)
+			{
+				envio.Estado = Estado.Finalizado;
+				envio.FechaFinalizacion = DateTime.Now;
 
-                if (envio is EnvioUrgente envioUrgente)
-                {
-                    
-                    if (envio.Seguimientos != null && envio.Seguimientos.Any())
-                    {
-                        var seguimientoEnvio = envio.Seguimientos
-                            .FirstOrDefault(s => s.Comentario == "El envío fue enviado");
+				if (envio is EnvioUrgente envioUrgente)
+				{
 
-                        if (seguimientoEnvio != null && envio.FechaFinalizacion.HasValue)
-                        {
-                            TimeSpan tiempoTranscurrido = envio.FechaFinalizacion.Value - seguimientoEnvio.Fecha;
+					if (envio.Seguimientos != null && envio.Seguimientos.Any())
+					{
+						var seguimientoEnvio = envio.Seguimientos
+							.FirstOrDefault(s => s.Comentario == "El envío fue enviado");
 
-                            envioUrgente.EsEficiente = tiempoTranscurrido.TotalHours < 24;
-                        }
-                        else
-                        {
-                            envioUrgente.EsEficiente = false;
-                        }
-                    }
-                    else
-                    {
-                        envioUrgente.EsEficiente = false;
-                    }
-                }
-            }
+						if (seguimientoEnvio != null && envio.FechaFinalizacion.HasValue)
+						{
+							TimeSpan tiempoTranscurrido = envio.FechaFinalizacion.Value - seguimientoEnvio.Fecha;
 
-            return envio;
-        }
+							envioUrgente.EsEficiente = tiempoTranscurrido.TotalHours < 24;
+						}
+						else
+						{
+							envioUrgente.EsEficiente = false;
+						}
+					}
+					else
+					{
+						envioUrgente.EsEficiente = false;
+					}
+				}
+			}
 
+			return envio;
+		}
 
-    }
+	}
 }
 
