@@ -7,8 +7,8 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios
 		IRepositorioGetAll<Envio>,
 		IRepositorioUpdate<Envio>,
 		IRepositorioGetById<Envio>,
-		IRepositorioGetByTracking<Envio>
-
+		IRepositorioGetByTracking<Envio>,
+		IRepositorioGetAllEnviosCliente<Envio>
 	{
 
 	}

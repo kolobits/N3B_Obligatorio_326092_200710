@@ -9,6 +9,7 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios
 		IRepositorioGetById<Usuario>,
 		IRepositorioUpdate<Usuario>,
 		IRepositorioGetByEmail<Usuario>
+	//IRepositorioUpdatePassword<Usuario>
 
 	{
 

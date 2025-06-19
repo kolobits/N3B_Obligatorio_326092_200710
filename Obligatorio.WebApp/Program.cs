@@ -9,7 +9,6 @@ using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Agencia;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
-using Obligatorio.Infraestructura.AccesoDatos.EF.Config;
 using Obligatorio.LogicaAplicacion.CasoUso.Agencias;
 using Obligatorio.LogicaAplicacion.CasoUso.Auditorias;
 using Obligatorio.LogicaAplicacion.CasoUso.Envio;
@@ -47,6 +46,7 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
 			builder.Services.AddScoped(typeof(ILogin<Usuario>), typeof(Login));
 
+
 			// Inyecciones para los Caso de Uso de Auditoria
 			builder.Services.AddScoped<IAdd<AuditoriaDto>, AddAuditoria>();
 
@@ -55,6 +55,7 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IGetAll<EnvioListadoDto>, GetAllEnvio>();
 			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
 			builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
+
 
 			// Inyecciones para los Caso de Uso de Seguimiento
 			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();

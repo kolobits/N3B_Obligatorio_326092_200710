@@ -31,6 +31,20 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.ToList();
 		}
 
+		public IEnumerable<Envio> GetAllEnviosCliente(int clienteId)
+		{
+			return _context.Envios
+				.Include(e => e.Cliente)
+					.ThenInclude(c => c.NombreCompleto)
+				.Include(e => e.Empleado)
+					.ThenInclude(emp => emp.NombreCompleto)
+				.Include(e => e.Tracking)
+				.Include(e => e.Seguimientos)
+				.Where(e => e.ClienteId == clienteId)
+				.ToList();
+		}
+
+
 		public void Update(int id, Envio obj)
 		{
 			Envio unE = GetById(id);
