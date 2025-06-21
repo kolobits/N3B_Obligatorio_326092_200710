@@ -9,8 +9,9 @@
 		double Peso,
 		string Tipo,
 		string UltimoComentario,
-		DateTime? FechaFinalizacion
-		)
+		DateTime? FechaFinalizacion,
+        DateTime? FechaCreacion
+        )
 	{
 	}
 }

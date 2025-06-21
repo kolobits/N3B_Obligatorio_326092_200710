@@ -41,7 +41,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				.Include(e => e.Tracking)
 				.Include(e => e.Seguimientos)
 				.Where(e => e.ClienteId == clienteId)
-				.ToList();
+                .OrderBy(e => e.FechaCreacion)
+                .ToList();
 		}
 
 
@@ -82,7 +83,64 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			return envioExitoso;
 		}
 
-	}
+		public IEnumerable<Envio> GetEnviosFecha(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado, int clienteId)
+		{
 
+            //Manejo de Enum en consultas LINQ, los enum no se pueden consultar con where, EF no puede realiza comparaciones con enum
+            var query = _context.Envios
+                .Include(e => e.Cliente)
+                    .ThenInclude(c => c.NombreCompleto)
+                .Include(e => e.Empleado)
+                    .ThenInclude(emp => emp.NombreCompleto)
+                .Include(e => e.Tracking)
+                .Include(e => e.Seguimientos)
+                .Where(e => e.ClienteId == clienteId);
+
+            Estado? estadoEnum = null;
+            if (!string.IsNullOrEmpty(estado))
+            {
+                if (Enum.TryParse(estado, true, out Estado estadoParsed))
+                {
+                    estadoEnum = estadoParsed;
+                }
+                else
+                {
+                    throw new BadRequestException($"El estado '{estado}' no es válido.");
+                }
+            }
+            
+
+            if (fechaCreacion.HasValue && fechaFinalizacion.HasValue)
+            {
+                query = query.Where(e => e.FechaCreacion >= fechaCreacion.Value && e.FechaCreacion <= fechaFinalizacion.Value);
+            }
+
+            if (estadoEnum.HasValue)
+            {
+                query = query.Where(e => e.Estado == estadoEnum.Value);
+            }
+
+            return query
+                .OrderBy(e => e.Tracking.Value)
+                .ToList();
+        }
+
+        public IEnumerable<Envio> GetEnviosComentario(string comentario,int clienteId)
+        {
+            return _context.Envios
+                .Include(e => e.Cliente)
+                    .ThenInclude(c => c.NombreCompleto)
+                .Include(e => e.Empleado)
+                    .ThenInclude(emp => emp.NombreCompleto)
+                .Include(e => e.Tracking)
+                .Include(e => e.Seguimientos)
+                .Where(e => e.ClienteId == clienteId &&
+                               e.Seguimientos.Any(s =>
+								 s.Comentario != null &&
+								 s.Comentario.ToLower().Contains(comentario.ToLower())))
+				.OrderBy(e=>e.FechaCreacion)
+                .ToList();   
+        }
+    }
 
 }

@@ -60,9 +60,11 @@ namespace Obligatorio.WebApi
 			builder.Services.AddScoped<IUpdate<EnvioDto>, UpdateEnvio>();
 			builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
 			builder.Services.AddScoped<IGetAllEnviosCliente<EnvioListadoDto>, GetAllEnviosCliente>();
+			builder.Services.AddScoped<IGetEnviosFecha<EnvioListadoDto>, GetEnviosFecha>();
+            builder.Services.AddScoped<IGetEnviosComentario<EnvioListadoDto>, GetEnviosComentario>();
 
-			// Inyecciones para los Caso de Uso de Seguimiento
-			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
+            // Inyecciones para los Caso de Uso de Seguimiento
+            builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
 
 			// Inyecciones para los Caso de Uso de Agencia
 			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
