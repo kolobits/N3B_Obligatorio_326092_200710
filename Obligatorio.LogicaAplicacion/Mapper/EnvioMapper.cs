@@ -21,6 +21,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 				Estado.En_Proceso,
 				new List<Seguimiento>(),
 				fechaFinalizacion: null,
+				fechaCreacion: DateTime.Now,
 				dto.AgenciaId
 			);
 		}
@@ -40,7 +41,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 				Estado.En_Proceso,
 				new List<Seguimiento>(),
 				fechaFinalizacion: null,
-				new DireccionPostal(dto.Calle,
+                fechaCreacion: DateTime.Now,
+                new DireccionPostal(dto.Calle,
 									dto.Numero,
 									dto.CodigoPostal),
 				false
@@ -65,7 +67,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 				envio.Peso.Value,
 				envio.Discriminator,
 				ultimoComentario,
-				envio.FechaFinalizacion
+				envio.FechaFinalizacion,
+				envio.FechaCreacion
 			);
 		}
 
@@ -88,7 +91,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 												  item.Peso.Value,
 												  item.Discriminator,
 												  ultimoComentario,
-												  item.FechaFinalizacion
+												  item.FechaFinalizacion,
+												  item.FechaCreacion
 												  ));
 			}
 			return enviosDto;

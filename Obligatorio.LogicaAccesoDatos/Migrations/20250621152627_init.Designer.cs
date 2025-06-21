@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250521221830_init")]
+    [Migration("20250621152627_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -82,6 +82,9 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.Property<int>("Estado")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("FechaCreacion")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("FechaFinalizacion")
                         .HasColumnType("datetime2");
