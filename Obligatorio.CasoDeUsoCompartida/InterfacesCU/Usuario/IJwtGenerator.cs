@@ -1,6 +1,6 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 
-namespace Obligatorio.WebApi.Services
+namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario
 {
 	public interface IJwtGenerator
 	{

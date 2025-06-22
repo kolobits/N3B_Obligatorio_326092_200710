@@ -16,7 +16,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.Excepciones
 		{
 		}
 
-		public override int statusCode()
+		public override int StatusCode()
 		{
 			return 400;
 		}

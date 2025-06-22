@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.Excepciones
 {
-    public class Unauthorized : InfraestructuraException
-    {
-        public Unauthorized()
-        {
-        }
+	public class Unauthorized : InfraestructuraException
+	{
+		public Unauthorized()
+		{
+		}
 
-        public Unauthorized(string? message) : base(message)
-        {
-        }
+		public Unauthorized(string? message) : base(message)
+		{
+		}
 
-        protected Unauthorized(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+		protected Unauthorized(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+		}
 
-        public override int statusCode()
-        {
-            return 401;
-        }
-    }
+		public override int StatusCode()
+		{
+			return 401;
+		}
+	}
 }

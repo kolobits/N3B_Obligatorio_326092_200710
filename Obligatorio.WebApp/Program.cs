@@ -44,7 +44,7 @@ namespace Obligatorio.WebApp
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
 			builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
 			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
-			builder.Services.AddScoped(typeof(ILogin<Usuario>), typeof(Login));
+			builder.Services.AddScoped<ILoginWebApp<Usuario>, Login>();
 
 
 			// Inyecciones para los Caso de Uso de Auditoria

@@ -2,16 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
 {
 	public class HomeController : Controller
 	{
 
-		private readonly ILogin<Usuario> _login;
+		private readonly ILoginWebApp<Usuario> _login;
 
-		public HomeController(ILogin<Usuario> login)
+		public HomeController(ILoginWebApp<Usuario> login)
 		{
 			_login = login;
 		}
