@@ -60,11 +60,11 @@ namespace Obligatorio.WebApi.Controllers
 			}
 			catch (NotFoundException e)
 			{
-				return StatusCode(e.statusCode(), e.Error());
+				return StatusCode(e.StatusCode(), e.Error());
 			}
 			catch (BadRequestException e)
 			{
-				return StatusCode(e.statusCode(), e.Error());
+				return StatusCode(e.StatusCode(), e.Error());
 			}
 			catch (Exception e)
 			{

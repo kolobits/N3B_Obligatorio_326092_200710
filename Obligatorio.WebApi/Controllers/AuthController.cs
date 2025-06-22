@@ -2,7 +2,6 @@
 using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.Excepciones;
-using Obligatorio.WebApi.Services;
 
 namespace Obligatorio.WebApi.Controllers
 {
@@ -10,17 +9,14 @@ namespace Obligatorio.WebApi.Controllers
 	[ApiController]
 	public class AuthController : ControllerBase
 	{
-		private readonly IJwtGenerator _jwtGenerator;
-		private readonly ILogin<UsuarioListadoDto> _login;
+		private readonly ILoginWebApi<UsuarioLoginDto> _login;
 
-		public AuthController(IJwtGenerator jwtGenerator,
-							  ILogin<UsuarioListadoDto> login)
+		public AuthController(ILoginWebApi<UsuarioLoginDto> login)
 		{
 			_login = login;
-			_jwtGenerator = jwtGenerator;
 		}
 
-
+		//RF2
 		[HttpPost("login")]
 		public IActionResult Login([FromBody] UsuarioLoginDto usuarioLogin)
 		{
@@ -28,20 +24,23 @@ namespace Obligatorio.WebApi.Controllers
 			{
 
 				if (usuarioLogin == null)
-				{
 					throw new BadRequestException("Datos incompletos");
-				}
-				var usuario = _login.Execute(usuarioLogin.Email, usuarioLogin.Password);
-				var token = _jwtGenerator.GenerateToken(usuario);
+				var token = _login.Execute(usuarioLogin);
 				return Ok(new { token });
+
+			}
+			catch (NotFoundException e)
+			{
+				return StatusCode(e.StatusCode(), e.Error());
 			}
 			catch (BadRequestException e)
 			{
-				return StatusCode(400, e.Message);
+				return StatusCode(e.StatusCode(), e.Error());
 			}
 			catch (Exception e)
 			{
-				return StatusCode(500, "Hubo un problema intente nuevamente.");
+				Error error = new Error(500, "Hubo un problema intente nuevamente." + e.Message);
+				return StatusCode(500, error);
 			}
 		}
 	}

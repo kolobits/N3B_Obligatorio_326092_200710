@@ -71,7 +71,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     EmpleadoId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     Peso = table.Column<double>(type: "float", nullable: false),
-                    Estado = table.Column<int>(type: "int", nullable: false),
+                    Estado = table.Column<int>(type: "int", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     FechaFinalizacion = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: true),

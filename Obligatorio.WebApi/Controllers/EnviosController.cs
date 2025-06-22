@@ -13,13 +13,13 @@ namespace Obligatorio.WebApi.Controllers
 		IGetByTracking<EnvioListadoDto> _getByTracking;
 		IGetAllEnviosCliente<EnvioListadoDto> _getAllEnviosCliente;
 		IGetEnviosFecha<EnvioListadoDto> _getEnviosFecha;
-        IGetEnviosComentario<EnvioListadoDto> _getEnviosComentario;
-        public EnviosController(IGetByTracking<EnvioListadoDto> getByTracking, IGetAllEnviosCliente<EnvioListadoDto> getAllEnviosCliente, IGetEnviosFecha<EnvioListadoDto> getEnviosFecha, IGetEnviosComentario<EnvioListadoDto> getEnviosComentario)
+		IGetEnviosComentario<EnvioListadoDto> _getEnviosComentario;
+		public EnviosController(IGetByTracking<EnvioListadoDto> getByTracking, IGetAllEnviosCliente<EnvioListadoDto> getAllEnviosCliente, IGetEnviosFecha<EnvioListadoDto> getEnviosFecha, IGetEnviosComentario<EnvioListadoDto> getEnviosComentario)
 		{
 			_getByTracking = getByTracking;
 			_getAllEnviosCliente = getAllEnviosCliente;
-            _getEnviosFecha = getEnviosFecha;
-			_getEnviosComentario= getEnviosComentario;
+			_getEnviosFecha = getEnviosFecha;
+			_getEnviosComentario = getEnviosComentario;
 		}
 
 		// RF1
@@ -32,7 +32,7 @@ namespace Obligatorio.WebApi.Controllers
 			}
 			catch (NotFoundException e)
 			{
-				return StatusCode(e.statusCode(), e.Error());
+				return StatusCode(e.StatusCode(), e.Error());
 			}
 			catch (Exception e)
 			{
@@ -58,7 +58,7 @@ namespace Obligatorio.WebApi.Controllers
 			}
 			catch (NotFoundException e)
 			{
-				return StatusCode(e.statusCode(), e.Error());
+				return StatusCode(e.StatusCode(), e.Error());
 			}
 			catch (Exception e)
 			{
@@ -69,56 +69,56 @@ namespace Obligatorio.WebApi.Controllers
 		//RF5
 		[Authorize]
 		[HttpGet("listar-enviosFecha/{id}")]
-        public IActionResult GetAllEnviosFecha(DateTime? fechaCreacion,DateTime? fechaFinalizacion , string estado,int id)
-        {
-            try
-            {
-                var envios = _getEnviosFecha.Execute(fechaCreacion,fechaFinalizacion,estado, id);
-                if (envios.Count() == 0)
-                {
-                    return StatusCode(204);
-                }
+		public IActionResult GetAllEnviosFecha(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado, int id)
+		{
+			try
+			{
+				var envios = _getEnviosFecha.Execute(fechaCreacion, fechaFinalizacion, estado, id);
+				if (envios.Count() == 0)
+				{
+					return StatusCode(204);
+				}
 				if (estado == null)
 				{
 					return Ok(_getAllEnviosCliente.Execute(id));
 				}
-                return Ok(envios);
-            }
-            catch (NotFoundException e)
-            {
-                return StatusCode(e.statusCode(), e.Error());
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Hubo un problema intente nuevamente.");
-            }
-        }
+				return Ok(envios);
+			}
+			catch (NotFoundException e)
+			{
+				return StatusCode(e.StatusCode(), e.Error());
+			}
+			catch (Exception e)
+			{
+				return StatusCode(500, "Hubo un problema intente nuevamente.");
+			}
+		}
 
 		// RF6
 		//ERROR 401
 		[Authorize]
 		[HttpGet("listar-enviosComentario/{id}")]
-        public IActionResult GetEnviosComentario(string comentario,int id)
-        {
-            try
-            {
-                var envios = _getEnviosComentario.Execute(comentario,id);
-                if (envios.Count() == 0)
-                {
-                    return StatusCode(204);
-                }
-                return Ok(envios);
-            }
-            catch (NotFoundException e)
-            {
-                return StatusCode(e.statusCode(), e.Error());
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Hubo un problema intente nuevamente.");
-            }
-        }
-    }
+		public IActionResult GetEnviosComentario(string comentario, int id)
+		{
+			try
+			{
+				var envios = _getEnviosComentario.Execute(comentario, id);
+				if (envios.Count() == 0)
+				{
+					return StatusCode(204);
+				}
+				return Ok(envios);
+			}
+			catch (NotFoundException e)
+			{
+				return StatusCode(e.StatusCode(), e.Error());
+			}
+			catch (Exception e)
+			{
+				return StatusCode(500, "Hubo un problema intente nuevamente.");
+			}
+		}
+	}
 }
 
 

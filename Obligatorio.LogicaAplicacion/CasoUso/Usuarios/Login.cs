@@ -6,7 +6,7 @@ using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
-	public class Login : ILogin<Usuario>
+	public class Login : ILoginWebApp<Usuario>
 	{
 		private readonly IRepositorioUsuario _repo;
 

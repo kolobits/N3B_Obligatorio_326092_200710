@@ -47,8 +47,7 @@ namespace Obligatorio.WebApi
 			builder.Services.AddScoped<IRemove, RemoveUsuario>();
 			builder.Services.AddScoped<IUpdate<UsuarioDto>, UpdateUsuario>();
 			builder.Services.AddScoped<IGetByEmail<UsuarioListadoDto>, GetByEmail>();
-			//builder.Services.AddScoped(typeof(ILogin<UsuarioDto>), typeof(LoginWebApi));
-			builder.Services.AddScoped<ILogin<UsuarioListadoDto>, LoginWebApi>();
+			builder.Services.AddScoped<ILoginWebApi<UsuarioLoginDto>, LoginWebApi>();
 			builder.Services.AddScoped<IUpdate<UsuarioDtoUpdate>, UpdatePassword>();
 
 			// Inyecciones para los Caso de Uso de Auditoria
@@ -61,10 +60,10 @@ namespace Obligatorio.WebApi
 			builder.Services.AddScoped<IGetByTracking<EnvioListadoDto>, GetByTracking>();
 			builder.Services.AddScoped<IGetAllEnviosCliente<EnvioListadoDto>, GetAllEnviosCliente>();
 			builder.Services.AddScoped<IGetEnviosFecha<EnvioListadoDto>, GetEnviosFecha>();
-            builder.Services.AddScoped<IGetEnviosComentario<EnvioListadoDto>, GetEnviosComentario>();
+			builder.Services.AddScoped<IGetEnviosComentario<EnvioListadoDto>, GetEnviosComentario>();
 
-            // Inyecciones para los Caso de Uso de Seguimiento
-            builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
+			// Inyecciones para los Caso de Uso de Seguimiento
+			builder.Services.AddScoped<IAdd<SeguimientoDto>, AddSeguimiento>();
 
 			// Inyecciones para los Caso de Uso de Agencia
 			builder.Services.AddScoped<IGetByName<AgenciaListadoDto>, GetByName>();
@@ -86,13 +85,18 @@ namespace Obligatorio.WebApi
 			// Inyecciones para el contexto de la base de datos
 			builder.Services.AddDbContext<ObligatorioContext>();
 
+			// 1. Obtener configuración JWT desde appsettings.json
+			var jwtSection = builder.Configuration.GetSection("Jwt");
+			builder.Services.Configure<JwtSettings>(jwtSection);
+			var jwtSettings = jwtSection.Get<JwtSettings>();
+			builder.Services.AddSingleton(jwtSettings);
 
-			// Agrega generador de token JWT
+			// 2. Agregar servicio que genera tokens
 			builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 
-			// Obtener configuración JWT desde appsettings
-			var jwtConfig = builder.Configuration.GetSection("Jwt");
-			var key = Encoding.ASCII.GetBytes(jwtConfig["Key"]);
+			// 3. Configurar autenticación JWT
+			var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
+
 
 			builder.Services.AddAuthentication(options =>
 			{
@@ -110,7 +114,7 @@ namespace Obligatorio.WebApi
 				   // ValidateIssuer = true,
 				   // ValidIssuer = jwtConfig["Issuer"],
 				   // ValidateAudience = true,
-				   // ValidAudience = jwtConfig["Audience"],
+				   //ValidAudience = jwtConfig["Audience"],
 				   ValidateIssuer = false,
 				   ValidateAudience = false,
 			   };

@@ -18,12 +18,12 @@ namespace Obligatorio.Infraestructura.AccesoDatos.Excepciones
 		{
 		}
 
-		public abstract int statusCode();
+		public abstract int StatusCode();
 
 		public Error Error()
 		{
 			return new Error(
-				statusCode(),
+				StatusCode(),
 				_message
 				);
 

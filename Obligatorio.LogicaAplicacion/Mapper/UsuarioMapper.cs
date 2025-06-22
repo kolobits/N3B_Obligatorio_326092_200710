@@ -40,15 +40,15 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			);
 		}
 
-		public static UsuarioDto ToLoginDto(Usuario usuario)
-		{
-			return new UsuarioDto(
-				usuario.Email.Value,
-				usuario.Password.Value,
-				usuario.NombreCompleto.Nombre,
-				usuario.NombreCompleto.Apellido
-			);
-		}
+		//public static UsuarioDto ToLoginDto(Usuario usuario)
+		//{
+		//	return new UsuarioDto(
+		//		usuario.Email.Value,
+		//		usuario.Password.Value,
+		//		usuario.NombreCompleto.Nombre,
+		//		usuario.NombreCompleto.Apellido
+		//	);
+		//}
 
 		public static Usuario ForUpdatePassword(Usuario usuario, UsuarioDtoUpdate usuarioDtoUpdate)
 		{

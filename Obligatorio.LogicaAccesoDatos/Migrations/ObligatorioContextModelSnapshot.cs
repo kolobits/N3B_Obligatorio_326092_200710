@@ -77,7 +77,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Estado")
+                    b.Property<int?>("Estado")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("FechaCreacion")
