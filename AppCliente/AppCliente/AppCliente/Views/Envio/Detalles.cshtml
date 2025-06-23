@@ -1,4 +1,4 @@
-﻿@model AppCliente.Models.Envio.EnvioDto
+﻿@model AppCliente.Models.Envio.EnvioListadoDto
 
 @{
     ViewData["Title"] = "Buscar Envío por Tracking";
@@ -6,52 +6,61 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm p-4">
-                <h4 class="text-center text-primary mb-4">@ViewData["Title"]</h4>
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-5">
+                    <h2 class="text-center text-primary mb-4">
+                        <i class="bi bi-search"></i> @ViewData["Title"]
+                    </h2>
 
-                <form asp-action="BuscarPorTracking" method="get">
-                    <div class="mb-3">
-                        <label for="tracking" class="form-label">Número de Tracking</label>
-                        <input type="text" name="tracking" id="tracking" class="form-control" required />
-                    </div>
-                    <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
-                    </div>
-                </form>
+                    <form asp-action="BuscarPorTracking" method="get" class="mb-4">
+                        <div class="input-group">
+                            <input type="text" name="tracking" id="tracking" class="form-control form-control-lg" placeholder="Ingrese número de tracking..." required />
+                            <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+                        </div>
+                    </form>
 
-                @if (ViewBag.Message != null)
-                {
-                    <div class="alert alert-danger text-center">@ViewBag.Message</div>
-                }
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger text-center">@ViewBag.Message</div>
+                    }
 
-                @if (Model != null)
-                {
-                    <hr />
-                    <h5 class="text-secondary">Detalle del Envío</h5>
-                    <dl class="row">
-                        <dt class="col-sm-4">Email</dt>
-                        <dd class="col-sm-8">@Model.Tracking</dd>
+                    @if (Model != null)
+                    {
+                        <div class="mt-4">
+                            <h5 class="text-secondary">📦 Detalle del Envío</h5>
+                            <hr />
+                            <dl class="row">
+                                <dt class="col-sm-4 fw-bold">Número de Tracking</dt>
+                                <dd class="col-sm-8">@Model.Tracking</dd>
 
-                        <dt class="col-sm-4">Peso</dt>
-                        <dd class="col-sm-8">@Model.Peso</dd>
+                                <dt class="col-sm-4 fw-bold">Cliente</dt>
+                                <dd class="col-sm-8">@Model.Cliente</dd>
 
-                        <dt class="col-sm-4">Tipo</dt>
-                        <dd class="col-sm-8">@Model.Tipo</dd>
+                                <dt class="col-sm-4 fw-bold">Empleado</dt>
+                                <dd class="col-sm-8">@Model.Empleado</dd>
 
-                        <dt class="col-sm-4">Estado</dt>
-                        <dd class="col-sm-8">@Model.Estado</dd>
+                                <dt class="col-sm-4 fw-bold">Peso</dt>
+                                <dd class="col-sm-8">@Model.Peso kg</dd>
 
-                        <dt class="col-sm-4">Fecha de Creación</dt>
-                        <dd class="col-sm-8">@Model.FechaCreacion</dd>
+                                <dt class="col-sm-4 fw-bold">Tipo</dt>
+                                <dd class="col-sm-8">@Model.Tipo</dd>
 
-                        <dt class="col-sm-4">Fecha de Finalización</dt>
-                        <dd class="col-sm-8">@Model.FechaFinalizacion</dd>
+                                <dt class="col-sm-4 fw-bold">Estado</dt>
+                                <dd class="col-sm-8">@Model.Estado</dd>
 
-                        <dt class="col-sm-4">Último Comentario</dt>
-                        <dd class="col-sm-8">@Model.UltimoComentario</dd>
-                    </dl>
-                }
+                                <dt class="col-sm-4 fw-bold">Fecha de Creación</dt>
+                                <dd class="col-sm-8">@Model.FechaCreacion?.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4 fw-bold">Fecha de Finalización</dt>
+                                <dd class="col-sm-8">@Model.FechaFinalizacion?.ToString("dd/MM/yyyy HH:mm") ?? "Sin finalizar"</dd>
+
+                                <dt class="col-sm-4 fw-bold">Último Comentario</dt>
+                                <dd class="col-sm-8">@Model.UltimoComentario</dd>
+                            </dl>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
