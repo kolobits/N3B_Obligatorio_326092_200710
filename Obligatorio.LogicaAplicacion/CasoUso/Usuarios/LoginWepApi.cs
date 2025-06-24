@@ -10,32 +10,28 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 		private readonly IRepositorioUsuario _repo;
 		private readonly IJwtGenerator _jwtGenerator;
 
-		public LoginWebApi(IRepositorioUsuario repo,
-							IJwtGenerator jwtGenerator)
+		public LoginWebApi(IRepositorioUsuario repo, IJwtGenerator jwtGenerator)
 		{
 			_repo = repo;
 			_jwtGenerator = jwtGenerator;
 		}
 
-		public string Execute(UsuarioLoginDto obj)
+		public UsuarioLogueadoDto Execute(UsuarioLoginDto obj)
 		{
-			UsuarioListadoDto dto = UsuarioMapper.ToDto(_repo.GetByEmail(obj.Email));
-			return _jwtGenerator.GenerateToken(dto);
+			var usuario = _repo.GetByEmail(obj.Email);
+
+			var dto = UsuarioMapper.ToDto(usuario);
+
+			string token = _jwtGenerator.GenerateToken(dto);
+
+
+			return new UsuarioLogueadoDto(
+				Id: dto.Id,
+				Nombre: dto.Nombre,
+				Email: dto.Email,
+				Token: token
+			);
 		}
-
-		//public UsuarioListadoDto Execute(string email, string password)
-		//{
-		//	var emailVO = new Email(email);
-		//	var passwordVO = new Password(password);
-
-		//	var usuario = _repo.GetByEmail(emailVO.Value);
-
-		//	if (usuario == null || !usuario.Password.Equals(passwordVO))
-		//	{
-		//		throw new Exception("Email o contraseña incorrectos.");
-		//	}
-
-		//	return UsuarioMapper.ToDto(usuario);
-		//}
 	}
 }
+

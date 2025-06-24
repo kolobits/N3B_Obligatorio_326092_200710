@@ -1,0 +1,41 @@
+﻿@using AppCliente.Models.Envio
+@model IEnumerable<SeguimientoDto>
+
+@{
+	ViewData["Title"] = "Seguimientos del Envío";
+}
+
+<div class="container mt-4">
+	<h2 class="text-primary">@ViewData["Title"]</h2>
+
+	@if (ViewBag.Message != null)
+	{
+		<div class="alert alert-danger">@ViewBag.Message</div>
+	}
+	else if (!Model.Any())
+	{
+		<div class="alert alert-info">Este envío aún no tiene seguimientos.</div>
+	}
+	else
+	{
+		<table class="table table-striped mt-3">
+			<thead>
+				<tr>
+					<th>Fecha</th>
+					<th>Comentario</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model)
+				{
+					<tr>
+						<td>@s.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+						<td>@s.Comentario</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+
+	<a asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
+</div>

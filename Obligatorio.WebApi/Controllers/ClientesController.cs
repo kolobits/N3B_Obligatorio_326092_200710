@@ -26,28 +26,6 @@ namespace Obligatorio.WebApi.Controllers
 			_getAll = getAll;
 		}
 
-
-		// RF3
-		//[HttpGet("update/{id}")]
-		//public IActionResult Update(int id)
-		//{
-		//	try
-		//	{
-		//		var usuario = new VMUsuario { Password = "" };
-
-		//		return Ok(_getById.Execute(id));
-		//	}
-		//	catch (NotFoundException e)
-		//	{
-		//		return StatusCode(e.statusCode(), e.Error());
-
-		//	}
-		//	catch (Exception e)
-		//	{
-		//		return StatusCode(500, "Hubo un problema intente nuevamente.");
-		//	}
-		//}
-
 		// RF3
 		[Authorize]
 		[HttpPut("cambiar-password/{id}")]
@@ -55,6 +33,7 @@ namespace Obligatorio.WebApi.Controllers
 		{
 			try
 			{
+
 				_update.Execute(id, usuarioDtoUpdate);
 				return Ok();
 			}

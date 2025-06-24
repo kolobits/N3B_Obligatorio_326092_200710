@@ -1,28 +1,30 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio;
+using Obligatorio.Infraestructura.AccesoDatos.Excepciones;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 {
-    public class GetEnviosComentario : IGetEnviosComentario<EnvioListadoDto>
-    {
-        private IRepositorioEnvio _repo;
+	public class GetEnviosComentario : IGetEnviosComentario<EnvioListadoDto>
+	{
+		private IRepositorioEnvio _repo;
+		private IRepositorioUsuario _repoUsuario;
 
-        public GetEnviosComentario(IRepositorioEnvio repo)
-        {
-            _repo = repo;
-        }
+		public GetEnviosComentario(IRepositorioEnvio repo, IRepositorioUsuario repositorioUsuario)
+		{
+			_repo = repo;
+			_repoUsuario = _repoUsuario;
+		}
 
-        public IEnumerable<EnvioListadoDto> Execute( string comentario, int clienteId)
-        {
+		public IEnumerable<EnvioListadoDto> Execute(string comentario, int clienteId)
+		{
+			var usuario = _repoUsuario.GetById(clienteId);
+			if (usuario == null)
+				throw new NotFoundException("Usuario no encontrado.");
 
-            return EnvioMapper.ToListDto(_repo.GetEnviosComentario(comentario, clienteId));
-        }
-    }
+			return EnvioMapper.ToListDto(_repo.GetEnviosComentario(comentario, clienteId));
+		}
+	}
 }

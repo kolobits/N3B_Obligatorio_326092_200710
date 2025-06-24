@@ -1,0 +1,57 @@
+﻿using System.Text.Json;
+using AppCliente.Models.Usuario;
+using Microsoft.AspNetCore.Mvc;
+using RestSharp;
+
+
+namespace AppCliente.Controllers
+{
+	public class UsuarioController : Controller
+	{
+		public IActionResult CambiarPassword()
+		{
+			return View(new CambioPasswordDto());
+		}
+
+
+
+		[HttpPost]
+		public IActionResult CambiarPassword(CambioPasswordDto cambioPassword)
+		{
+			try
+			{
+				var idUsuario = HttpContext.Session.GetInt32("id");
+				if (idUsuario == null)
+					throw new Exception("Sesión expirada. Iniciá sesión nuevamente.");
+
+				var options = new RestClientOptions("https://localhost:7018")
+				{
+					MaxTimeout = -1,
+				};
+				var client = new RestClient(options);
+				var request = new RestRequest($"/api/Usuario/cambiar-password{idUsuario}", Method.Put);
+				var body = JsonSerializer.Serialize(cambioPassword);
+				request.AddStringBody(body, DataFormat.Json);
+				RestResponse response = client.Execute(request);
+				if ((int)response.StatusCode == 404)
+				{
+					throw new Exception("Problemas con las credenciales");
+				}
+				if ((int)response.StatusCode == 200)
+				{
+					ViewBag.mensaje = "Contraseña cambiada correctamente";
+					return View(new CambioPasswordDto());
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error: " + e.ToString()); // Muestra traza completa
+				ViewBag.mensaje = "Ocurrió un error: " + e.Message;
+			}
+
+			return View("CambiarPassword");
+		}
+	}
+}
+
+
