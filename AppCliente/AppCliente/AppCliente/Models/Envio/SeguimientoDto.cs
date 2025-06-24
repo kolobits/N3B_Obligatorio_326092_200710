@@ -2,6 +2,7 @@
 {
 	public record SeguimientoDto(
 		string Comentario,
+		string Estado,
 		DateTime Fecha)
 	{
 	}

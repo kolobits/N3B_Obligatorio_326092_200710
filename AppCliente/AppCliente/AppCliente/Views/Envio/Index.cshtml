@@ -42,7 +42,7 @@
                     <tr>
                         <th>Tracking</th>
                         <th>Estado</th>
-                        <th>Fecha Finalización</th>
+                        <th>Fecha Creacion</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -52,9 +52,9 @@
                         <tr>
                             <td>@item.Tracking</td>
                             <td>@(item.Estado == "En_Proceso" ? "En proceso" : item.Estado)</td>
-                            <td>@item.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                            <td>@item.FechaCreacion?.ToString("dd/MM/yyyy")</td>
                             <td class="text-center">
-                                <a asp-action="VerSeguimientos" asp-route-envioId="@item.Id" class="btn btn-sm btn-outline-secondary">
+                                <a asp-action="VerSeguimientos" asp-route-envioId="@item.Id" class="btn btn-sm btn-success">
                                     Ver Seguimientos
                                 </a>
                             </td>

@@ -11,8 +11,9 @@ namespace AppCliente.Controllers
 		{
 			try
 			{
-				var token = HttpContext.Session.GetString("token");
 				var idCliente = HttpContext.Session.GetInt32("id");
+				var token = HttpContext.Session.GetString("token");
+
 				if (idCliente == null)
 					throw new Exception("Sesión expirada. Iniciá sesión nuevamente.");
 
@@ -21,7 +22,7 @@ namespace AppCliente.Controllers
 					MaxTimeout = -1,
 				};
 				var client = new RestClient(options);
-				var request = new RestRequest($"/api/clientes/listar-envios/{idCliente}", Method.Get);
+				var request = new RestRequest($"/api/envios/listar-envios/{idCliente}", Method.Get);
 				request.AddHeader("Authorization", $"Bearer {token}");
 
 				RestResponse response = client.Execute(request);
@@ -109,12 +110,12 @@ namespace AppCliente.Controllers
 				var optionsJson = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 				var seguimientos = JsonSerializer.Deserialize<List<SeguimientoDto>>(response.Content, optionsJson);
 
-				return View("VerSeguimientos", seguimientos);
+				return View("Seguimiento", seguimientos);
 			}
 			catch (Exception e)
 			{
 				ViewBag.Message = e.Message;
-				return View("VerSeguimientos", new List<SeguimientoDto>());
+				return View("Seguimiento", new List<SeguimientoDto>());
 			}
 		}
 

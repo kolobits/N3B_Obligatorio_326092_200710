@@ -1,41 +1,44 @@
-﻿@using AppCliente.Models.Envio
-@model IEnumerable<SeguimientoDto>
+﻿@model List<AppCliente.Models.Envio.SeguimientoDto>
 
 @{
-	ViewData["Title"] = "Seguimientos del Envío";
+    ViewData["Title"] = "Seguimientos del Envío";
 }
 
 <div class="container mt-4">
-	<h2 class="text-primary">@ViewData["Title"]</h2>
+    <h2 class="text-primary">@ViewData["Title"]</h2>
 
-	@if (ViewBag.Message != null)
-	{
-		<div class="alert alert-danger">@ViewBag.Message</div>
-	}
-	else if (!Model.Any())
-	{
-		<div class="alert alert-info">Este envío aún no tiene seguimientos.</div>
-	}
-	else
-	{
-		<table class="table table-striped mt-3">
-			<thead>
-				<tr>
-					<th>Fecha</th>
-					<th>Comentario</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var s in Model)
-				{
-					<tr>
-						<td>@s.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
-						<td>@s.Comentario</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	}
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-warning">@ViewBag.Message</div>
+    }
+    else if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">Este envío no tiene seguimientos aún.</div>
+    }
+    else
+    {
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Comentario</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var seguimiento in Model)
+                    {
+                        <tr>
+                            <td>@seguimiento.Comentario</td>
+                            <td>@seguimiento.Estado</td>
+                            <td>@seguimiento.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 
-	<a asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
 </div>

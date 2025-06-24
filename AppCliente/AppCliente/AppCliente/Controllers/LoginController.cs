@@ -41,9 +41,9 @@ namespace AppCliente.Controllers
 					throw new Exception("no se encontro el usuario");
 				}
 
-				string token = GetToken(user);
+
 				HttpContext.Session.SetInt32("id", unUsuario.Id);
-				HttpContext.Session.SetString("token", token);
+				HttpContext.Session.SetString("token", unUsuario.Token);
 
 				return RedirectToAction("Index", "Envio");
 

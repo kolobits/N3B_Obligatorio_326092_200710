@@ -11,6 +11,7 @@ namespace Obligatorio.WebApi.Controllers
 	{
 		private readonly ILoginWebApi<UsuarioLoginDto> _login;
 
+
 		public AuthController(ILoginWebApi<UsuarioLoginDto> login)
 		{
 			_login = login;
@@ -27,6 +28,7 @@ namespace Obligatorio.WebApi.Controllers
 					throw new BadRequestException("Datos incompletos");
 				var loginRespuesta = _login.Execute(usuarioLogin);
 				return Ok(loginRespuesta);
+
 			}
 			catch (NotFoundException e)
 			{
