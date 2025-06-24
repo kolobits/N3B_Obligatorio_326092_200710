@@ -25,9 +25,8 @@ namespace Obligatorio.WebApi.Controllers
 
 				if (usuarioLogin == null)
 					throw new BadRequestException("Datos incompletos");
-				var token = _login.Execute(usuarioLogin);
-				return Ok(new { token });
-
+				var loginRespuesta = _login.Execute(usuarioLogin);
+				return Ok(loginRespuesta);
 			}
 			catch (NotFoundException e)
 			{
@@ -45,3 +44,4 @@ namespace Obligatorio.WebApi.Controllers
 		}
 	}
 }
+
