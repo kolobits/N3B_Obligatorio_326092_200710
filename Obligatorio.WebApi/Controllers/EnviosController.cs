@@ -43,7 +43,7 @@ namespace Obligatorio.WebApi.Controllers
 
 
 		// RF4
-		[Authorize]
+		//[Authorize]
 		[HttpGet("listar-envios/{id}")]
 		public IActionResult GetAllEnviosCliente(int id)
 		{

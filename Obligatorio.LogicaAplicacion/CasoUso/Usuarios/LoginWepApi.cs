@@ -1,7 +1,9 @@
 ﻿using Obligatorio.CasoDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.Infraestructura.AccesoDatos.Excepciones;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
+using Obligatorio.LogicaNegocio.Vo.Usuario;
 
 namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 {
@@ -19,18 +21,30 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 		public UsuarioLogueadoDto Execute(UsuarioLoginDto obj)
 		{
 			var usuario = _repo.GetByEmail(obj.Email);
+			if (usuario == null)
+				throw new NotFoundException("Usuario no encontrado.");
 
-			var dto = UsuarioMapper.ToDto(usuario);
+			var passwordVO = new Password(usuario.Password.Value);
 
-			string token = _jwtGenerator.GenerateToken(dto);
+			if (!passwordVO.Equals(obj.Password))
+			{
+				throw new BadRequestException("Contraseña incorrecta.");
+			}
+
+			{
+
+				var dto = UsuarioMapper.ToDto(usuario);
+
+				string token = _jwtGenerator.GenerateToken(dto);
 
 
-			return new UsuarioLogueadoDto(
-				Id: dto.Id,
-				Nombre: dto.Nombre,
-				Email: dto.Email,
-				Token: token
-			);
+				return new UsuarioLogueadoDto(
+					Id: dto.Id,
+					Nombre: dto.Nombre,
+					Email: dto.Email,
+					Token: token
+				);
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace AppCliente.Controllers
 {
-	public class UsuarioController : Controller
+	public class ClienteController : Controller
 	{
 		public IActionResult CambiarPassword()
 		{
@@ -20,7 +20,13 @@ namespace AppCliente.Controllers
 		{
 			try
 			{
-				var idUsuario = HttpContext.Session.GetInt32("id");
+                var token = HttpContext.Session.GetString("token");  // Suponiendo que el token está almacenado en la sesión
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    throw new Exception("No se encontró un token válido para autenticar la solicitud.");
+                }
+                var idUsuario = HttpContext.Session.GetInt32("id");
 				if (idUsuario == null)
 					throw new Exception("Sesión expirada. Iniciá sesión nuevamente.");
 
@@ -29,8 +35,9 @@ namespace AppCliente.Controllers
 					MaxTimeout = -1,
 				};
 				var client = new RestClient(options);
-				var request = new RestRequest($"/api/Usuario/cambiar-password{idUsuario}", Method.Put);
-				var body = JsonSerializer.Serialize(cambioPassword);
+				var request = new RestRequest($"/api/Clientes/cambiar-password/{idUsuario}", Method.Put);
+                request.AddHeader("Authorization", "Bearer " + token);
+                var body = JsonSerializer.Serialize(cambioPassword);
 				request.AddStringBody(body, DataFormat.Json);
 				RestResponse response = client.Execute(request);
 				if ((int)response.StatusCode == 404)
@@ -45,7 +52,6 @@ namespace AppCliente.Controllers
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Error: " + e.ToString()); // Muestra traza completa
 				ViewBag.mensaje = "Ocurrió un error: " + e.Message;
 			}
 
