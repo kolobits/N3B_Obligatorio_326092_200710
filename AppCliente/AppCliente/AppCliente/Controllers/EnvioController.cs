@@ -12,7 +12,11 @@ namespace AppCliente.Controllers
 			try
 			{
 				var token = HttpContext.Session.GetString("token");
-				var idCliente = HttpContext.Session.GetInt32("id");
+                if (string.IsNullOrEmpty(token))
+                {
+                    throw new Exception("No se encontró un token válido para autenticar la solicitud.");
+                }
+                var idCliente = HttpContext.Session.GetInt32("id");
 				if (idCliente == null)
 					throw new Exception("Sesión expirada. Iniciá sesión nuevamente.");
 
@@ -21,7 +25,7 @@ namespace AppCliente.Controllers
 					MaxTimeout = -1,
 				};
 				var client = new RestClient(options);
-				var request = new RestRequest($"/api/clientes/listar-envios/{idCliente}", Method.Get);
+				var request = new RestRequest($"/api/Envios/listar-envios/{idCliente}", Method.Get);
 				request.AddHeader("Authorization", $"Bearer {token}");
 
 				RestResponse response = client.Execute(request);
@@ -118,7 +122,61 @@ namespace AppCliente.Controllers
 			}
 		}
 
+        public IActionResult ListarEnviosPorFecha(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado)
+        {
+            try
+            {
+                var token = HttpContext.Session.GetString("token");
+                if (string.IsNullOrEmpty(token))
+                {
+                    throw new Exception("No se encontró un token válido para autenticar la solicitud.");
+                }
 
-	}
+                var idCliente = HttpContext.Session.GetInt32("id");
+                if (idCliente == null)
+                    throw new Exception("Sesión expirada. Iniciá sesión nuevamente.");
+
+                string fechaCreacionStr = fechaCreacion?.ToString("yyyy-MM-dd");
+                string fechaFinalizacionStr = fechaFinalizacion?.ToString("yyyy-MM-dd");
+
+                var options = new RestClientOptions("https://localhost:7018")
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest($"/api/Envios/listar-enviosFecha/{idCliente}?fechaCreacion={fechaCreacionStr}&fechaFinalizacion={fechaFinalizacionStr}&estado={estado}", Method.Get);
+                request.AddHeader("Authorization", $"Bearer {token}");
+
+                // Ejecutar la solicitud
+                RestResponse response = client.Execute(request);
+
+                // Validar la respuesta
+                if ((int)response.StatusCode == 401)
+                    throw new Exception("No autorizado. Iniciá sesión nuevamente.");
+                if ((int)response.StatusCode == 204)
+                    throw new Exception("No hay envíos registrados.");
+                if ((int)response.StatusCode != 200)
+                    throw new Exception("Error al obtener los envíos.");
+
+                var optionsJson = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                };
+
+                // Deserializar los envíos
+                List<EnvioListadoDto> envios = JsonSerializer.Deserialize<List<EnvioListadoDto>>(response.Content, optionsJson);
+
+                // Devolver la vista con los envíos
+                return View("Index", envios);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = e.Message;
+                return View("Index", new List<EnvioListadoDto>());
+            }
+        }
+
+    
+    }
 }
 
