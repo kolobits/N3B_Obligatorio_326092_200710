@@ -25,7 +25,7 @@ namespace Obligatorio.WebApi.Services
 			{
 				new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
 				new Claim("id", usuario.Id.ToString()),
-				//new Claim(ClaimTypes.Role, "cliente")
+				new Claim(ClaimTypes.Role, "cliente")
 			};
 
 			var tokenDescriptor = new SecurityTokenDescriptor

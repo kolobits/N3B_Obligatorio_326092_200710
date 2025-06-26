@@ -13,49 +13,6 @@ namespace AppCliente.Controllers
 			return View();
 		}
 
-
-		//[HttpPost]
-		//public IActionResult Login(UsuarioLoginDto user)
-		//{
-		//	try
-		//	{
-		//		var options = new RestClientOptions("https://localhost:7018")
-		//		{
-		//			MaxTimeout = -1,
-		//		};
-		//		var client = new RestClient(options);
-		//		var request = new RestRequest("/api/Auth/login", Method.Post);
-		//		var body = JsonSerializer.Serialize(user);
-		//		request.AddStringBody(body, DataFormat.Json);
-		//		RestResponse response = client.Execute(request);
-		//		if ((int)response.StatusCode == 404)
-		//		{
-		//			throw new Exception("Problemas con las credenciales");
-		//		}
-		//		var optionsJson = new JsonSerializerOptions
-		//		{
-		//			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-		//		};
-		//		UsuarioListadoDto unUsuario = JsonSerializer.Deserialize<UsuarioListadoDto>(response.Content, optionsJson);
-		//		if (unUsuario == null)
-		//		{
-		//			throw new Exception("No se encontro el usuario");
-		//		}
-
-		//		string token = GetToken(user);
-		//		HttpContext.Session.SetInt32("id", unUsuario.Id);
-		//		HttpContext.Session.SetString("token", token);
-
-		//		return RedirectToAction("Index", "Envio");
-
-		//	}
-		//	catch (Exception e)
-		//	{
-		//		ViewBag.mensaje = e.Message;
-		//	}
-		//	return View("Index");
-		//}
-
 		[HttpPost]
 		public IActionResult Login(UsuarioLoginDto user)
 		{
