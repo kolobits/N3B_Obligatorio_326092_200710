@@ -41,6 +41,11 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
 				.HasForeignKey("ClienteId")
 				.OnDelete(DeleteBehavior.Restrict);
 
-		}
+            builder.HasMany(e => e.Seguimientos)
+            .WithOne(s => s.Envio)
+            .HasForeignKey(s => s.EnvioId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        }
 	}
 }

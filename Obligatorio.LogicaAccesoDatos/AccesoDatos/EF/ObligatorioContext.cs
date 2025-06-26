@@ -39,8 +39,20 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			modelBuilder.ApplyConfiguration(new EnvioUrgenteConfiguration());
 			modelBuilder.ApplyConfiguration(new EnvioComunConfiguration());
 
+            modelBuilder.Entity<Seguimiento>()
+           .HasOne(s => s.Envio)
+           .WithMany(e => e.Seguimientos)
+           .HasForeignKey(s => s.EnvioId) // Aquí se asegura que la clave foránea es EnvioId
+           .OnDelete(DeleteBehavior.Restrict);
 
-		}
+            // Configuración de la relación de Seguimiento con Empleado
+            modelBuilder.Entity<Seguimiento>()
+                .HasOne(s => s.Empleado)
+                .WithMany()
+                .HasForeignKey(s => s.EmpleadoId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
 
 	}
 }

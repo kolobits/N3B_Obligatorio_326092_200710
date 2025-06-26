@@ -345,16 +345,18 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.HasOne("Obligatorio.LogicaNegocio.Entidades.Empleado", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Obligatorio.LogicaNegocio.Entidades.Envio", null)
+                    b.HasOne("Obligatorio.LogicaNegocio.Entidades.Envio", "Envio")
                         .WithMany("Seguimientos")
                         .HasForeignKey("EnvioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Empleado");
+
+                    b.Navigation("Envio");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Usuario", b =>

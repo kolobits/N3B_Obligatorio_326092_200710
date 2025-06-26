@@ -9,6 +9,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
 		public DateTime Fecha { get; set; }
 		public Empleado Empleado { get; set; }
 		public int EmpleadoId { get; set; }
+		public Envio Envio {get;set; }
 		public int EnvioId { get; set; }
 		public Seguimiento(int id, string comentario, DateTime fecha, int empleadoId, int envioId)
 		{

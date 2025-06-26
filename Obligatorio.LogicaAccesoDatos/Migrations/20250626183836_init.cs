@@ -123,13 +123,13 @@ namespace Obligatorio.Infraestructura.Migrations
                         column: x => x.EnvioId,
                         principalTable: "Envios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Seguimientos_Usuarios_EmpleadoId",
                         column: x => x.EmpleadoId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

@@ -166,7 +166,9 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			_context.SaveChanges();
 		}
 
-		private void Envio()
+        
+
+        private void Envio()
 		{
 			Envio envioUrgente1 = new EnvioUrgente(0,
 				tracking: new Tracking(345678),
@@ -233,7 +235,62 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				esEficiente: false);
 			_context.Envios.Add(envioUrgente5);
 
-			Envio envioComun1 = new EnvioComun(0,
+            Envio envioUrgente6 = new EnvioUrgente(0,
+		    tracking: new Tracking(345683),
+		    empleadoId: 1,
+		    clienteId: 4,
+		    peso: new Peso(15),
+		    estado: Estado.Finalizado,
+		    seguimientos: new List<Seguimiento>(),
+		    fechaFinalizacion: new DateTime(2025, 6, 15),
+		    fechaCreacion: DateTime.Now,
+		    direccionPostal: new DireccionPostal("Bulevar Artigas", 1500, 12000),
+		    esEficiente: true);
+            _context.Envios.Add(envioUrgente6);
+
+          
+            Envio envioUrgente7 = new EnvioUrgente(0,
+                tracking: new Tracking(345684),
+                empleadoId: 2,
+                clienteId: 6,
+                peso: new Peso(9),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 20), 
+                fechaCreacion: DateTime.Now,
+                direccionPostal: new DireccionPostal("Plaza Independencia", 200, 11800),
+                esEficiente: false);
+            _context.Envios.Add(envioUrgente7);
+
+          
+            Envio envioUrgente8 = new EnvioUrgente(0,
+                tracking: new Tracking(345685),
+                empleadoId: 3,
+                clienteId: 7,
+                peso: new Peso(4),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 18),
+                fechaCreacion: DateTime.Now,
+                direccionPostal: new DireccionPostal("Rambla Sur", 500, 11600),
+                esEficiente: true);
+            _context.Envios.Add(envioUrgente8);
+
+            Envio envioUrgente9 = new EnvioUrgente(0,
+                tracking: new Tracking(345686),
+                empleadoId: 7,
+                clienteId: 5,
+                peso: new Peso(13),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 30), 
+                fechaCreacion: DateTime.Now,
+                direccionPostal: new DireccionPostal("Av. 18 de Julio", 2050, 11400),
+                esEficiente: true);
+            _context.Envios.Add(envioUrgente9);
+
+
+            Envio envioComun1 = new EnvioComun(0,
 				tracking: new Tracking(123456),
 				empleadoId: 2,
 				clienteId: 4,
@@ -293,8 +350,141 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				agenciaId: 3);
 			_context.Envios.Add(envioComun5);
 
-			_context.SaveChanges();
+            
+            Envio envioComun6 = new EnvioComun(0,
+                tracking: new Tracking(123461),
+                empleadoId: 4,
+                clienteId: 5,
+                peso: new Peso(11),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 22), 
+                fechaCreacion: DateTime.Now,
+                agenciaId: 5);
+            _context.Envios.Add(envioComun6);
+
+            
+            Envio envioComun7 = new EnvioComun(0,
+                tracking: new Tracking(123462),
+                empleadoId: 5,
+                clienteId: 4,
+                peso: new Peso(8),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 25),
+                fechaCreacion: DateTime.Now,
+                agenciaId: 2);
+            _context.Envios.Add(envioComun7);
+
+          
+            Envio envioComun8 = new EnvioComun(0,
+                tracking: new Tracking(123463),
+                empleadoId: 6,
+                clienteId: 7,
+                peso: new Peso(10),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 28), 
+                fechaCreacion: DateTime.Now,
+                agenciaId: 1);
+            _context.Envios.Add(envioComun8);
+
+           
+            Envio envioComun9 = new EnvioComun(0,
+                tracking: new Tracking(123464),
+                empleadoId: 8,
+                clienteId: 6,
+                peso: new Peso(12),
+                estado: Estado.Finalizado,
+                seguimientos: new List<Seguimiento>(),
+                fechaFinalizacion: new DateTime(2025, 6, 30),
+                fechaCreacion: DateTime.Now,
+                agenciaId: 3);
+            _context.Envios.Add(envioComun9);
+
+            Seguimiento();
+            _context.SaveChanges();
 		}
 
-	}
+        private void Seguimiento()
+        {
+            // Seguimientos para EnvioId = 1
+            var seguimiento1 = new Seguimiento(0, "Pendiente", DateTime.Now, empleadoId: 1, envioId: 1);
+            var seguimiento2 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 1);
+            var seguimiento3 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 1);
+            var seguimiento4 = new Seguimiento(0, "Demorado", DateTime.Now.AddHours(3), empleadoId: 8, envioId: 1);
+
+            // Seguimientos para EnvioId = 2
+            var seguimiento5 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 2);
+            var seguimiento6 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 2);
+            var seguimiento7 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 2);
+            var seguimiento8 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 9, envioId: 2);
+
+            // Seguimientos para EnvioId = 3
+            var seguimiento9 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 3);
+            var seguimiento10 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 3);
+
+            // Seguimientos para EnvioId = 4
+            var seguimiento11 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 4);
+            var seguimiento12 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 4);
+            var seguimiento13 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 4);
+            var seguimiento14 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 8, envioId: 4);
+
+            // Seguimientos para EnvioId = 5
+            var seguimiento15 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 5);
+            var seguimiento16 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 5);
+            var seguimiento17 = new Seguimiento(0, "Enviado", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 5);
+            var seguimiento18 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 9, envioId: 5);
+
+            // Seguimientos para EnvioId = 6
+            var seguimiento19 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 6);
+            var seguimiento20 = new Seguimiento(0, "En camino", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 6);
+            var seguimiento21 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 6);
+            var seguimiento22 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 10, envioId: 6);
+
+            // Seguimientos para EnvioId = 7
+            var seguimiento23 = new Seguimiento(0, "En preparación:" +
+				"", DateTime.Now, empleadoId: 1, envioId: 7);
+            var seguimiento24 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 7);
+            var seguimiento25 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 7);
+            var seguimiento26 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 9, envioId: 7);
+
+            // Seguimientos para EnvioId = 8
+            var seguimiento27 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 8);
+            var seguimiento28 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 8);
+            var seguimiento29 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 8);
+            var seguimiento30 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 8, envioId: 8);
+
+            // Seguimientos para EnvioId = 9
+            var seguimiento31 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 9);
+            var seguimiento32 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 9);
+            var seguimiento33 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 9);
+            var seguimiento34 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 10, envioId: 9);
+
+            // Seguimientos para EnvioId = 10
+            var seguimiento35 = new Seguimiento(0, "Recibido en agencia", DateTime.Now, empleadoId: 1, envioId: 10);
+            var seguimiento36 = new Seguimiento(0, "En tránsito", DateTime.Now.AddHours(1), empleadoId: 2, envioId: 10);
+            var seguimiento37 = new Seguimiento(0, "En reparto", DateTime.Now.AddHours(2), empleadoId: 3, envioId: 10);
+            var seguimiento38 = new Seguimiento(0, "Entrega exitosa", DateTime.Now.AddHours(3), empleadoId: 8, envioId: 10);
+
+            _context.Seguimientos.AddRange(
+                seguimiento1, seguimiento2, seguimiento3, seguimiento4,
+                seguimiento5, seguimiento6, seguimiento7, seguimiento8,
+                seguimiento9, seguimiento10, seguimiento11, seguimiento12,
+                seguimiento13, seguimiento14, seguimiento15, seguimiento16,
+                seguimiento17, seguimiento18, seguimiento19, seguimiento20,
+                seguimiento21, seguimiento22, seguimiento23, seguimiento24,
+                seguimiento25, seguimiento26, seguimiento27, seguimiento28,
+                seguimiento29, seguimiento30, seguimiento31, seguimiento32,
+                seguimiento33, seguimiento34, seguimiento35, seguimiento36,
+                seguimiento37, seguimiento38
+            );
+            _context.SaveChanges();
+        }
+
+
+
+
+    }
+
 }
