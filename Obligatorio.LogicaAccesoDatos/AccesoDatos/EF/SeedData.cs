@@ -19,6 +19,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			if (!_context.Agencias.Any()) Agencia();
 			if (!_context.Usuarios.Any()) Usuario();
 			if (!_context.Envios.Any()) Envio();
+			if (!_context.Seguimientos.Any()) Seguimiento();
 		}
 
 		private void Agencia()
@@ -294,9 +295,6 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
 			_context.SaveChanges();
 		}
-
-
-
 
 	}
 }
