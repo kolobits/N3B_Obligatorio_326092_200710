@@ -18,12 +18,12 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 			_repoUsuario = repoUsuario;
 		}
 
-		public IEnumerable<EnvioListadoDto> Execute(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado, int clienteId)
+		public IEnumerable<EnvioListadoDto> Execute(DateTime? fechaInicio,DateTime? fechaFin, string estado, int clienteId)
 		{
 			var usuario = _repoUsuario.GetById(clienteId);
 			if (usuario == null)
 				throw new NotFoundException("Usuario no encontrado.");
-			return EnvioMapper.ToListDto(_repo.GetEnviosFecha(fechaCreacion, fechaFinalizacion, estado, clienteId));
+			return EnvioMapper.ToListDto(_repo.GetEnviosFecha(fechaInicio, fechaFin, estado, clienteId));
 		}
 	}
 

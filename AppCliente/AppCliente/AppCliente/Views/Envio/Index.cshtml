@@ -8,7 +8,7 @@
 <div class="container mt-4">
     <h2 class="text-primary mb-4">@ViewData["Title"]</h2>
 
-    <form asp-action="ListarEnviosPorFecha" method="get" class="row g-3 mb-4">
+    <form asp-action="ListarPorFecha" method="get" class="row g-3 mb-4">
         <div class="col-md-3">
             <label class="form-label">Estado</label>
             <select name="estado" class="form-select">
@@ -19,29 +19,28 @@
         </div>
         <div class="col-md-3">
             <label class="form-label">Desde</label>
-            <input type="date" name="fechaCreacion" class="form-control" />
+            <input type="date" name="fechaInicio" class="form-control" />
         </div>
         <div class="col-md-3">
             <label class="form-label">Hasta</label>
-            <input type="date" name="fechaFinalizacion" class="form-control" />
+            <input type="date" name="fechaFin" class="form-control" />
         </div>
         <div class="col-md-2 d-flex align-items-end">
             <button type="submit" class="btn btn-primary w-100">Buscar</button>
         </div>
     </form>
 
-    <div class="col-md-6 mb-4">
-        <form class="d-flex" action="/Envio/Details" method="get">
-            <div class="col-md-9 col-sm-8">
-                <label class="form-label">Palabra en comentario</label>
-                <input type="text" name="palabraClave" class="form-control" placeholder="Ej: Demorado, En Camino..." />
-            </div>
-            <div class="col-md-3 col-sm-4 d-flex align-items-end">
+    <div class="col-md-6 mb-2">
+        <form asp-controller="Envio" asp-action="ListarPorComentario" method="get">
+            <input type="text" name="comentario" class="form-control me-2" placeholder="Ej: Demorado, En Camino..." />
+            <div class="col-md-2 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary w-100">Buscar</button>
             </div>
         </form>
     </div>
 </div>
+
+
 
     @if (Model.Any())
     {
@@ -54,6 +53,7 @@
                         <th>Tipo</th>
                         <th>Fecha de Creación</th>
                         <th>Fecha de Finalización</th>
+                        <th>Ultimo comentario</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -66,6 +66,7 @@
                             <td>@item.Tipo</td>
                             <td>@item.FechaCreacion?.ToString("dd/MM/yyyy")</td>
                             <td>@item.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                            <td>@item.UltimoComentario</td>
                             <td class="text-center">
                                 <a asp-action="VerSeguimientos" asp-route-envioId="@item.Id" class="btn btn-sm btn-outline-secondary">
                                     Ver Seguimientos

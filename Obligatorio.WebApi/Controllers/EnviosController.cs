@@ -45,7 +45,7 @@ namespace Obligatorio.WebApi.Controllers
 
 
         // RF4
-        //[Authorize]
+        [Authorize]
         [HttpGet("listar-envios/{id}")]
         public IActionResult GetAllEnviosCliente(int id)
         {
@@ -90,18 +90,14 @@ namespace Obligatorio.WebApi.Controllers
         //RF5
         //[Authorize]
         [HttpGet("listar-enviosFecha/{id}")]
-        public IActionResult GetAllEnviosFecha(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado, int id)
+        public IActionResult GetAllEnviosFecha(DateTime? fechaInicio, DateTime? fechaFin, string estado, int id)
         {
             try
             {
-                var envios = _getEnviosFecha.Execute(fechaCreacion, fechaFinalizacion, estado, id);
+                var envios = _getEnviosFecha.Execute(fechaInicio, fechaFin, estado, id);
                 if (envios.Count() == 0)
                 {
                     return StatusCode(204);
-                }
-                if (estado == null)
-                {
-                    return Ok(_getAllEnviosCliente.Execute(id));
                 }
                 return Ok(envios);
             }
@@ -116,7 +112,6 @@ namespace Obligatorio.WebApi.Controllers
         }
 
         // RF6
-        //ERROR 401
         [Authorize]
         [HttpGet("listar-enviosComentario/{id}")]
         public IActionResult GetEnviosComentario(string comentario, int id)
