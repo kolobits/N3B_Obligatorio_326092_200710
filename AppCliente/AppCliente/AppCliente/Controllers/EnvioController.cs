@@ -121,6 +121,7 @@ namespace AppCliente.Controllers
 				return View("Seguimiento", new List<SeguimientoDto>());
 			}
 		}
+
 		public IActionResult ListarPorFecha(DateTime? fechaInicio, DateTime? fechaFin, string estado)
 		{
 			try
@@ -137,9 +138,9 @@ namespace AppCliente.Controllers
 
 				string fechaInicioStr = fechaInicio?.ToString("yyyy-MM-dd");
 				string fechaFinStr = fechaFin?.ToString("yyyy-MM-dd");
-                estado = estado ?? string.Empty;
+				estado = estado ?? string.Empty;
 
-                var options = new RestClientOptions("https://localhost:7018")
+				var options = new RestClientOptions("https://localhost:7018")
 				{
 					MaxTimeout = -1,
 				};
@@ -215,8 +216,8 @@ namespace AppCliente.Controllers
 			catch (Exception e)
 			{
 				ViewBag.Message = e.Message;
-                return View("Index", new List<EnvioListadoDto>());
-            }
+				return View("Index", new List<EnvioListadoDto>());
+			}
 		}
 	}
 }
