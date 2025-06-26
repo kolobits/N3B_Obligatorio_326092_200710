@@ -20,8 +20,7 @@ namespace AppCliente.Controllers
 		{
 			try
 			{
-                var token = HttpContext.Session.GetString("token");  // Suponiendo que el token está almacenado en la sesión
-
+                var token = HttpContext.Session.GetString("token");
                 if (string.IsNullOrEmpty(token))
                 {
                     throw new Exception("No se encontró un token válido para autenticar la solicitud.");
@@ -40,19 +39,30 @@ namespace AppCliente.Controllers
                 var body = JsonSerializer.Serialize(cambioPassword);
 				request.AddStringBody(body, DataFormat.Json);
 				RestResponse response = client.Execute(request);
-				if ((int)response.StatusCode == 404)
-				{
-					throw new Exception("Problemas con las credenciales");
-				}
-				if ((int)response.StatusCode == 200)
-				{
-					ViewBag.mensaje = "Contraseña cambiada correctamente";
-					return View(new CambioPasswordDto());
-				}
-			}
-			catch (Exception e)
+                if ((int)response.StatusCode == 404)
+                {
+                    throw new Exception("Problemas con las credenciales");
+                }
+                if ((int)response.StatusCode == 400)
+                {
+                    throw new Exception("Contraseña actual incorrecta");
+                }
+                if ((int)response.StatusCode != 200)
+                {
+                    throw new Exception("Error inesperado al cambiar la contraseña.");
+                }
+
+
+
+                if ((int)response.StatusCode == 200)
+                {
+                    ViewBag.mensaje = "Contraseña cambiada correctamente";
+                    return View(new CambioPasswordDto());
+                }
+            }
+            catch (Exception e)
 			{
-				ViewBag.mensaje = "Ocurrió un error: " + e.Message;
+				ViewBag.mensaje = e.Message;
 			}
 
 			return View("CambiarPassword");

@@ -83,11 +83,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			return envioExitoso;
 		}
 
-		public IEnumerable<Envio> GetEnviosFecha(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado, int clienteId)
+		public IEnumerable<Envio> GetEnviosFecha(DateTime? fechaInicio, DateTime? fechaFin, string estado, int clienteId)
 		{
 
-            //Manejo de Enum en consultas LINQ, los enum no se pueden consultar con where, EF no puede realiza comparaciones con enum
-            var query = _context.Envios
+			var query = _context.Envios
                 .Include(e => e.Cliente)
                     .ThenInclude(c => c.NombreCompleto)
                 .Include(e => e.Empleado)
@@ -103,16 +102,13 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
                 {
                     estadoEnum = estadoParsed;
                 }
-                else
-                {
-                    throw new BadRequestException($"El estado '{estado}' no es válido.");
-                }
             }
             
 
-            if (fechaCreacion.HasValue && fechaFinalizacion.HasValue)
+            if (fechaInicio.HasValue && fechaFin.HasValue)
             {
-                query = query.Where(e => e.FechaCreacion >= fechaCreacion.Value && e.FechaCreacion <= fechaFinalizacion.Value);
+				query = query.Where(e => e.FechaCreacion >= fechaInicio && e.FechaCreacion <= fechaFin);
+
             }
 
             if (estadoEnum.HasValue)

@@ -4,6 +4,6 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios.Envios
 {
     public interface IRepositorioGetEnviosFecha<T>
     {
-        IEnumerable<T> GetEnviosFecha(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado,int id);
+        IEnumerable<T> GetEnviosFecha(DateTime? fechaInicio, DateTime? fechaFin, string estado,int id);
     }
 }

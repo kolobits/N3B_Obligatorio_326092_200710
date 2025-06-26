@@ -26,10 +26,10 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 
 			var passwordVO = new Password(usuario.Password.Value);
 
-			if (!passwordVO.Equals(obj.Password))
-			{
-				throw new BadRequestException("Contraseña incorrecta.");
-			}
+			//if (!passwordVO.Equals(obj.Password))
+			//{
+			//	throw new BadRequestException("Contraseña incorrecta.");
+			//}
 
 			{
 

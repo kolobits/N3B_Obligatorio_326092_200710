@@ -12,10 +12,10 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Envio
 		private IRepositorioEnvio _repo;
 		private IRepositorioUsuario _repoUsuario;
 
-		public GetEnviosComentario(IRepositorioEnvio repo, IRepositorioUsuario repositorioUsuario)
+		public GetEnviosComentario(IRepositorioEnvio repo, IRepositorioUsuario repoUsuario)
 		{
 			_repo = repo;
-			_repoUsuario = _repoUsuario;
+			_repoUsuario = repoUsuario;
 		}
 
 		public IEnumerable<EnvioListadoDto> Execute(string comentario, int clienteId)
