@@ -1,0 +1,830 @@
+{
+	"info": {
+		"_postman_id": "3c68f8fb-2d28-420a-8f34-770eebef5bde",
+		"name": "Obligatorio_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44841505",
+		"_collection_link": "https://camilo-1322581.postman.co/workspace/Camilo's-Workspace~80f6d3af-c2b4-48bc-8b59-290df68e21cb/collection/44841505-3c68f8fb-2d28-420a-8f34-770eebef5bde?action=share&source=collection_link&creator=44841505"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "200 -Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"ana.gonzalez@gmail.com\",\r\n  \"password\": \"Ana2024!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/api/Auth/login",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 -Contraseña inválida",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"ana.gonzalez@gmail.com\",\r\n  \"password\": \"Ana2025!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/api/Auth/login",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404- Email inválido",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"ana.gomez@gmail.com\",\r\n  \"password\": \"Ana2024!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/api/Auth/login",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - Error inesperado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cambiar Contraseña",
+					"item": [
+						{
+							"name": "200 -Cambiar contraseña",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"passwordActual\": \"Ana2024!\",\r\n  \"passwordNueva\": \"Ana2024+\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/api/Clientes/cambiar-password/",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Clientes",
+										"cambiar-password",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 -Contraseña actual incorrecta",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJuYmYiOjE3NTA4OTExODQsImV4cCI6MTc1MDg5NDc4NCwiaWF0IjoxNzUwODkxMTg0fQ.6LHN2fSbBsUUrYw4I0nwxnKcEWJrC7XlUDtjQFnNCc0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"passwordActual\": \"Ana2027+\",\r\n  \"passwordNueva\": \"Ana2024+\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/api/Clientes/cambiar-password/4",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Clientes",
+										"cambiar-password",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 -Id cliente no encontrado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJuYmYiOjE3NTA4OTExODQsImV4cCI6MTc1MDg5NDc4NCwiaWF0IjoxNzUwODkxMTg0fQ.6LHN2fSbBsUUrYw4I0nwxnKcEWJrC7XlUDtjQFnNCc0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"passwordActual\": \"Ana2024!\",\r\n  \"passwordNueva\": \"Ana2024+\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/api/Clientes/cambiar-password/1000",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Clientes",
+										"cambiar-password",
+										"1000"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 -Error inesperado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJuYmYiOjE3NTA4OTExODQsImV4cCI6MTc1MDg5NDc4NCwiaWF0IjoxNzUwODkxMTg0fQ.6LHN2fSbBsUUrYw4I0nwxnKcEWJrC7XlUDtjQFnNCc0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Envios",
+			"item": [
+				{
+					"name": "Consulta Envío por tracking",
+					"item": [
+						{
+							"name": "200 -Consulta envío por tracking",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/{{tracking}}",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"{{tracking}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 -Nro Tracking no encontrado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 -Error inesperado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar Envios por Id cliente",
+					"item": [
+						{
+							"name": "200 -Listar envíos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MjIzOCwiZXhwIjoxNzUwOTU1ODM4LCJpYXQiOjE3NTA5NTIyMzh9.RQ1QvabzDHFo2iXaVqU5-bO4gzrPMSkA4jlS5EHMVGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-envios/4",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-envios",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "204 - Cliente sin envíos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MjIzOCwiZXhwIjoxNzUwOTU1ODM4LCJpYXQiOjE3NTA5NTIyMzh9.RQ1QvabzDHFo2iXaVqU5-bO4gzrPMSkA4jlS5EHMVGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-envios/5",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-envios",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 -Id cliente no encontrado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MjIzOCwiZXhwIjoxNzUwOTU1ODM4LCJpYXQiOjE3NTA5NTIyMzh9.RQ1QvabzDHFo2iXaVqU5-bO4gzrPMSkA4jlS5EHMVGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-envios/50",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-envios",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 -Error inesperado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar Envíos por Id cliente y rango de fechas",
+					"item": [
+						{
+							"name": "200 -Get Envios Por Fecha",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MjIzOCwiZXhwIjoxNzUwOTU1ODM4LCJpYXQiOjE3NTA5NTIyMzh9.RQ1QvabzDHFo2iXaVqU5-bO4gzrPMSkA4jlS5EHMVGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-enviosFecha/4?fechaCreacion=2025%2F06%2F10%2000%3A00&fechaFinalizacion=2025%2F06%2F22%2000%3A00&estado=Finalizado",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-enviosFecha",
+										"4"
+									],
+									"query": [
+										{
+											"key": "fechaCreacion",
+											"value": "2025%2F06%2F10%2000%3A00"
+										},
+										{
+											"key": "fechaFinalizacion",
+											"value": "2025%2F06%2F22%2000%3A00"
+										},
+										{
+											"key": "estado",
+											"value": "Finalizado"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "204 -Cliente sin envíos con los datos proporcionados",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MjIzOCwiZXhwIjoxNzUwOTU1ODM4LCJpYXQiOjE3NTA5NTIyMzh9.RQ1QvabzDHFo2iXaVqU5-bO4gzrPMSkA4jlS5EHMVGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-enviosFecha/5?fechaCreacion=2025%2F06%2F10%2000%3A00&fechaFinalizacion=2025%2F06%2F22%2000%3A00&estado=Finalizado",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-enviosFecha",
+										"5"
+									],
+									"query": [
+										{
+											"key": "fechaCreacion",
+											"value": "2025%2F06%2F10%2000%3A00"
+										},
+										{
+											"key": "fechaFinalizacion",
+											"value": "2025%2F06%2F22%2000%3A00"
+										},
+										{
+											"key": "estado",
+											"value": "Finalizado"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 -Id cliente no encontrado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MjIzOCwiZXhwIjoxNzUwOTU1ODM4LCJpYXQiOjE3NTA5NTIyMzh9.RQ1QvabzDHFo2iXaVqU5-bO4gzrPMSkA4jlS5EHMVGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-enviosFecha/50?fechaCreacion=2025%2F06%2F10%2000%3A00&fechaFinalizacion=2025%2F06%2F22%2000%3A00&estado=Finalizado",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-enviosFecha",
+										"50"
+									],
+									"query": [
+										{
+											"key": "fechaCreacion",
+											"value": "2025%2F06%2F10%2000%3A00"
+										},
+										{
+											"key": "fechaFinalizacion",
+											"value": "2025%2F06%2F22%2000%3A00"
+										},
+										{
+											"key": "estado",
+											"value": "Finalizado"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 -Error inesperado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar Detalles Envios",
+					"item": [
+						{
+							"name": "200 - Get Seguimiento Por Envio",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MzI2NiwiZXhwIjoxNzUwOTU2ODY2LCJpYXQiOjE3NTA5NTMyNjZ9.eRa2QYRQDMBFLweNCH0t813aj3Xzgnby1umdvOT8cWQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/envios/5/seguimientos",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"envios",
+										"5",
+										"seguimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "204 - Envio sin Seguimiento",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MzI2NiwiZXhwIjoxNzUwOTU2ODY2LCJpYXQiOjE3NTA5NTMyNjZ9.eRa2QYRQDMBFLweNCH0t813aj3Xzgnby1umdvOT8cWQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/envios/1/seguimientos",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"envios",
+										"1",
+										"seguimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - Id Envio no encontrado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MzI2NiwiZXhwIjoxNzUwOTU2ODY2LCJpYXQiOjE3NTA5NTMyNjZ9.eRa2QYRQDMBFLweNCH0t813aj3Xzgnby1umdvOT8cWQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/envios/50/seguimientos",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"envios",
+										"50",
+										"seguimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - Error inesperado",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar envíos por Id cliente y comentario",
+					"item": [
+						{
+							"name": "200 -Get Envios Por Comentario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MzI2NiwiZXhwIjoxNzUwOTU2ODY2LCJpYXQiOjE3NTA5NTMyNjZ9.eRa2QYRQDMBFLweNCH0t813aj3Xzgnby1umdvOT8cWQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-enviosComentario/6?comentario=reparto",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-enviosComentario",
+										"6"
+									],
+									"query": [
+										{
+											"key": "comentario",
+											"value": "reparto"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "204 -Envío con comentario inexistente",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MzI2NiwiZXhwIjoxNzUwOTU2ODY2LCJpYXQiOjE3NTA5NTMyNjZ9.eRa2QYRQDMBFLweNCH0t813aj3Xzgnby1umdvOT8cWQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-enviosComentario/6?comentario=llegando",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-enviosComentario",
+										"6"
+									],
+									"query": [
+										{
+											"key": "comentario",
+											"value": "llegando"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 -Id cliente no encontrado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJpZCI6IjQiLCJyb2xlIjoiY2xpZW50ZSIsIm5iZiI6MTc1MDk1MzI2NiwiZXhwIjoxNzUwOTU2ODY2LCJpYXQiOjE3NTA5NTMyNjZ9.eRa2QYRQDMBFLweNCH0t813aj3Xzgnby1umdvOT8cWQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/api/Envios/listar-enviosComentario/1000?comentario=enviado",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"Envios",
+										"listar-enviosComentario",
+										"1000"
+									],
+									"query": [
+										{
+											"key": "comentario",
+											"value": "enviado"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 -Error inesperado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Url",
+			"value": "https://localhost:7018",
+			"type": "default"
+		},
+		{
+			"key": "Token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYS5nb256YWxlekBnbWFpbC5jb20iLCJuYmYiOjE3NTA3MjE5NDUsImV4cCI6MTc1MDcyNTU0NSwiaWF0IjoxNzUwNzIxOTQ1fQ.piMnWtt_Bw2v-OgyTNtKpQm8f_RkRRNldUkD-2qpnQU",
+			"type": "default"
+		},
+		{
+			"key": "tracking",
+			"value": "345678",
+			"type": "default"
+		}
+	]
+}
