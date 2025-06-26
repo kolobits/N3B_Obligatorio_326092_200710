@@ -9,6 +9,6 @@ namespace Obligatorio.CasoDeUsoCompartida.InterfacesCU.Envio
 {
     public interface IGetEnviosFecha<T>
     {
-        IEnumerable<T> Execute(DateTime? fechaCreacion, DateTime? fechaFinalizacion, string estado, int clienteId);
+        IEnumerable<T> Execute(DateTime? fechaInicio, DateTime? fechaFin, string estado, int clienteId);
     }
 }

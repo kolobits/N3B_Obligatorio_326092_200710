@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Obligatorio.WebApp\Obligatorio.WebApp.csproj" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
+
 </Project>

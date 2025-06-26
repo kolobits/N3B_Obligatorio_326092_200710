@@ -44,6 +44,7 @@ namespace Obligatorio.WebApi.Controllers
 
 
 
+<<<<<<< FinRF1.0
 		// RF4
 		[Authorize]
 		[HttpGet("listar-envios/{id}")]
@@ -67,6 +68,31 @@ namespace Obligatorio.WebApi.Controllers
 				return StatusCode(500, "Hubo un problema intente nuevamente.");
 			}
 		}
+=======
+        // RF4
+        [Authorize]
+        [HttpGet("listar-envios/{id}")]
+        public IActionResult GetAllEnviosCliente(int id)
+        {
+            try
+            {
+                var envios = _getAllEnviosCliente.Execute(id);
+                if (envios.Count() == 0)
+                {
+                    return StatusCode(204);
+                }
+                return Ok(envios);
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(e.StatusCode(), e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un problema intente nuevamente.");
+            }
+        }
+>>>>>>> main
 
 		[Authorize]
 		[HttpGet("{id}/seguimientos")]
@@ -76,6 +102,7 @@ namespace Obligatorio.WebApi.Controllers
 			{
 				var seguimientos = _getSeguimientosEnvio.Execute(id);
 
+<<<<<<< FinRF1.0
 				if (seguimientos.Count() == 0)
 				{
 					return StatusCode(204);
@@ -145,6 +172,56 @@ namespace Obligatorio.WebApi.Controllers
 			}
 		}
 	}
+=======
+        //RF5
+        //[Authorize]
+        [HttpGet("listar-enviosFecha/{id}")]
+        public IActionResult GetAllEnviosFecha(DateTime? fechaInicio, DateTime? fechaFin, string estado, int id)
+        {
+            try
+            {
+                var envios = _getEnviosFecha.Execute(fechaInicio, fechaFin, estado, id);
+                if (envios.Count() == 0)
+                {
+                    return StatusCode(204);
+                }
+                return Ok(envios);
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(e.StatusCode(), e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un problema intente nuevamente.");
+            }
+        }
+
+        // RF6
+        [Authorize]
+        [HttpGet("listar-enviosComentario/{id}")]
+        public IActionResult GetEnviosComentario(string comentario, int id)
+        {
+            try
+            {
+                var envios = _getEnviosComentario.Execute(comentario, id);
+                if (envios.Count() == 0)
+                {
+                    return StatusCode(204);
+                }
+                return Ok(envios);
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(e.StatusCode(), e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un problema intente nuevamente.");
+            }
+        }
+    }
+>>>>>>> main
 }
 
 

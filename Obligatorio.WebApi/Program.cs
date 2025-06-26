@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Obligatorio.CasoDeUsoCompartida.DTOs;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Agencia;
 using Obligatorio.CasoDeUsoCompartida.DTOs.Envios;
@@ -24,6 +25,7 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios.Seguimientos;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 using Obligatorio.WebApi.Services;
 using Obligatorio.WebApp.Servicios;
+using System.Reflection;
 using System.Text;
 
 namespace Obligatorio.WebApi
@@ -33,6 +35,54 @@ namespace Obligatorio.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+
+                    Version = "v1",
+                    Title = "ToDo API",
+                    Description = "An ASP.NET Core Web API for managing ToDo items",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/spboyer"),
+                    },
+
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Ingrese el token JWT en este formato: Bearer {token}"
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                    {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                    }
+
+                            },
+                            new string[] { }
+
+                        }
+                    });
+            });
 
             //Inyecto la Session
             builder.Services.AddSession();
