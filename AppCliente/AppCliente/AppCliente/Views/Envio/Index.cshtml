@@ -68,9 +68,9 @@
                             <td>@item.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
                             <td>@item.UltimoComentario</td>
                             <td class="text-center">
-                                <a asp-action="VerSeguimientos" asp-route-envioId="@item.Id" class="btn btn-sm btn-outline-secondary">
-                                    Ver Seguimientos
-                                </a>
+                            <a asp-action="VerSeguimientos" asp-route-envioId="@item.Id" class="btn btn-sm btn-success">
+                                Ver Seguimientos
+                            </a>
                             </td>
                         </tr>
                     }

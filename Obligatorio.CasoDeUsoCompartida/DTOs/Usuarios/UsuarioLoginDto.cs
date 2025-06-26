@@ -2,7 +2,8 @@
 {
 	public record UsuarioLoginDto(
 		string Email,
-		string Password)
+		string Password,
+		string? Rol)
 	{
 	}
 }

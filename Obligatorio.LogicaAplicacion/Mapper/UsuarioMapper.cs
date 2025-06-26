@@ -27,7 +27,6 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 			return usuario;
 		}
 
-
 		public static UsuarioListadoDto ToDto(Usuario usuario)
 		{
 			return new UsuarioListadoDto(usuario.Id, usuario.NombreCompleto.Nombre, usuario.NombreCompleto.Apellido, usuario.Email.Value);

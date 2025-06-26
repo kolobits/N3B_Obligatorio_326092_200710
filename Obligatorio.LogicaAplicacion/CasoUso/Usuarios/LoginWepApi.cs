@@ -2,6 +2,7 @@
 using Obligatorio.CasoDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.Excepciones;
 using Obligatorio.LogicaAplicacion.Mapper;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios.Usuarios;
 using Obligatorio.LogicaNegocio.Vo.Usuario;
 
@@ -26,10 +27,18 @@ namespace Obligatorio.LogicaAplicacion.CasoUso.Usuarios
 
 			var passwordVO = new Password(usuario.Password.Value);
 
+<<<<<<< FinRF1.0
+			if (!usuario.Password.Equals(new Password(obj.Password)))
+				throw new BadRequestException("Contraseña incorrecta.");
+
+			if (usuario is not Cliente)
+				throw new BadRequestException("Solo los clientes pueden iniciar sesión.");
+=======
 			//if (!passwordVO.Equals(obj.Password))
 			//{
 			//	throw new BadRequestException("Contraseña incorrecta.");
 			//}
+>>>>>>> main
 
 			{
 

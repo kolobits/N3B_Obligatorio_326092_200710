@@ -19,6 +19,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 			if (!_context.Agencias.Any()) Agencia();
 			if (!_context.Usuarios.Any()) Usuario();
 			if (!_context.Envios.Any()) Envio();
+			if (!_context.Seguimientos.Any()) Seguimiento();
+
 		}
 
 		private void Agencia()
@@ -175,8 +177,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                direccionPostal: new DireccionPostal("Av. Libertador", 1234, 11200),
+				fechaCreacion: DateTime.Now,
+				direccionPostal: new DireccionPostal("Av. Libertador", 1234, 11200),
 				esEficiente: false);
 			_context.Envios.Add(envioUrgente1);
 
@@ -188,8 +190,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                direccionPostal: new DireccionPostal("Canelones", 567, 11100),
+				fechaCreacion: DateTime.Now,
+				direccionPostal: new DireccionPostal("Canelones", 567, 11100),
 				esEficiente: false);
 			_context.Envios.Add(envioUrgente2);
 
@@ -201,8 +203,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                direccionPostal: new DireccionPostal("Colonia", 789, 11300),
+				fechaCreacion: DateTime.Now,
+				direccionPostal: new DireccionPostal("Colonia", 789, 11300),
 				esEficiente: false);
 			_context.Envios.Add(envioUrgente3);
 
@@ -214,8 +216,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                direccionPostal: new DireccionPostal("18 de Julio", 1001, 11000),
+				fechaCreacion: DateTime.Now,
+				direccionPostal: new DireccionPostal("18 de Julio", 1001, 11000),
 				esEficiente: false);
 			_context.Envios.Add(envioUrgente4);
 
@@ -227,8 +229,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                direccionPostal: new DireccionPostal("Rambla República", 202, 11400),
+				fechaCreacion: DateTime.Now,
+				direccionPostal: new DireccionPostal("Rambla República", 202, 11400),
 				esEficiente: false);
 			_context.Envios.Add(envioUrgente5);
 
@@ -240,8 +242,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                agenciaId: 6);
+				fechaCreacion: DateTime.Now,
+				agenciaId: 6);
 			_context.Envios.Add(envioComun1);
 
 			Envio envioComun2 = new EnvioComun(0,
@@ -252,8 +254,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                agenciaId: 2);
+				fechaCreacion: DateTime.Now,
+				agenciaId: 2);
 			_context.Envios.Add(envioComun2);
 
 			Envio envioComun3 = new EnvioComun(0,
@@ -264,8 +266,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                agenciaId: 4);
+				fechaCreacion: DateTime.Now,
+				agenciaId: 4);
 			_context.Envios.Add(envioComun3);
 
 			Envio envioComun4 = new EnvioComun(0,
@@ -276,8 +278,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                agenciaId: 1);
+				fechaCreacion: DateTime.Now,
+				agenciaId: 1);
 			_context.Envios.Add(envioComun4);
 
 			Envio envioComun5 = new EnvioComun(0,
@@ -288,11 +290,21 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 				estado: Estado.En_Proceso,
 				seguimientos: new List<Seguimiento>(),
 				fechaFinalizacion: null,
-                fechaCreacion: DateTime.Now,
-                agenciaId: 3);
+				fechaCreacion: DateTime.Now,
+				agenciaId: 3);
 			_context.Envios.Add(envioComun5);
 
 			_context.SaveChanges();
 		}
+
+
+		private void Seguimiento()
+		{
+
+
+		}
+
+
+
 	}
 }
