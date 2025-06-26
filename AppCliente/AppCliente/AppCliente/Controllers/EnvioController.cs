@@ -113,7 +113,13 @@ namespace AppCliente.Controllers
 				var optionsJson = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 				var seguimientos = JsonSerializer.Deserialize<List<SeguimientoDto>>(response.Content, optionsJson);
 
-				return View("Seguimiento", seguimientos);
+                if (seguimientos == null || seguimientos.Count == 0)
+                {
+                    ViewBag.Message = "Este envío no tiene seguimientos disponibles.";
+                    return View("Seguimiento", new List<SeguimientoDto>());
+                }
+
+                return View("Seguimiento", seguimientos);
 			}
 			catch (Exception e)
 			{
